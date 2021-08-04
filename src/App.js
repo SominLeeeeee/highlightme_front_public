@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const SignIn = lazy(() => import("./routes/SignIn"));
 const SignUp = lazy(() => import("./routes/SignUp"));
-const Questions = lazy(() => import("./routes/QuestionsList"));
+const QuestionsList = lazy(() => import("./routes/QuestionsList"));
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
 
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/questions/" component={Questions} />
+          <Route path="/questions/:keyword" component={QuestionsList} />
 
           {/* <Route path="/signin/logout" component={Logout} />
           <Route path="/field" component={Field} />

@@ -17,11 +17,11 @@ function Question(props) {
       <div id="underQuestion">
         <span id="evaluateQuestionBox">
           이 질문이 마음에 드셨나요?
-          <img id="icGood" src="./images/ic-mydocs-good.svg"></img>
-          <img id="icBad" src="./images/ic-mydocs-bad.svg"></img>
+          <img id="icGood" src="/images/ic-mydocs-good.svg"></img>
+          <img id="icBad" src="/images/ic-mydocs-bad.svg"></img>
         </span>
         <span id="editAnswerBox">
-          <img id="icEdit" src="./images/ic-mydocs-g-write.svg"></img>
+          <img id="icEdit" src="/images/ic-mydocs-g-write.svg"></img>
           수정
         </span>
       </div>
