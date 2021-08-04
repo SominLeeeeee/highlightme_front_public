@@ -1,6 +1,5 @@
 import React from "react";
 import "../style/signup.scss";
-import "../style/colors.scss";
 import colors from "../style/colors.js";
 
 import HighlightButton from "../components/HighlightButton";

@@ -1,7 +1,6 @@
 import React from "react";
 import "../style/login.scss";
-import "../style/colors.scss";
-
+import colors from "../style/colors";
 import HighlightButton from "../components/HighlightButton";
 
 function Home() {
@@ -37,8 +36,8 @@ function Home() {
 
         <HighlightButton
           text="로그인"
-          backgroundColor="$subyellowb"
-          color="$black"
+          backgroundColor={colors.subyellowb}
+          color={colors.black}
         />
 
         {/* <!--- TODO: 로그인 버튼 누르면 전송되는 거 구현해야 함 --> */}
