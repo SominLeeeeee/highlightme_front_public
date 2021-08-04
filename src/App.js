@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+const SignIn = lazy(() => import("./routes/SignIn"));
+const SignUp = lazy(() => import("./routes/SignUp"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<div></div>}>
+        <Switch>
+          {/* <Route exact path="/" component={Home} /> */}
+
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+
+          {/* <Route path="/signin/logout" component={Logout} />
+          <Route path="/field" component={Field} />
+
+          <Route path="/coverletter" component={Coverletter} />
+
+          <Route
+            path="/questions/keywordmap?view=graph"
+            component={GraphKeyword}
+          />
+          <Route path="/questions/keywordmap?view=cl" component={ClKeyword} />
+          <Route path="/questions/:keyword_id" component={Questions} />
+          <Route path="/questions/search/:query" component={Search} /> */}
+        </Switch>
+      </Suspense>
+    </Router>
   );
 }
 
