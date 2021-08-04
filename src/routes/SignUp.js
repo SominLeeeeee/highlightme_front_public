@@ -5,12 +5,17 @@ import colors from "../style/colors.js";
 
 import HighlightButton from "../components/HighlightButton";
 import InputBox from "../components/InputBox";
-
+import ShadowBox from "../components/ShadowBox";
 function SignUp() {
   return (
     <div className="signUpParent">
       <p> logo</p>
-      <div className="signUpForm">
+      <ShadowBox
+        width="294px"
+        aOfRgba="0.08"
+        fleaxDirection="column"
+        padding="40px"
+      >
         {/* <!-- TODO: 중앙정렬 --> */}
         <p className="signUpTitle">
           정보를 입력하면 <br></br>다양한 서비스를 만나볼 수 있어요!
@@ -52,7 +57,7 @@ function SignUp() {
           backgroundColor={colors.darkgray}
           color={colors.white}
         />
-      </div>
+      </ShadowBox>
     </div>
   );
 }
