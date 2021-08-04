@@ -1,0 +1,41 @@
+@import "./colors.scss";
+
+.questionsListParent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .questionsListParent2 {
+    width: 317px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+#questionsListTitleParent {
+  width: fit-content;
+  #questionsListTitle {
+    text-align: left;
+    width: fit-content;
+    font-size: 14px;
+    font-family: "AppleSDGothicNeo-Bold";
+  }
+  #questionsListTitleBackground {
+    height: 5.5px;
+    width: 100%;
+    margin: -22px 0 16px 0;
+    background-color: #fde97f41;
+  }
+}
+
+#keywordName {
+  margin-top: 2px;
+  margin-bottom: 8px;
+  font-family: "AppleSDGothicNeo-Bold";
+  color: $subyellowb;
+  font-size: 15px;
+  text-align: left;
+  display: block;
+}

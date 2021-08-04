@@ -1,0 +1,42 @@
+#questionText {
+  font-size: 12px;
+  display: block;
+  text-align: left;
+  color: black;
+  margin: 6px 0 10px 0;
+}
+
+#underQuestion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#evaluateQuestionBox {
+  border-radius: 12.5px;
+  background-color: #f7f7f7;
+  padding: 7px 11px 7px 11px;
+  color: #818181;
+  font-size: 9px;
+  display: flex;
+  width: fit-content;
+  font-family: "AppleSDGothicNeo-Regular";
+
+  #icGood,
+  #icBad {
+    width: 9.4px;
+    height: 9px;
+    margin-left: 6.2px;
+  }
+}
+
+#editAnswerBox {
+  font-size: 9px;
+  color: #898989;
+  #icEdit {
+    width: 7.2px;
+    height: 7.2px;
+    margin-right: 4px;
+  }
+}
