@@ -7,10 +7,21 @@
   display: block;
   width: calc(100% - 18px);
   margin-bottom: 4.5px;
+  font-family: "AppleSDGothicNeo-Regular";
+  font-size: 9px;
 
   &::placeholder {
     font-family: "AppleSDGothicNeo-Regular";
     font-size: 9px;
     color: $darkgray;
+    font-stretch: 1.2;
+  }
+
+  &:focus {
+    outline: none;
+    font-family: "AppleSDGothicNeo-Regular";
+    font-size: 9px;
+    border-radius: 4px;
+    border-color: $subyellowb;
   }
 }

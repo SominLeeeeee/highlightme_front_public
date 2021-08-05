@@ -30,28 +30,18 @@
     width: 9.4px;
     height: 9px;
     margin-left: 6.2px;
-    img:last-child {
-      display: none;
-    }
-
-    &:hover,
-    &:active {
-      img:first-child {
-        display: none;
-      }
-      img:last-child {
-        display: inline;
-      }
-    }
   }
 }
 
 #editAnswerBox {
-  font-size: 9px;
-  color: #898989;
   #icEdit {
     width: 7.2px;
     height: 7.2px;
     margin-right: 4px;
+  }
+  p {
+    display: inline;
+    font-size: 9px;
+    color: #898989;
   }
 }

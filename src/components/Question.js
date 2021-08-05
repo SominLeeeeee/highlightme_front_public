@@ -6,6 +6,7 @@ import InputBox from "./InputBox";
 function Question(props) {
   const { questionText, answerText } = { ...props };
   const [isThumbClicked, setIsThumbClicked] = useState("x");
+  const [isEditClicked, setIsEditClicked] = useState(false);
 
   function goodOnClick() {
     if (isThumbClicked == "g") setIsThumbClicked("x");
@@ -15,6 +16,10 @@ function Question(props) {
   function badOnClick() {
     if (isThumbClicked == "b") setIsThumbClicked("x");
     else setIsThumbClicked("b");
+  }
+
+  function editOnClick() {
+    setIsEditClicked(!isEditClicked);
   }
 
   return (
@@ -36,23 +41,31 @@ function Question(props) {
                 ? "/images/ic-mydocs-good-clicked.svg"
                 : "/images/ic-mydocs-good.svg"
             }
-            style={{ height: "9px", width: "9.4px" }}
             onClick={goodOnClick}
+            onMouseOver={"this.src = '/images/ic-mydocs-good-clicked.svg'"}
           />
           <img
-            id="icBad"
+            className="icBad"
             src={
               isThumbClicked == "b"
                 ? "/images/ic-mydocs-bad-clicked.svg"
                 : "/images/ic-mydocs-bad.svg"
             }
-            style={{ height: "9px", width: "9.4px" }}
             onClick={badOnClick}
           />
         </span>
-        <span id="editAnswerBox">
-          <img id="icEdit" src="/images/ic-mydocs-g-write.svg" />
-          수정
+        <span id="editAnswerBox" onClick={editOnClick}>
+          <img
+            id="icEdit"
+            src={
+              isEditClicked
+                ? "/images/ic-mydocs-g-write-clicked.svg"
+                : "/images/ic-mydocs-g-write.svg"
+            }
+          />
+          <p style={isEditClicked ? { color: "#fe894b" } : {}}>
+            {isEditClicked ? "수정완료" : "수정"}
+          </p>
         </span>
       </div>
     </div>
