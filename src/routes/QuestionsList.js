@@ -19,7 +19,10 @@ function QuestionsList() {
   return (
     <div className="questionsListParent">
       <div className="questionsListParent2">
-        <HighlightText text="예상질문 리스트"></HighlightText>
+        <HighlightText
+          text="예상질문 리스트"
+          marginBottom="27px"
+        ></HighlightText>
         <ShadowBox
           aOfRgba="0.05"
           flexDirection="column"
