@@ -1,0 +1,13 @@
+.itemCircleSpan {
+  display: grid;
+  width: fit-content;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.keywordParent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -6px;
+  margin-bottom: -6px;
+}
