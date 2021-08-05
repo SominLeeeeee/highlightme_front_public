@@ -1,0 +1,25 @@
+.itemCircle {
+  display: inline-block;
+  margin-right: 3px;
+  height: fit-content;
+
+  div {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: black;
+  }
+
+  p {
+    display: inline-block;
+    font-size: 10px;
+    -webkit-transform: scale(0.7);
+    text-align: left;
+    color: #717171;
+    font-family: "AppleSDGothicNeo-Light";
+    margin: 0;
+    margin-left: -6px;
+    margin-right: -6px;
+  }
+}
