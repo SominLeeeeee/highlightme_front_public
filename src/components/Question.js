@@ -45,7 +45,7 @@ function Question(props) {
             onMouseOver={"this.src = '/images/ic-mydocs-good-clicked.svg'"}
           />
           <img
-            className="icBad"
+            id="icBad"
             src={
               isThumbClicked == "b"
                 ? "/images/ic-mydocs-bad-clicked.svg"
