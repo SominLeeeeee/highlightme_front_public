@@ -1,0 +1,20 @@
+.highlightText {
+  width: fit-content;
+
+  p {
+    margin: 0;
+    position: relative;
+    text-align: left;
+    width: fit-content;
+    font-size: 14px;
+    font-family: "AppleSDGothicNeo-Bold";
+    color: black;
+  }
+  div {
+    position: relative;
+    top: -7px;
+    height: 5.5px;
+    width: 100%;
+    background-color: #fde97f41;
+  }
+}

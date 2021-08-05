@@ -4,6 +4,7 @@ import "../style/questionsList.scss";
 import colors from "../style/colors.js";
 import Question from "../components/Question.js";
 import ShadowBox from "../components/ShadowBox";
+import HighlightText from "../components/HighlightText";
 
 function QuestionsList() {
   const { keyword } = useParams();
@@ -18,10 +19,7 @@ function QuestionsList() {
   return (
     <div className="questionsListParent">
       <div className="questionsListParent2">
-        <div id="questionsTitleParent">
-          <p id="questionsTitle">예상질문 리스트</p>
-          <div id="questionsTitleBackground" />
-        </div>
+        <HighlightText text="예상질문 리스트"></HighlightText>
         <ShadowBox
           aOfRgba="0.05"
           flexDirection="column"
