@@ -26,9 +26,23 @@
 
   #icGood,
   #icBad {
+    display: inline-block;
     width: 9.4px;
     height: 9px;
     margin-left: 6.2px;
+    img:last-child {
+      display: none;
+    }
+
+    &:hover,
+    &:active {
+      img:first-child {
+        display: none;
+      }
+      img:last-child {
+        display: inline;
+      }
+    }
   }
 }
 
