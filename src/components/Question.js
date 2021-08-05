@@ -6,6 +6,7 @@ import InputBox from "./InputBox";
 function Question(props) {
   const { questionText, answerText } = { ...props };
   const [isThumbClicked, setIsThumbClicked] = useState("x");
+  const [isThumbHovered, setIsThumbHovered] = useState("x");
   const [isEditClicked, setIsEditClicked] = useState(false);
 
   function goodOnClick() {
@@ -20,6 +21,18 @@ function Question(props) {
 
   function editOnClick() {
     setIsEditClicked(!isEditClicked);
+  }
+
+  function goodOnMouseOver() {
+    setIsThumbHovered("g");
+  }
+
+  function badOnMouseOver() {
+    setIsThumbHovered("b");
+  }
+
+  function thumbOnMouseOut() {
+    setIsThumbHovered("x");
   }
 
   return (
@@ -39,19 +52,26 @@ function Question(props) {
             src={
               isThumbClicked == "g"
                 ? "/images/ic-mydocs-good-clicked.svg"
+                : isThumbHovered == "g"
+                ? "/images/ic-mydocs-good-clicked.svg"
                 : "/images/ic-mydocs-good.svg"
             }
             onClick={goodOnClick}
-            onMouseOver={"this.src = '/images/ic-mydocs-good-clicked.svg'"}
+            onMouseOver={goodOnMouseOver}
+            onMouseOut={thumbOnMouseOut}
           />
           <img
             id="icBad"
             src={
               isThumbClicked == "b"
                 ? "/images/ic-mydocs-bad-clicked.svg"
+                : isThumbHovered == "b"
+                ? "/images/ic-mydocs-bad-clicked.svg"
                 : "/images/ic-mydocs-bad.svg"
             }
             onClick={badOnClick}
+            onMouseOver={badOnMouseOver}
+            onMouseOut={thumbOnMouseOut}
           />
         </span>
         <span id="editAnswerBox" onClick={editOnClick}>
