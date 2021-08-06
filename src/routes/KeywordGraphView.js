@@ -7,6 +7,73 @@ import ShadowBox from "../components/ShadowBox";
 import Keyword from "../components/Keyword";
 
 function KeywordGraphView() {
+  const keywordArr = [
+    {
+      parentKeyword: "디자인",
+      childKeywords: [
+        {
+          name: "UI/UX",
+          answerExist: "y",
+        },
+        {
+          name: "편집디자인",
+          answerExist: "n",
+        },
+        {
+          name: "브랜딩",
+          answerExist: "x",
+        },
+        {
+          name: "웹디자인",
+          answerExist: "n",
+        },
+        {
+          name: "편집디자인",
+          answerExist: "y",
+        },
+        {
+          name: "브랜딩",
+          answerExist: "y",
+        },
+      ],
+    },
+    {
+      parentKeyword: "디자인22",
+      childKeywords: [
+        {
+          name: "UI/UX",
+          answerExist: "y",
+        },
+        {
+          name: "편집디자인",
+          answerExist: "n",
+        },
+        {
+          name: "브랜딩",
+          answerExist: "x",
+        },
+        {
+          name: "웹디자인",
+          answerExist: "n",
+        },
+        {
+          name: "편집디자인",
+          answerExist: "y",
+        },
+        {
+          name: "브랜딩",
+          answerExist: "y",
+        },
+      ],
+    },
+  ];
+
+  function pickColor(answerExist) {
+    if (answerExist === "y") return `${colors.mainyellow}`;
+    else if (answerExist === "n") return `${colors.subyellow}`;
+    else return `${colors.gray}`;
+  }
+
   return (
     <div className="parentForCenter">
       <div className="parent">
@@ -16,26 +83,28 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        <ShadowBox
-          width="52.8rem"
-          aOfRgba="0.05"
-          flexDirection="column"
-          padding="4.4rem"
-          radius="1.6rem"
-        >
-          <HighlightText
-            text="디자인"
-            marginBottom="0"
-            color={colors.mainyellowa}
-          />
-          <div className="keywordParent">
-            <Keyword text="브랜딩" color={colors.gray} />
-            <Keyword text="편집디자인" color={colors.mainyellow} />
-            <Keyword text="편집디자인" color={colors.subyellow} />
-            <Keyword text="브랜딩" color={colors.gray} />
-            <Keyword text="편집디자인" color={colors.subyellow} />
-          </div>
-        </ShadowBox>
+
+        {keywordArr.map((element) => (
+          <ShadowBox
+            width="52.8rem"
+            aOfRgba="0.05"
+            flexDirection="column"
+            padding="4.2rem"
+            radius="1.6rem"
+          >
+            <HighlightText
+              text={element.parentKeyword}
+              marginBottom="0"
+              color={colors.mainyellowa}
+            />
+
+            <div className="keywordParent">
+              {element.childKeywords.map((e) => (
+                <Keyword text={e.name} color={pickColor(e.answerExist)} />
+              ))}
+            </div>
+          </ShadowBox>
+        ))}
       </div>
     </div>
   );
