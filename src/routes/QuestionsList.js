@@ -1,10 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "../style/questionsList.scss";
-import colors from "../style/colors.js";
 import Question from "../components/Question.js";
-import ShadowBox from "../components/ShadowBox";
 import HighlightText from "../components/HighlightText";
+import ShadowBoxMedium from "../components/ShadowBoxMedium";
 
 function QuestionsList() {
   const { keyword } = useParams();
@@ -23,17 +22,12 @@ function QuestionsList() {
           text="예상질문 리스트"
           marginBottom="1.75rem"
         ></HighlightText>
-        <ShadowBox
-          aOfRgba="0.05"
-          flexDirection="column"
-          padding="2.75rem"
-          radius="1rem"
-        >
+        <ShadowBoxMedium paddingTop="4.8rem">
           <p id="keywordName">{keyword}</p>
           {arr.map((element) => (
             <Question questionText={element.title} />
           ))}
-        </ShadowBox>
+        </ShadowBoxMedium>
       </div>
     </div>
   );

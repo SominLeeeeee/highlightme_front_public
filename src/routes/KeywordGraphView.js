@@ -3,8 +3,8 @@ import "../style/keywordGraphView.scss";
 import colors from "../style/colors.js";
 import HighlightText from "../components/HighlightText";
 import ItemCircle from "../components/ItemCircle";
-import ShadowBox from "../components/ShadowBox";
 import Keyword from "../components/Keyword";
+import ShadowBoxMedium from "../components/ShadowBoxMedium";
 
 function KeywordGraphView() {
   const keywordArr = [
@@ -85,13 +85,7 @@ function KeywordGraphView() {
         </span>
 
         {keywordArr.map((element) => (
-          <ShadowBox
-            width="52.8rem"
-            aOfRgba="0.05"
-            flexDirection="column"
-            padding="4.2rem"
-            radius="1.6rem"
-          >
+          <ShadowBoxMedium paddingTop="3.1rem">
             <HighlightText
               text={element.parentKeyword}
               marginBottom="0"
@@ -103,7 +97,7 @@ function KeywordGraphView() {
                 <Keyword text={e.name} color={pickColor(e.answerExist)} />
               ))}
             </div>
-          </ShadowBox>
+          </ShadowBoxMedium>
         ))}
       </div>
     </div>

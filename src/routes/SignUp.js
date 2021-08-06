@@ -4,12 +4,13 @@ import colors from "../style/colors.js";
 
 import HighlightButton from "../components/HighlightButton";
 import InputBox from "../components/InputBox";
-import ShadowBox from "../components/ShadowBox";
+import ShadowBoxMedium from "../components/ShadowBoxMedium";
+
 function SignUp() {
   return (
     <div className="signUpParent">
       <p> logo</p>
-      <ShadowBox
+      <ShadowBoxMedium
         width="294px"
         aOfRgba="0.08"
         fleaxDirection="column"
@@ -56,7 +57,7 @@ function SignUp() {
           backgroundColor={colors.darkgray}
           color={colors.white}
         />
-      </ShadowBox>
+      </ShadowBoxMedium>
     </div>
   );
 }
