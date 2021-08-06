@@ -21,13 +21,13 @@ function QuestionsList() {
       <div className="questionsListParent2">
         <HighlightText
           text="예상질문 리스트"
-          marginBottom="27px"
+          marginBottom="1.75rem"
         ></HighlightText>
         <ShadowBox
           aOfRgba="0.05"
           flexDirection="column"
-          padding="22px"
-          radius="8px"
+          padding="2.75rem"
+          radius="1rem"
         >
           <p id="keywordName">{keyword}</p>
           {arr.map((element) => (

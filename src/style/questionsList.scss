@@ -7,35 +7,19 @@
   align-items: center;
 
   .questionsListParent2 {
-    width: 317px;
+    width: 39.563rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
 }
 
-#questionsTitleParent {
-  width: fit-content;
-  #questionsTitle {
-    text-align: left;
-    width: fit-content;
-    font-size: 14px;
-    font-family: "AppleSDGothicNeo-Bold";
-  }
-  #questionsTitleBackground {
-    height: 5.5px;
-    width: 100%;
-    margin: -22px 0 16px 0;
-    background-color: #fde97f41;
-  }
-}
-
 #keywordName {
-  margin-top: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 1rem;
+  margin-top: 0;
   font-family: "AppleSDGothicNeo-Bold";
   color: $subyellowb;
-  font-size: 15px;
+  font-size: 1.875rem;
   text-align: left;
   display: block;
 }
