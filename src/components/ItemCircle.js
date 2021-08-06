@@ -2,18 +2,12 @@ import React from "react";
 import "./ItemCircle.scss";
 
 function ItemCircle(props) {
-  const { text, color, marginLeft } = { ...props };
+  const { text, color } = { ...props };
 
   return (
     <span className="itemCircle">
       <div style={{ backgroundColor: color }} />
-      <p
-        style={{
-          marginLeft: marginLeft,
-        }}
-      >
-        {text}
-      </p>
+      <p>{text}</p>
     </span>
   );
 }

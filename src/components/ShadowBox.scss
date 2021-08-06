@@ -1,8 +1,8 @@
 .shadowBox {
   display: flex;
   flex-direction: column;
-  width: calc(294px - 80px);
-  border-radius: 26px;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.08);
-  padding: 40px;
+  width: calc(100% - 8rem);
+  border-radius: 2.6rem;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.08);
+  padding: 4rem;
 }

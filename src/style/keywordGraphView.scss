@@ -1,5 +1,10 @@
+.parent {
+  display: inline-block;
+  width: fit-content;
+}
+
 .itemCircleSpan {
-  display: grid;
+  display: inline-block;
   width: fit-content;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -8,6 +13,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-right: -6px;
-  margin-bottom: -6px;
+  margin-right: -1.2rem;
+  margin-bottom: -1.2rem;
 }
