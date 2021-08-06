@@ -1,18 +1,18 @@
 @import "../style/colors.scss";
 
 .inputBox {
-  padding: 8px;
-  border: solid 0.5px $grayborder;
-  border-radius: 4px;
+  padding: 1rem;
+  border: solid 1px $grayborder;
+  border-radius: 0.5rem;
   display: block;
-  width: calc(100% - 18px);
-  margin-bottom: 4.5px;
+  width: calc(100% - 2.125rem);
+  margin-bottom: 0.563rem;
   font-family: "AppleSDGothicNeo-Regular";
-  font-size: 9px;
+  font-size: 1.125rem;
 
   &::placeholder {
     font-family: "AppleSDGothicNeo-Regular";
-    font-size: 9px;
+    font-size: 1.125rem;
     color: $darkgray;
     font-stretch: 1.2;
   }
@@ -20,8 +20,8 @@
   &:focus {
     outline: none;
     font-family: "AppleSDGothicNeo-Regular";
-    font-size: 9px;
-    border-radius: 4px;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
     border-color: $subyellowb;
   }
 }

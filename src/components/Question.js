@@ -40,9 +40,9 @@ function Question(props) {
       <p id="questionText">Q. {questionText}</p>
       <InputBox
         text="답변을"
-        padding="11px"
-        radius="8px"
-        marginBottom="5.2px"
+        padding="1.438rem"
+        radius="1rem"
+        marginBottom="0.65rem"
       ></InputBox>
       <div id="underQuestion">
         <span id="evaluateQuestionBox">
