@@ -1,9 +1,10 @@
 #questionText {
-  font-size: 12px;
+  font-size: 1.5rem;
   display: block;
   text-align: left;
   color: black;
-  margin: 6px 0 10px 0;
+  margin: 0.875px 0 1.313rem 0;
+  font-family: "AppleSDGothicNeo-Medium";
 }
 
 #underQuestion {
@@ -11,37 +12,37 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
-}
+  margin-bottom: 1.875rem;
 
-#evaluateQuestionBox {
-  border-radius: 12.5px;
-  background-color: #f7f7f7;
-  padding: 7px 11px 7px 11px;
-  color: #818181;
-  font-size: 9px;
-  display: flex;
-  width: fit-content;
-  font-family: "AppleSDGothicNeo-Regular";
+  #evaluateQuestionBox {
+    border-radius: 1.563rem;
+    background-color: #f7f7f7;
+    padding: 0.969rem 1.375rem 0.844rem 1.375rem;
+    color: #818181;
+    font-size: 1.125rem;
+    display: flex;
+    width: fit-content;
+    font-family: "AppleSDGothicNeo-Regular";
 
-  #icGood,
-  #icBad {
-    display: inline-block;
-    width: 9.4px;
-    height: 9px;
-    margin-left: 6.2px;
+    #icGood,
+    #icBad {
+      display: inline-block;
+      width: 1.181rem;
+      height: 1.125rem;
+      margin-left: 0.775rem;
+    }
   }
-}
 
-#editAnswerBox {
-  #icEdit {
-    width: 7.2px;
-    height: 7.2px;
-    margin-right: 4px;
-  }
-  p {
-    display: inline;
-    font-size: 9px;
-    color: #898989;
+  #editAnswerBox {
+    #icEdit {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: 1rem;
+    }
+    p {
+      display: inline;
+      font-size: 1.125rem;
+      color: #898989;
+    }
   }
 }
