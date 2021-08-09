@@ -1,0 +1,20 @@
+.clInputNotice {
+  display: flex;
+  justify-content: space-between;
+
+  .errNotice {
+    margin: 0;
+    color: white;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .typingCount {
+    color: black;
+    font-size: 18px;
+    margin: 0;
+  }
+}

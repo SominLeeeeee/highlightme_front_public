@@ -1,0 +1,45 @@
+@import "../style/colors.scss";
+
+.clInputTitle {
+  display: flex;
+  margin-top: 3.6rem;
+  div {
+    display: inline-block;
+    width: 0.6rem;
+    height: 2.3rem;
+    background-color: black;
+    margin-right: 1.1rem;
+  }
+  p {
+    margin: 0;
+    display: inline;
+    color: black;
+    font-size: 2.2rem;
+    font-family: "AppleSDGothicNeo-SemiBold";
+  }
+}
+
+.clInputAnswer {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid $grayborder;
+  padding: 1.7rem;
+  color: black;
+  margin-top: 1.7rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  border-radius: 0.8rem;
+  font-family: "AppleSDGothicNeo-Regular";
+
+  &::placeholder {
+    color: $darkgray;
+    font-size: 1.8rem;
+    font-family: "AppleSDGothicNeo-Regular";
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $mainyellowa;
+  }
+}
