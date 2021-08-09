@@ -4,7 +4,8 @@
 
   .errNotice {
     margin: 0;
-    color: white;
+    color: black;
+    display: none;
     font-size: 18px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -16,5 +17,41 @@
     color: black;
     font-size: 18px;
     margin: 0;
+  }
+}
+
+.clInputButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  .clInputDeleteButton {
+    display: flex;
+    align-items: center;
+
+    img {
+      display: inline-block;
+      height: 2.4rem;
+      margin-right: 1rem;
+    }
+    p {
+      margin: 0;
+      display: inline-block;
+      font-size: 2rem;
+      font-stretch: 1.2;
+      color: #838383;
+      font-family: "AppleSDGothicNeo-SemiBold";
+    }
+  }
+
+  .clInputSaveButton {
+    background-color: #eaeaea;
+    border-radius: 8px;
+    outline: none;
+    padding: 18px 48px;
+    border: none;
+    font-size: 20px;
+    font-family: "AppleSDGothicNeo-SemiBold";
   }
 }

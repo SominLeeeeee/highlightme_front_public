@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
 
 function ClInput() {
-  var count = 100;
+  const [count, setCount] = useState(0);
+
+  const onInputChange = (event) => {
+    setCount(event.target.value.length);
+  };
 
   return (
     <div>
@@ -23,15 +27,26 @@ function ClInput() {
       {/* 자기소개서 문항 입력 */}
       <ClInputDiv
         title="자기소개서 문항 입력"
-        hint="ex) 협업을 진행하며 어려웠던 경험이 있으신가요?"
+        hint="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
       />
       <ClInputDiv
         title="자기소개서 답변 입력"
-        hint="ex) 커뮤니케이션 부분에서 미숙한 점이 있었지만 이렇게 극복했습니다."
+        hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
+        onChange={onInputChange}
       />
       <div className="clInputNotice">
-        <p className="errNotice">답변을 200자 이상 입력해주세요.</p>
+        <div>
+          <p className="errNotice">답변을 200자 이상 입력해주세요.</p>
+        </div>
         <p className="typingCount">({count} / 5000자)</p>
+      </div>
+
+      <div className="clInputButtons">
+        <div className="clInputDeleteButton">
+          <img src="/images/ic-mydocs-trash.svg" />
+          <p>삭제</p>
+        </div>
+        <button className="clInputSaveButton">저장하기</button>
       </div>
     </div>
   );

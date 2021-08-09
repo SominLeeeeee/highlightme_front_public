@@ -1,7 +1,7 @@
 import "./clInputDiv.scss";
 
 function ClInputDiv(props) {
-  const { hint, title } = { ...props };
+  const { hint, title, onChange } = { ...props };
 
   return (
     <div>
@@ -9,7 +9,7 @@ function ClInputDiv(props) {
         <div />
         <p>{title}</p>
       </span>
-      <input className="clInputAnswer" placeholder={hint} />
+      <input className="clInputAnswer" placeholder={hint} onChange={onChange} />
     </div>
   );
 }
