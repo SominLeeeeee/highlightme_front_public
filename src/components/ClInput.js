@@ -1,12 +1,26 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
 
 function ClInput() {
   const [count, setCount] = useState(0);
+  const [deleteHover, setDeleteHover] = useState(false);
 
   const onInputChange = (event) => {
     setCount(event.target.value.length);
+  };
+
+  const onSaveButtonClicked = () => {
+    if (count < 200)
+      document.getElementById("errNotice").style.display = "inline-block";
+    else {
+      document.getElementById("errNotice").style.display = "none";
+    }
+  };
+
+  const onDeleteButtonMouseOver = () => {
+    setDeleteHover(!deleteHover);
   };
 
   return (
@@ -34,19 +48,34 @@ function ClInput() {
         hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
         onChange={onInputChange}
       />
+
       <div className="clInputNotice">
         <div>
-          <p className="errNotice">답변을 200자 이상 입력해주세요.</p>
+          <p id="errNotice">답변을 200자 이상 입력해주세요.</p>
         </div>
         <p className="typingCount">({count} / 5000자)</p>
       </div>
 
       <div className="clInputButtons">
-        <div className="clInputDeleteButton">
-          <img src="/images/ic-mydocs-trash.svg" />
-          <p>삭제</p>
+        <div
+          className="clInputDeleteButton"
+          onMouseOver={onDeleteButtonMouseOver}
+          onMouseOut={onDeleteButtonMouseOver}
+        >
+          <img
+            src={
+              deleteHover
+                ? "/images/ic-mydocs-trash-clicked.svg"
+                : "/images/ic-mydocs-trash.svg"
+            }
+          />
+          <p style={deleteHover ? { color: "#ff0000" } : { color: "#838383" }}>
+            삭제
+          </p>
         </div>
-        <button className="clInputSaveButton">저장하기</button>
+        <button className="clInputSaveButton" onClick={onSaveButtonClicked}>
+          저장하기
+        </button>
       </div>
     </div>
   );

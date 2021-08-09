@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
 
-  .errNotice {
+  #errNotice {
     margin: 0;
-    color: black;
+    color: red;
     display: none;
     font-size: 18px;
     -webkit-user-select: none;
