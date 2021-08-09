@@ -73,7 +73,15 @@ function ClInput() {
             삭제
           </p>
         </div>
-        <button className="clInputSaveButton" onClick={onSaveButtonClicked}>
+        <button
+          className="clInputSaveButton"
+          onClick={onSaveButtonClicked}
+          style={
+            count > 0
+              ? { backgroundColor: "#febb2d" }
+              : { backgroundColor: "#eaeaea" }
+          }
+        >
           저장하기
         </button>
       </div>
