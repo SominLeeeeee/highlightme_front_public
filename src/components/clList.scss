@@ -1,0 +1,25 @@
+.clListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .clListTitle {
+    font-size: 2.6rem;
+    font-family: "AppleSDGothicNeo-Bold";
+  }
+
+  .clQuestionPlus {
+    img {
+      display: inline;
+      width: 1.4rem;
+      height: 1.4rem;
+      margin-right: 0.6rem;
+    }
+    p {
+      display: inline;
+      color: #777777;
+      font-size: 1.8rem;
+      font-family: "AppleSDGothicNeo-Medium";
+    }
+  }
+}
