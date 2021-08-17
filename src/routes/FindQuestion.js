@@ -5,9 +5,11 @@ import "../style/findQuestion.scss";
 
 function FindQuestion() {
   return (
-    <div className="findQuestionWrapper">
-      <KeywordGraphView />
-      <QuestionList />
+    <div className="findQuestionWrapperParent">
+      <div className="findQuestionWrapper">
+        <KeywordGraphView />
+        <QuestionList />
+      </div>
     </div>
   );
 }
