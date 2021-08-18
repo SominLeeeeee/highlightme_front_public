@@ -3,22 +3,46 @@ import { Redirect } from "react-router-dom";
 import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
 
+import config from "../configs";
+
 function ClInput() {
   const [count, setCount] = useState(0);
   const [deleteHover, setDeleteHover] = useState(false);
   const [textAreaHeight, setTextAreaHeight] = useState("auto");
 
-  const onInputChange = (event) => {
-    setCount(event.target.value.length);
-    setTextAreaHeight(`${event.target.scrollHeight}px`);
+  const [problem, setProblem] = useState("");
+  const [answer, setAnswer] = useState("");
+
+  const onInputChangeProblem = (event) => {
+    setProblem(event.target.value);
     console.log(textAreaHeight);
   };
 
-  const onSaveButtonClicked = () => {
+  const onInputChangeAnswer = (event) => {
+    setCount(event.target.value.length);
+    setTextAreaHeight(`${event.target.scrollHeight}px`);
+    setAnswer(event.target.value);
+    console.log(textAreaHeight);
+  };
+
+  const onSaveButtonClicked = async () => {
     if (count < 200)
       document.getElementById("errNotice").style.display = "inline-block";
     else {
       document.getElementById("errNotice").style.display = "none";
+
+      //Upload
+      const result = await fetch(`${config.URL}/api/cls`, {
+        method: "POST",
+        body: new URLSearchParams({
+          user_id: 2,
+          problem: problem,
+          answer: answer,
+          _public: 1,
+        }),
+      });
+
+      console.log(result);
     }
   };
 
@@ -46,13 +70,14 @@ function ClInput() {
         className="clInputDiv"
         title="자기소개서 문항 입력"
         hint="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
+        onChange={onInputChangeProblem}
       />
       <ClInputDiv
         className="clInputDiv"
         title="자기소개서 답변 입력"
         hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
         height={textAreaHeight}
-        onChange={onInputChange}
+        onChange={onInputChangeAnswer}
       />
 
       <div className="clInputNotice">

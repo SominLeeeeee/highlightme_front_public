@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./clInputDiv.scss";
 
 function ClInputDiv(props) {
-  const { hint, title, onChange, height } = { ...props };
+  const { hint, title, onChange, height, text } = { ...props };
 
   return (
     <div className="clInputDivWrapper">
