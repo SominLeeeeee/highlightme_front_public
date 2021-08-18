@@ -6,9 +6,12 @@ import ClInputDiv from "./ClInputDiv";
 function ClInput() {
   const [count, setCount] = useState(0);
   const [deleteHover, setDeleteHover] = useState(false);
+  const [textAreaHeight, setTextAreaHeight] = useState("auto");
 
   const onInputChange = (event) => {
     setCount(event.target.value.length);
+    setTextAreaHeight(`${event.target.scrollHeight}px`);
+    console.log(textAreaHeight);
   };
 
   const onSaveButtonClicked = () => {
@@ -48,6 +51,7 @@ function ClInput() {
         className="clInputDiv"
         title="자기소개서 답변 입력"
         hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
+        height={textAreaHeight}
         onChange={onInputChange}
       />
 
