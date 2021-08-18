@@ -24,7 +24,7 @@ function ClInput() {
   };
 
   return (
-    <div>
+    <div className="clInputWrapper">
       {/* Tip
         <div>
           <div>
@@ -40,10 +40,12 @@ function ClInput() {
 
       {/* 자기소개서 문항 입력 */}
       <ClInputDiv
+        className="clInputDiv"
         title="자기소개서 문항 입력"
         hint="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
       />
       <ClInputDiv
+        className="clInputDiv"
         title="자기소개서 답변 입력"
         hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
         onChange={onInputChange}

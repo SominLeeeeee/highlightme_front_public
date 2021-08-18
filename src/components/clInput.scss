@@ -1,5 +1,6 @@
 .clInputNotice {
   display: flex;
+  width: 100%;
   justify-content: space-between;
 
   #errNotice {
@@ -25,6 +26,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  width: 100%;
 
   .clInputDeleteButton {
     display: flex;
@@ -54,4 +56,10 @@
     font-size: 20px;
     font-family: "AppleSDGothicNeo-SemiBold";
   }
+}
+
+.clInputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 796px;
 }

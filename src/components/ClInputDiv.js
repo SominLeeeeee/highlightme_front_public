@@ -4,7 +4,7 @@ function ClInputDiv(props) {
   const { hint, title, onChange } = { ...props };
 
   return (
-    <div>
+    <div className="clInputDivWrapper">
       <span className="clInputTitle">
         <div />
         <p>{title}</p>
