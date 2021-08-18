@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import config from "../configs";
 import { useParams } from "react-router-dom";
 import "../style/questionsList.scss";
 import Question from "../components/Question.js";
@@ -7,6 +9,24 @@ import ShadowBoxMedium from "../components/ShadowBoxMedium";
 
 function QuestionsList() {
   const { keyword } = useParams();
+  const [questions, setQuestions] = useState([]);
+  //41, 53
+  useEffect(async () => {
+    console.log("yes!!");
+    async function yes() {
+      const result = await fetch(
+        `${config.URL}/api/questions?keyword=${keyword}`,
+        {
+          method: "GET",
+        }
+      );
+      console.log(result);
+    }
+
+    if (questions.length === 0) {
+      yes();
+    }
+  }, []);
 
   const arr = [
     {

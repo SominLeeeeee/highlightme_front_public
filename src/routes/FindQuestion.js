@@ -10,8 +10,8 @@ function FindQuestion() {
         <div className="findQuestionHeader">
           <p id="findQuestionTitle">질문찾기</p>
           <p id="findQuestionExplain">
-            자기소개서에서 면접관이 <b>물어볼 만한 질문</b>을 파악하고, 실제
-            면접을 준비해보세요!
+            자기소개서와 연관된 <b>면접 예상 질문</b>을 파악하고, 실제 면접을
+            준비해보세요!
           </p>
         </div>
         <div className="keywordQuestionWrapper">
