@@ -1,12 +1,32 @@
+.findQuestionWrapperParent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .findQuestionWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.keywordQuestionWrapper {
   display: grid;
   grid-template-columns: 528px 633px;
   column-gap: 4rem;
   align-items: start;
 }
 
-.findQuestionWrapperParent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.findQuestionHeader {
+  margin-bottom: 4.1rem;
+  #findQuestionTitle {
+    font-size: 3.6rem;
+    font-family: "AppleSDGothicNeo-Bold";
+    margin: 0;
+  }
+  #findQuestionExplain {
+    font-size: 2.2rem;
+    margin-top: 0.7rem;
+  }
 }
