@@ -22,5 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+/src/configs/
 /src/components/func&params.txt
 /src/components/rem.txt
