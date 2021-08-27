@@ -14,7 +14,8 @@
 
 .keywordQuestionWrapper {
   display: grid;
-  grid-template-columns: 528px 633px;
+  width: 1200px;
+  grid-template-columns: 5fr 6fr;
   column-gap: 4rem;
   align-items: start;
 }
