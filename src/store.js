@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import config from "./configs/index";
+import config from "./configs";
 
 console.log("hello");
 
@@ -77,3 +77,4 @@ store.dispatch(clickKeyword("eee"));
 store.dispatch(clickKeyword("fff"));
 store.dispatch(clickKeyword("ggg"));
 store.dispatch(viewKeywords());
+console.log(store.getState());
