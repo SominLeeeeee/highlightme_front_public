@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import config from "./configs/index";
 
 console.log("hello");
 
@@ -29,7 +30,23 @@ function reducer(state = initialState, action) {
     case CLICK_KEYWORD:
       return {
         ...state,
-        clickKeyword: action.keyword,
+        clickedKeyword: action.keyword,
+      };
+    case VIEW_KEYWORDS:
+      var keywordArr = [];
+      fetch(`${config.URL}/api/keywords?user_id=2`, {
+        method: "GET",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          keywordArr = res;
+          console.log(keywordArr);
+        });
+      return {
+        ...state,
+        keywords: keywordArr,
       };
     default:
       return state;
@@ -59,3 +76,4 @@ store.dispatch(clickKeyword("ddd"));
 store.dispatch(clickKeyword("eee"));
 store.dispatch(clickKeyword("fff"));
 store.dispatch(clickKeyword("ggg"));
+store.dispatch(viewKeywords());
