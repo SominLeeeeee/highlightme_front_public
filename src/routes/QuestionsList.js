@@ -7,8 +7,8 @@ import Question from "../components/Question.js";
 import HighlightText from "../components/HighlightText";
 import ShadowBoxMedium from "../components/ShadowBoxMedium";
 
-function QuestionsList() {
-  const { keyword } = useParams();
+function QuestionsList(props) {
+  const { keyword } = { ...props };
   const [questions, setQuestions] = useState([]);
   //41, 53
   useEffect(async () => {
