@@ -58,7 +58,6 @@ const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-console.log(store.getState());
 
 /* 스토어안에 들어있는 상태가 바뀔 때 마다 호출되는 listener 함수 */
 const listener = () => {
@@ -67,14 +66,3 @@ const listener = () => {
 };
 
 const unsubscribe = store.subscribe(listener);
-
-/* 액션들을 디스패치 해보기 */
-store.dispatch(clickKeyword("aaa"));
-store.dispatch(clickKeyword("bbb"));
-store.dispatch(clickKeyword("ccc"));
-store.dispatch(clickKeyword("ddd"));
-store.dispatch(clickKeyword("eee"));
-store.dispatch(clickKeyword("fff"));
-store.dispatch(clickKeyword("ggg"));
-store.dispatch(viewKeywords());
-console.log(store.getState());
