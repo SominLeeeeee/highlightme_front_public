@@ -5,6 +5,7 @@ import HighlightText from "../components/HighlightText";
 import ItemCircle from "../components/ItemCircle";
 import Keyword from "../components/Keyword";
 import ShadowBoxMedium from "../components/ShadowBoxMedium";
+import { useSelector } from "react-redux";
 
 function KeywordGraphView() {
   const keywordArr = [
@@ -68,6 +69,8 @@ function KeywordGraphView() {
     },
   ];
 
+  const keywordArrRedux = useSelector((state) => state.keywords);
+
   function pickColor(answerExist) {
     if (answerExist === "y") return `${colors.mainyellow}`;
     else if (answerExist === "n") return `${colors.subyellow}`;
@@ -83,7 +86,7 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-
+        {console.log(keywordArrRedux)}
         {keywordArr.map((element) => (
           <ShadowBoxMedium paddingTop="3.1rem">
             <HighlightText
