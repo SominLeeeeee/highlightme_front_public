@@ -8,6 +8,7 @@ const QuestionsList = lazy(() => import("./routes/QuestionsList"));
 const KeywordGraphView = lazy(() => import("./routes/KeywordGraphView"));
 const Coverletter = lazy(() => import("./routes/Coverletter"));
 const FindQuestion = lazy(() => import("./routes/FindQuestion"));
+const Header = lazy(() => import("./components/Header"));
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/quest" component={FindQuestion} />
           <Route path="/keywordview/graph" component={KeywordGraphView} />
           <Route path="/coverletter" component={Coverletter} />
+          <Route path="/headerTest" component={Header} />
 
           {/* <Route path="/signin/logout" component={Logout} />
           <Route path="/field" component={Field} />
