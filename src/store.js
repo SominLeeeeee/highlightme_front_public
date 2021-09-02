@@ -7,16 +7,16 @@ console.log("hello");
 const initialState = {
   id: 2,
   keywords: ["this", "is", "initial", "keywords"],
-  clickedKeyword: "",
+  selectedKeyword: "",
 };
 
 /* 액션 타입 정의 */
-const CLICK_KEYWORD = "CLICK_KEYWORD";
+const SELECT_KEYWORD = "SELECT_KEYWORD";
 const VIEW_KEYWORDS = "VIEW_KEYWORDS";
 
 /* 액션 생성 함수 정의 */
-const clickKeyword = (keyword) => ({
-  type: CLICK_KEYWORD,
+const selectKeyword = (keyword) => ({
+  type: SELECT_KEYWORD,
   keyword,
 });
 
@@ -27,14 +27,14 @@ const viewKeywords = () => ({
 /* 리듀서 만들기 */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case CLICK_KEYWORD:
+    case SELECT_KEYWORD:
       return {
         ...state,
-        clickedKeyword: action.keyword,
+        selectedKeyword: action.keyword,
       };
     case VIEW_KEYWORDS:
       var keywordArr = [];
-      fetch(`${config.URL}/api/keywords?user_id=2`, {
+      fetch(`${config.URL}/api/keywords?user_id=${state.id}`, {
         method: "GET",
       })
         .then((res) => {
