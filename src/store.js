@@ -7,7 +7,7 @@ console.log("hello");
 const initialState = {
   id: 2,
   keywords: ["this", "is", "initial", "keywords"],
-  selectedKeyword: "",
+  selectedKeyword: "selectedKeywordTemp",
 };
 
 /* 액션 타입 정의 */
