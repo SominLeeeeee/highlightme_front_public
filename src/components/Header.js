@@ -6,12 +6,20 @@ function Header() {
     <div id="headerWrapper">
       <div id="header">
         <img src="/images/ic-sign-logo.svg" />
-        <span id="headerNavigators">
-          <p>질문찾기</p>
-          <p>모아보기</p>
-          <p>주고받기</p>
-          <img id="myProfile" src="/images/ic-profile.svg" />
-        </span>
+        <ul id="headerNavigators">
+          <li>
+            <a>질문찾기</a>
+          </li>
+          <li>
+            <a>모아보기</a>
+          </li>
+          <li>
+            <a>주고받기</a>
+          </li>
+          <li>
+            <img id="myProfile" src="/images/ic-profile.svg" />
+          </li>
+        </ul>
       </div>
     </div>
   );

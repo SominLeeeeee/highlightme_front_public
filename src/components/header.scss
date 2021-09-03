@@ -6,13 +6,17 @@
   padding: 2.2rem;
 }
 
-p {
-  display: inline;
-  font-size: 1.8rem;
-  color: #707070;
-  margin: 0;
-  margin-right: 39px;
-  font-family: "AppleSDGothicNeo-Medium";
+li {
+  list-style: none;
+
+  a {
+    display: inline;
+    font-size: 1.8rem;
+    color: #707070;
+    margin: 0;
+    margin-right: 39px;
+    font-family: "AppleSDGothicNeo-Medium";
+  }
 }
 
 #header {
