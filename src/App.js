@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const SignIn = lazy(() => import("./routes/SignIn"));
+const SignIn = lazy(() => import("./components/GoogleLoginPage"));
 const SignUp = lazy(() => import("./routes/SignUp"));
 const QuestionsList = lazy(() => import("./routes/QuestionsList"));
 const KeywordGraphView = lazy(() => import("./routes/KeywordGraphView"));
