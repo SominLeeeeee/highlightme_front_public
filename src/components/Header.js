@@ -10,7 +10,7 @@ function Header() {
           <p>질문찾기</p>
           <p>모아보기</p>
           <p>주고받기</p>
-          <img src="/images/ic-profile.svg" />
+          <img id="myProfile" src="/images/ic-profile.svg" />
         </span>
       </div>
     </div>
