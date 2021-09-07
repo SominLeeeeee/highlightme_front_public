@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 
-function GoogleLoginPage() {
+function GoogleLoginButton() {
   function attachSignin() {}
 
   const responseGoogle = (response) => {
@@ -39,4 +39,4 @@ function GoogleLoginPage() {
   );
 }
 
-export default GoogleLoginPage;
+export default GoogleLoginButton;
