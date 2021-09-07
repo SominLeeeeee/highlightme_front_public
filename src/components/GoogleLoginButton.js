@@ -18,6 +18,7 @@ function GoogleLoginButton() {
     padding: "2rem 3rem",
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
