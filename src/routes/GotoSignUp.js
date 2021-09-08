@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleLoginPage from "../components/GoogleLoginButton";
+import HighlightText from "../components/HighlightText";
 import "../style/gotoSignUp.scss";
 
 function GotoSignUp() {
@@ -14,7 +15,16 @@ function GotoSignUp() {
           <br />
           예상 받아보세요
         </p>
-        <p id="signupPhrase2">이제 면접 대비는 하이라이트미</p>
+        <p id="signupPhrase2">
+          이제 면접 대비는{" "}
+          <HighlightText
+            fontSize="3rem"
+            marginBottom="0"
+            fontFamily="AppleSDGothicNeo-ExtraBold"
+          >
+            하이라이트미
+          </HighlightText>
+        </p>
         <GoogleLoginPage />
       </div>
       <p id="signupAgree">

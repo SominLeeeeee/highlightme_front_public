@@ -2,7 +2,9 @@ import React from "react";
 import "./HighlightText.scss";
 
 function HighlightText(props) {
-  const { text, penColor, color, marginBottom, fontSize } = { ...props };
+  const { penColor, color, marginBottom, fontSize, fontFamily } = {
+    ...props,
+  };
 
   return (
     <div className="highlightText" style={{ marginBottom: marginBottom }}>
@@ -10,9 +12,10 @@ function HighlightText(props) {
         style={{
           color: color,
           fontSize: fontSize,
+          fontFamily: fontFamily,
         }}
       >
-        {text}
+        {props.children}
       </p>
       <div
         style={{
