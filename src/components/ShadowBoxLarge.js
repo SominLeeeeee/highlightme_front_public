@@ -1,12 +1,12 @@
 import React from "react";
-import "./ShadowBoxMedium.scss";
+import "./ShadowBoxLarge.scss";
 
-function ShadowBoxMedium(props) {
+function ShadowBoxLarge(props) {
   const { paddingTop, children } = { ...props };
 
   return (
     <div
-      className="shadowBoxMedium"
+      className="shadowBoxLarge"
       style={{
         paddingTop: paddingTop,
       }}
@@ -16,4 +16,4 @@ function ShadowBoxMedium(props) {
   );
 }
 
-export default ShadowBoxMedium;
+export default ShadowBoxLarge;
