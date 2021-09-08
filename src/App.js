@@ -3,7 +3,7 @@ import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const SignIn = lazy(() => import("./components/GoogleLoginButton"));
-const SignUp = lazy(() => import("./routes/GotoSignUp"));
+const SignUp = lazy(() => import("./routes/SignUp"));
 const QuestionsList = lazy(() => import("./routes/QuestionsList"));
 const KeywordGraphView = lazy(() => import("./routes/KeywordGraphView"));
 const Coverletter = lazy(() => import("./routes/Coverletter"));
