@@ -4,52 +4,38 @@ import colors from "../style/colors.js";
 
 import HighlightButton from "../components/HighlightButton";
 import InputBox from "../components/InputBox";
-import ShadowBoxMedium from "../components/ShadowBoxMedium";
+import ShadowBoxLarge from "../components/ShadowBoxLarge";
+import Asterisk from "../components/Asterisk";
 
-function SignUp() {
+function SignUp(props) {
+  // const { email } = { ...props };
+  const email = "somin116@gmail.com";
   return (
     <div className="signUpParent">
-      <p> logo</p>
-      <ShadowBoxMedium
-        width="294px"
-        aOfRgba="0.08"
-        fleaxDirection="column"
-        padding="40px"
-      >
+      <img src="/images/ic-sign-logo.svg" id="logo"></img>
+      <ShadowBoxLarge>
         {/* <!-- TODO: 중앙정렬 --> */}
         <p className="signUpTitle">
           정보를 입력하면 <br></br>다양한 서비스를 만나볼 수 있어요!
         </p>
-        {/* <!-- TODO: fontface 적용해서 글꼴 바꾸기 --> */}
-        <div className="inputDivEmail">
-          <label for="email" className="inputLabel">
-            이메일
-          </label>
-          <InputBox
-            text="이메일을"
-            backgroundColor="white"
-            color="$darkgray"
-            type="email"
-          />
+        <div id="signUpUserInfo">
+          <div className="inputDivEmail">
+            <label for="email" className="inputLabel">
+              이메일 <Asterisk />
+            </label>
+            <input type="text" disabled value={email} />
+          </div>
+          <div className="inputDivJob">
+            <label for="job" className="inputLabel">
+              직무선택 <span id="jobLimitHint">(최대 3개)</span> <Asterisk />
+            </label>
+            <input placeholder="직무를 선택해주세요" />
+            <label for="task" className="inputLabel">
+              분야선택 <Asterisk />
+            </label>
+            <input placeholder="분야를 선택해주세요 " />
+          </div>
         </div>
-        <div className="inputDivPw">
-          <label for="pw" className="inputLabel">
-            비밀번호
-          </label>
-          <InputBox
-            text="비밀번호를"
-            type="password"
-            backgroundColor={colors.white}
-            color={colors.darkgray}
-          />
-          <InputBox
-            text="비밀번호를 한번 더"
-            type="password"
-            backgroundColor="#f8f8f8"
-            color={colors.darkgray}
-          />
-        </div>
-
         {/* TODO: 직무선택, 분야선택 만들기 */}
 
         <HighlightButton
@@ -57,7 +43,7 @@ function SignUp() {
           backgroundColor={colors.darkgray}
           color={colors.white}
         />
-      </ShadowBoxMedium>
+      </ShadowBoxLarge>
     </div>
   );
 }
