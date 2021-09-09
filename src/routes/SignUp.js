@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/signup.scss";
 import colors from "../style/colors.js";
 
@@ -8,13 +8,35 @@ import ShadowBoxLarge from "../components/ShadowBoxLarge";
 import Asterisk from "../components/Asterisk";
 
 function SignUp(props) {
-  // const { email } = { ...props };
-  const email = "somin116@gmail.com";
+  const { email } = { ...props };
+  const [fieldSelected, setFieldSelected] = useState(false); // 분야
+  const [jobSelected, setJobSelected] = useState(false); // 직무
+  const [jobList, setJobList] = useState([]); // 분야에 따른 직무 리스트
+
+  const taskList = [
+    { field: "a", job: ["aa", "ab", "ac"] },
+    { field: "b", job: ["ba", "bb", "bc"] },
+    { field: "c", job: ["ca", "cb", "cc"] },
+  ];
+
+  function fieldOnChange(e) {
+    if (e.target.value !== false) setFieldSelected(e.target.value);
+
+    taskList.map((element) => {
+      if (element.field === e.target.value) {
+        setJobList(element.job);
+      }
+    });
+  }
+
+  function jobOnChange(e) {
+    if (e.target.value !== false) setJobSelected(e.target.value);
+  }
+
   return (
     <div className="signUpParent">
       <img src="/images/ic-sign-logo.svg" id="logo"></img>
       <ShadowBoxLarge>
-        {/* <!-- TODO: 중앙정렬 --> */}
         <p className="signUpTitle">
           정보를 입력하면 <br></br>다양한 서비스를 만나볼 수 있어요!
         </p>
@@ -55,10 +77,12 @@ function SignUp(props) {
               <option disabled selected>
                 직무를 선택해주세요.
               </option>
+              {jobList.map((element) => (
+                <option>{element}</option>
+              ))}
             </select>
           </div>
         </div>
-        {/* TODO: 직무선택, 분야선택 만들기 */}
 
         <HighlightButton
           text="가입하기!"
