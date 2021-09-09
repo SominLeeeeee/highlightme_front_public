@@ -25,15 +25,37 @@ function SignUp(props) {
             </label>
             <input type="text" disabled value={email} />
           </div>
+
           <div className="inputDivJob">
+            <label for="field" className="inputLabel">
+              분야선택 <Asterisk />
+            </label>
+            <select
+              background="/images/ic-sign-dropdown.svg"
+              style={fieldSelected ? { color: "black" } : { color: "#c1c1c1" }}
+              onChange={fieldOnChange}
+            >
+              <option disabled selected>
+                분야를 선택해주세요.
+              </option>
+              {taskList.map((element) => (
+                <option>{element.field}</option>
+              ))}
+            </select>
+
             <label for="job" className="inputLabel">
               직무선택 <span id="jobLimitHint">(최대 3개)</span> <Asterisk />
             </label>
-            <input placeholder="직무를 선택해주세요" />
-            <label for="task" className="inputLabel">
-              분야선택 <Asterisk />
-            </label>
-            <input placeholder="분야를 선택해주세요 " />
+            <select
+              background="/images/ic-sign-dropdown.svg"
+              style={jobSelected ? { color: "black" } : { color: "#c1c1c1" }}
+              onChange={jobOnChange}
+            >
+              {" "}
+              <option disabled selected>
+                직무를 선택해주세요.
+              </option>
+            </select>
           </div>
         </div>
         {/* TODO: 직무선택, 분야선택 만들기 */}
