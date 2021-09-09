@@ -10,11 +10,11 @@
 
   #logo {
     margin-bottom: 4.8rem;
-    margin-top: 7.4rem;
+    margin-top: 4.8rem;
   }
 
   .signUpTitle {
-    font-family: "AppleSDGothicNeo-ExtraBold";
+    font-family: "AppleSDGothicNeo-Bold";
     font-size: 30px;
     margin: 0;
     margin-bottom: 3.8rem;
@@ -28,8 +28,16 @@
   margin-bottom: 0.6rem;
 }
 
+#signUpUserInfo {
+  width: 427px;
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   display: block;
+  font-size: 1.8rem;
+  font-family: "AppleSDGothicNeo-Regular";
   border-radius: 0.8rem;
   border: solid 1px #ddd;
   padding: 1.6rem;
