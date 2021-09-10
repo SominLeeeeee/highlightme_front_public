@@ -97,6 +97,12 @@ function SignUp(props) {
           </div>
         </div>
 
+        {fieldJob.map((element) => (
+          <p>
+            {element.field} {">"} {element.job}
+          </p>
+        ))}
+
         <HighlightButton
           text="가입하기!"
           backgroundColor={colors.darkgray}
