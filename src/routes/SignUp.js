@@ -10,6 +10,7 @@ function SignUp(props) {
   const { email } = { ...props };
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
+  const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
 
   const fieldArr = ["분야를 선택해주세요", "a", "b", "c"];
   const jobArr = [
@@ -27,6 +28,13 @@ function SignUp(props) {
 
   function jobOnChange(e) {
     setJobSelected(e.target.selectedIndex);
+
+    setFieldJob(
+      fieldJob.concat({
+        field: fieldArr[fieldSelected],
+        job: jobArr[fieldSelected][e.target.selectedIndex],
+      })
+    );
   }
 
   return (
