@@ -9,28 +9,25 @@ import Asterisk from "../components/Asterisk";
 
 function SignUp(props) {
   const { email } = { ...props };
-  const [fieldSelected, setFieldSelected] = useState(false); // 분야
-  const [jobSelected, setJobSelected] = useState(false); // 직무
-  const [jobList, setJobList] = useState([]); // 분야에 따른 직무 리스트
+  const [fieldSelected, setFieldSelected] = useState(0); // 분야
+  const [jobSelected, setJobSelected] = useState(0); // 직무
 
-  const taskList = [
-    { field: "a", job: ["aa", "ab", "ac"] },
-    { field: "b", job: ["ba", "bb", "bc"] },
-    { field: "c", job: ["ca", "cb", "cc"] },
+  const fieldArr = ["분야를 선택해주세요", "a", "b", "c"];
+  const jobArr = [
+    ["직무를 선택해주세요."],
+    ["직무를 선택해주세요.", "aa", "ab", "ac"],
+    ["직무를 선택해주세요.", "ba", "bb", "bc"],
+    ["직무를 선택해주세요.", "ca", "cb", "cc"],
   ];
 
   function fieldOnChange(e) {
-    if (e.target.value !== false) setFieldSelected(e.target.value);
-
-    taskList.map((element) => {
-      if (element.field === e.target.value) {
-        setJobList(element.job);
-      }
-    });
+    setFieldSelected(e.target.selectedIndex);
+    document.getElementById("selectJobForm").options.selectedIndex = 0;
+    setJobSelected(0);
   }
 
   function jobOnChange(e) {
-    if (e.target.value !== false) setJobSelected(e.target.value);
+    setJobSelected(e.target.selectedIndex);
   }
 
   return (
@@ -57,29 +54,39 @@ function SignUp(props) {
               style={fieldSelected ? { color: "black" } : { color: "#c1c1c1" }}
               onChange={fieldOnChange}
             >
-              <option disabled selected>
-                분야를 선택해주세요.
-              </option>
-              {taskList.map((element) => (
-                <option>{element.field}</option>
-              ))}
+              {fieldArr.map((element, index) =>
+                index == 0 ? (
+                  <option disabled selected>
+                    {element}
+                  </option>
+                ) : (
+                  <option>{element}</option>
+                )
+              )}
             </select>
 
             <label for="job" className="inputLabel">
               직무선택 <span id="jobLimitHint">(최대 3개)</span> <Asterisk />
             </label>
             <select
+              id="selectJobForm"
               background="/images/ic-sign-dropdown.svg"
-              style={jobSelected ? { color: "black" } : { color: "#c1c1c1" }}
+              // style={jobSelected ? { color: "black" } : { color: "#c1c1c1" }}
+              style={
+                jobSelected !== 0 ? { color: "black" } : { color: "#c1c1c1" }
+              }
               onChange={jobOnChange}
             >
               {" "}
-              <option disabled selected>
-                직무를 선택해주세요.
-              </option>
-              {jobList.map((element) => (
-                <option>{element}</option>
-              ))}
+              {jobArr[fieldSelected].map((element, index) =>
+                index == 0 ? (
+                  <option disabled selected style={{ color: "#c1c1c1" }}>
+                    {element}
+                  </option>
+                ) : (
+                  <option style={{ color: "black" }}>{element}</option>
+                )
+              )}
             </select>
           </div>
         </div>

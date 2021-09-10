@@ -75,10 +75,9 @@ select {
   padding: 1.6rem;
   padding-bottom: 1.2rem;
   margin-bottom: 2.6rem;
-  color: #c1c1c1;
 
   &:disabled {
-    color: #707070;
+    color: #c1c1c1;
   }
 
   &:focus {
