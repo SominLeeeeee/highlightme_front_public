@@ -1,7 +1,7 @@
 @import "../style/colors.scss";
 
 .selectedFieldJob {
-  display: inline-block;
+  display: block;
   width: fit-content;
   font-family: "AppleSDGothicNeo-Regular";
   font-size: 2rem;
@@ -9,4 +9,12 @@
   background-color: $subyellowa;
   margin-bottom: 1.3rem;
   border-radius: 2.5rem;
+
+  img {
+    margin-left: 1.3rem;
+  }
+}
+
+#fieldJobWrapper {
+  margin-bottom: 2rem;
 }

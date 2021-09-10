@@ -13,11 +13,11 @@ function SignUp(props) {
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
 
-  const fieldArr = ["분야를 선택해주세요", "a", "b", "c"];
+  const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
   const jobArr = [
     ["직무를 선택해주세요."],
-    ["직무를 선택해주세요.", "aa", "ab", "ac"],
-    ["직무를 선택해주세요.", "ba", "bb", "bc"],
+    ["직무를 선택해주세요.", "iOS 개발", "ab", "ac"],
+    ["직무를 선택해주세요.", "그래픽 디자인", "UI/UX 디자인", "bc"],
     ["직무를 선택해주세요.", "ca", "cb", "cc"],
   ];
 
