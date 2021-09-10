@@ -3,7 +3,6 @@ import "../style/signup.scss";
 import colors from "../style/colors.js";
 
 import HighlightButton from "../components/HighlightButton";
-import InputBox from "../components/InputBox";
 import ShadowBoxLarge from "../components/ShadowBoxLarge";
 import Asterisk from "../components/Asterisk";
 
@@ -77,7 +76,6 @@ function SignUp(props) {
               }
               onChange={jobOnChange}
             >
-              {" "}
               {jobArr[fieldSelected].map((element, index) =>
                 index == 0 ? (
                   <option disabled selected style={{ color: "#c1c1c1" }}>
