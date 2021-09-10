@@ -38,6 +38,10 @@ function SignUp(props) {
     );
   }
 
+  function fieldJobOnRemove(idx) {
+    setFieldJob(fieldJob.filter((element, index, array) => index != idx));
+  }
+
   return (
     <div className="signUpParent">
       <img src="/images/ic-sign-logo.svg" id="logo"></img>
@@ -98,9 +102,7 @@ function SignUp(props) {
           </div>
         </div>
 
-        {fieldJob.map((element) => (
-          <SelectedFieldJob field={element.field} job={element.job} />
-        ))}
+        <SelectedFieldJob fieldJob={fieldJob} onRemove={fieldJobOnRemove} />
 
         <HighlightButton
           text="가입하기!"
