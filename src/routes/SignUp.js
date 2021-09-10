@@ -5,6 +5,7 @@ import colors from "../style/colors.js";
 import HighlightButton from "../components/HighlightButton";
 import ShadowBoxLarge from "../components/ShadowBoxLarge";
 import Asterisk from "../components/Asterisk";
+import SelectedFieldJob from "../components/SelectedFieldJob";
 
 function SignUp(props) {
   const { email } = { ...props };
@@ -98,14 +99,14 @@ function SignUp(props) {
         </div>
 
         {fieldJob.map((element) => (
-          <p>
-            {element.field} {">"} {element.job}
-          </p>
+          <SelectedFieldJob field={element.field} job={element.job} />
         ))}
 
         <HighlightButton
           text="가입하기!"
-          backgroundColor={colors.darkgray}
+          backgroundColor={
+            fieldJob.length > 0 ? colors.mainyellowa : colors.darkgray
+          }
           color={colors.white}
         />
       </ShadowBoxLarge>
