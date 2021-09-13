@@ -3,7 +3,8 @@ import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const SignIn = lazy(() => import("./components/GoogleLoginButton"));
-const SignUp = lazy(() => import("./routes/GotoSignUp"));
+const SignUp = lazy(() => import("./routes/SignUp"));
+const GotoSignUp = lazy(() => import("./routes/GotoSignUp"));
 const QuestionsList = lazy(() => import("./routes/QuestionsList"));
 const KeywordGraphView = lazy(() => import("./routes/KeywordGraphView"));
 const Coverletter = lazy(() => import("./routes/Coverletter"));
@@ -19,6 +20,7 @@ function App() {
 
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/ssignup" component={GotoSignUp} />
           <Route path="/questions/:keyword" component={QuestionsList} />
           <Route path="/quest" component={FindQuestion} />
           <Route path="/keywordview/graph" component={KeywordGraphView} />

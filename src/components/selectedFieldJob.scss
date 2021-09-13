@@ -1,0 +1,20 @@
+@import "../style/colors.scss";
+
+.selectedFieldJob {
+  display: block;
+  width: fit-content;
+  font-family: "AppleSDGothicNeo-Regular";
+  font-size: 2rem;
+  padding: 1.1rem 2.4rem 0.8rem;
+  background-color: $subyellowa;
+  margin-bottom: 1.3rem;
+  border-radius: 2.5rem;
+
+  img {
+    margin-left: 1.3rem;
+  }
+}
+
+#fieldJobWrapper {
+  margin-bottom: 2rem;
+}

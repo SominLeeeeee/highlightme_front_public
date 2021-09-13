@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  height: 100vh;
   .gotoSignUp {
     display: flex;
     flex-direction: column;
@@ -12,7 +12,6 @@
       display: inline;
       width: 5rem;
       height: auto;
-      margin-top: 5.4rem;
       margin-bottom: 2.4rem;
     }
 
@@ -26,12 +25,12 @@
     #signupPhrase2 {
       font-family: "AppleSDGothicNeo-ExtraBold";
       font-size: 3rem;
-      color: #545454;
-      margin-bottom: 6.4rem;
+      color: black;
+      margin-bottom: 6rem;
     }
 
     button {
-      margin-bottom: 6.4rem;
+      margin-bottom: 15rem;
     }
   }
 }

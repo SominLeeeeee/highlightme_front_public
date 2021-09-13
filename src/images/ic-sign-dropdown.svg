@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.453" height="9.647" viewBox="0 0 16.453 9.647">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#838383;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="ic_sign_dropdown" transform="translate(-912.592 -806.485)">
+        <path id="선_18" d="M6.818 0L0 6.813" class="cls-1" transform="translate(914.006 814.717) rotate(-90)"/>
+        <path id="선_19" d="M0 0L6.818 6.812" class="cls-1" transform="translate(920.819 814.718) rotate(-90)"/>
+    </g>
+</svg>
