@@ -1,11 +1,24 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
+import config from "../configs";
 
 function GoogleLoginButton() {
   function attachSignin() {}
 
-  const responseGoogle = (response) => {
+  const responseGoogle = async (response) => {
     console.log(response);
+
+    /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
+    const alreadySignUp = await fetch(`${config.URL}/users/signup/oauth`, {
+      method: "POST",
+      body: new URLSearchParams({
+        email: response.profileObj.email,
+        type: "google",
+        tokenId: response.tokenId,
+      }),
+    });
+
+    console.log(alreadySignUp);
   };
 
   const googleLoginButtonStyle = {
@@ -36,6 +49,7 @@ function GoogleLoginButton() {
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={"single_host_origin"}
+      // isSignedIn={true}
     />
   );
 }
