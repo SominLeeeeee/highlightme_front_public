@@ -1,24 +1,26 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import config from "../configs";
+import { Redirect, useHistory } from "react-router-dom";
 
 function GoogleLoginButton() {
-  function attachSignin() {}
+  const history = useHistory();
 
   const responseGoogle = async (response) => {
     console.log(response);
 
     /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
-    const alreadySignUp = await fetch(`${config.URL}/users/signup/oauth`, {
-      method: "POST",
-      body: new URLSearchParams({
-        email: response.profileObj.email,
-        type: "google",
-        tokenId: response.tokenId,
-      }),
-    });
+    // const alreadySignUp = await fetch(`${config.URL}/users/signup/oauth`, {
+    //   method: "POST",
+    //   body: new URLSearchParams({
+    //     email: response.profileObj.email,
+    //     type: "google",
+    //     tokenId: response.tokenId,
+    //   }),
+    // });
 
-    console.log(alreadySignUp);
+    // console.log(alreadySignUp);
+    history.push("/signup");
   };
 
   const googleLoginButtonStyle = {
