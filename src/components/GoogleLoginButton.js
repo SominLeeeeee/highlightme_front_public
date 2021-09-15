@@ -2,13 +2,14 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 import config from "../configs";
 import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { SIGN_UP } from "../store";
 
 function GoogleLoginButton() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const responseGoogle = async (response) => {
-    console.log(response);
-
     /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
     // const alreadySignUp = await fetch(`${config.URL}/users/signup/oauth`, {
     //   method: "POST",
@@ -20,6 +21,8 @@ function GoogleLoginButton() {
     // });
 
     // console.log(alreadySignUp);
+    const email = response.profileObj.email;
+    dispatch({ type: SIGN_UP, email });
     history.push("/signup_info");
   };
 

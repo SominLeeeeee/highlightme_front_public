@@ -8,11 +8,13 @@ const initialState = {
   id: 2,
   keywords: ["this", "is", "initial", "keywords"],
   selectedKeyword: "selectedKeywordTemp",
+  email: "a@b.c",
 };
 
 /* 액션 타입 정의 */
-const SELECT_KEYWORD = "SELECT_KEYWORD";
-const VIEW_KEYWORDS = "VIEW_KEYWORDS";
+export const SELECT_KEYWORD = "SELECT_KEYWORD";
+export const VIEW_KEYWORDS = "VIEW_KEYWORDS";
+export const SIGN_UP = "SIGN_UP";
 
 /* 액션 생성 함수 정의 */
 const selectKeyword = (keyword) => ({
@@ -22,6 +24,11 @@ const selectKeyword = (keyword) => ({
 
 const viewKeywords = () => ({
   type: VIEW_KEYWORDS,
+});
+
+const signUp = (email) => ({
+  type: SIGN_UP,
+  email,
 });
 
 /* 리듀서 만들기 */
@@ -47,6 +54,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         keywords: keywordArr,
+      };
+    case SIGN_UP:
+      console.log(action.email);
+      return {
+        ...state,
+        email: action.email,
       };
     default:
       return state;
