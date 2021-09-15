@@ -20,7 +20,7 @@ function GoogleLoginButton() {
     // });
 
     // console.log(alreadySignUp);
-    history.push("/signup");
+    history.push("/signup_info");
   };
 
   const googleLoginButtonStyle = {

@@ -19,8 +19,8 @@ function App() {
           {/* <Route exact path="/" component={Home} /> */}
 
           <Route path="/signin" component={SignIn} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/ssignup" component={GotoSignUp} />
+          <Route path="/signup_info" component={SignUp} />
+          <Route path="/signup" component={GotoSignUp} />
           <Route path="/questions/:keyword" component={QuestionsList} />
           <Route path="/quest" component={FindQuestion} />
           <Route path="/keywordview/graph" component={KeywordGraphView} />
