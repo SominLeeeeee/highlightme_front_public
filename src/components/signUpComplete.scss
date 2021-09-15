@@ -1,0 +1,56 @@
+@import "../style/colors.scss";
+
+.signUpCompleteWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+
+  #completeText {
+    font-family: "AppleSDGothicNeo-Bold";
+    font-size: 3.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  #congratuText {
+    font-size: 2.2rem;
+    margin: 0;
+    margin-bottom: 6rem;
+  }
+
+  #registerText {
+    font-size: 2rem;
+    color: #898989;
+    margin: 0 -1.2rem 2rem -1.2rem;
+  }
+
+  button {
+    width: 42.7rem;
+    font-size: 2rem;
+    padding: 1.3rem;
+    border-radius: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  #regiButtonNow {
+    background-color: $mainyellowa;
+    color: white;
+    border: none;
+  }
+
+  #regiButtonAfter {
+    background-color: white;
+    color: $darkgray;
+    border: solid 1px $darkgray;
+  }
+}
+
+#completeImage {
+  width: 9.8rem;
+  height: 9.8rem;
+  display: inline-block;
+}
