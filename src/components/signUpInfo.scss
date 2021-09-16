@@ -1,0 +1,80 @@
+@import "../style/colors.scss";
+@import "../style/font.scss";
+
+.signUpTitle {
+  font-family: "AppleSDGothicNeo-Bold";
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 3.8rem;
+}
+
+.inputLabel {
+  display: inline-block;
+  font-family: "AppleSDGothicNeo-Bold";
+  font-size: 20px;
+  margin-bottom: 0.6rem;
+}
+
+#signUpUserInfo {
+  width: 427px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  display: block;
+  font-size: 1.8rem;
+  font-family: "AppleSDGothicNeo-Regular";
+  border-radius: 0.8rem;
+  border: solid 1px #ddd;
+  padding: 1.6rem;
+  padding-bottom: 1.2rem;
+  width: calc(100% - 3.4rem);
+  margin-bottom: 2.6rem;
+  line-height: 1.2;
+  height: calc(1.8rem * 1.2);
+
+  &:disabled {
+    color: #707070;
+    background-color: #ededed;
+  }
+
+  &::placeholder {
+    color: #c1c1c1;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $subyellowb;
+  }
+}
+
+select {
+  width: calc(100%);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../images/ic-sign-dropdown.svg") no-repeat 96% 50%;
+  font-size: 1.8rem;
+  font-family: "AppleSDGothicNeo-Regular";
+  border-radius: 0.8rem;
+  border: solid 1px #ddd;
+  padding: 1.6rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: 2.6rem;
+
+  &:disabled {
+    color: #c1c1c1;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $subyellowb;
+  }
+}
+
+#jobLimitHint {
+  font-family: "AppleSDGothicNeo-Regular";
+  font-size: 2rem;
+  color: #8b8b8b;
+}
