@@ -11,7 +11,7 @@ function GoogleLoginButton() {
 
   const responseGoogle = async (response) => {
     /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
-    // const alreadySignUp = await fetch(`${config.URL}/users/signup/oauth`, {
+    // const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
     //   method: "POST",
     //   body: new URLSearchParams({
     //     email: response.profileObj.email,
