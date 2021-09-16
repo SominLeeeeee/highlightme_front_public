@@ -27,7 +27,6 @@ function App() {
           <Route path="/keywordview/graph" component={KeywordGraphView} />
           <Route path="/coverletter" component={Coverletter} />
           <Route path="/headerTest" component={Header} />
-          <Route path="/signup_complete" component={SignUpComplete} />
 
           {/* <Route path="/signin/logout" component={Logout} />
           <Route path="/field" component={Field} />

@@ -9,12 +9,14 @@ const initialState = {
   keywords: ["this", "is", "initial", "keywords"],
   selectedKeyword: "selectedKeywordTemp",
   email: "a@b.c",
+  signUpLevel: 0,
 };
 
 /* 액션 타입 정의 */
 export const SELECT_KEYWORD = "SELECT_KEYWORD";
 export const VIEW_KEYWORDS = "VIEW_KEYWORDS";
 export const SIGN_UP = "SIGN_UP";
+export const SIGN_UP_REGISTER = "SIGN_UP_REGISTER";
 
 /* 액션 생성 함수 정의 */
 const selectKeyword = (keyword) => ({
@@ -60,6 +62,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         email: action.email,
+      };
+    case SIGN_UP_REGISTER:
+      console.log("go to complete");
+      return {
+        ...state,
+        signUpLevel: state.signUpLevel + 1,
       };
     default:
       return state;
