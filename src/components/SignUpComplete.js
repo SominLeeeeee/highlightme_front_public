@@ -1,5 +1,3 @@
-import HighlightButton from "./HighlightButton";
-import ShadowBoxLarge from "./ShadowBoxLarge";
 import "./signUpComplete.scss";
 
 function SignUpComplete() {
