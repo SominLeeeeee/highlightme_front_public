@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Asterisk from "./Asterisk";
 import HighlightButton from "./HighlightButton";
 import SelectedFieldJob from "../components/SelectedFieldJob";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { SIGN_UP_REGISTER } from "../store";
 import colors from "../style/colors";
 import "./signUpInfo.scss";
 
@@ -11,6 +12,7 @@ function SignUpInfo() {
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
 
+  const dispatch = useDispatch();
   const email = useSelector((state) => state.email);
   const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
   const jobArr = [
@@ -38,6 +40,10 @@ function SignUpInfo() {
 
   function fieldJobOnRemove(idx) {
     setFieldJob(fieldJob.filter((element, index, array) => index != idx));
+  }
+
+  function registerOnClick() {
+    dispatch({ type: SIGN_UP_REGISTER });
   }
 
   return (
@@ -106,6 +112,7 @@ function SignUpInfo() {
           fieldJob.length > 0 ? colors.mainyellowa : colors.darkgray
         }
         color={colors.white}
+        onClick={registerOnClick}
       />
     </div>
   );
