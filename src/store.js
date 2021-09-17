@@ -1,4 +1,3 @@
-import { createStore } from "redux";
 import config from "./configs";
 
 console.log("hello");
@@ -10,6 +9,11 @@ const initialState = {
   selectedKeyword: "selectedKeywordTemp",
   email: "a@b.c",
   signUpLevel: 0,
+  coverLetter: [
+    { problem: "", answer: "" },
+    { problem: "", answer: "" },
+  ],
+  selectedCoverLetterElement: 1,
 };
 
 /* 액션 타입 정의 */
@@ -17,6 +21,7 @@ export const SELECT_KEYWORD = "SELECT_KEYWORD";
 export const VIEW_KEYWORDS = "VIEW_KEYWORDS";
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_REGISTER = "SIGN_UP_REGISTER";
+export const EDIT_COVERLETTER = "EDIT_COVERLETTER";
 
 /* 액션 생성 함수 정의 */
 const selectKeyword = (keyword) => ({
@@ -36,6 +41,13 @@ const signUp = (email) => ({
 const signUpRegister = (level) => ({
   type: SIGN_UP_REGISTER,
   level,
+});
+
+const editCoverLetter = (number, problem, answer) => ({
+  type: EDIT_COVERLETTER,
+  number,
+  problem,
+  answer,
 });
 
 /* 리듀서 만들기 */
@@ -73,6 +85,25 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         signUpLevel: action.level,
+      };
+    case EDIT_COVERLETTER:
+      if (state.coverLetter.length == action.number) {
+        state.coverLetter.push({
+          problem: action.problem,
+          answer: action.answer,
+        });
+      } else {
+        state.coverLetter[action.number] = {
+          problem: action.problem,
+          answer: action.answer,
+        };
+      }
+
+      console.log(state.coverLetter);
+
+      return {
+        ...state,
+        editCoverLetter: action.number,
       };
     default:
       return state;
