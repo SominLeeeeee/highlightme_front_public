@@ -1,0 +1,24 @@
+.clTip {
+  border-radius: 1.6rem;
+  background-color: #fffaed;
+  font-family: "AppleSDGothicNeo-Regular";
+  padding: 3rem;
+  padding-bottom: 2.5rem;
+  margin-bottom: 1.7rem;
+
+  #tipTitleWrapper {
+    display: flex;
+    align-items: flex-start;
+
+    #tipTitle {
+      font-size: 2.2rem;
+      margin-left: 0.9rem;
+    }
+  }
+
+  #tipParagraph {
+    margin: 0;
+    margin-top: 0.6rem;
+    font-size: 1.8rem;
+  }
+}
