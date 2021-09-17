@@ -33,6 +33,11 @@ const signUp = (email) => ({
   email,
 });
 
+const signUpRegister = (level) => ({
+  type: SIGN_UP_REGISTER,
+  level,
+});
+
 /* 리듀서 만들기 */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -67,7 +72,7 @@ export default function reducer(state = initialState, action) {
       console.log("go to complete");
       return {
         ...state,
-        signUpLevel: state.signUpLevel + 1,
+        signUpLevel: action.level,
       };
     default:
       return state;

@@ -43,7 +43,7 @@ function SignUpInfo() {
   }
 
   function registerOnClick() {
-    dispatch({ type: SIGN_UP_REGISTER });
+    dispatch({ type: SIGN_UP_REGISTER, level: 1 });
   }
 
   return (
