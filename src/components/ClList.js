@@ -5,7 +5,7 @@ import "./clList.scss";
 
 function ClList() {
   return (
-    <div>
+    <div className="clListWrapper">
       <div className="clListHeader">
         <p className="clListTitle">자기소개서 등록</p>
         <div className="clElementPlus">
