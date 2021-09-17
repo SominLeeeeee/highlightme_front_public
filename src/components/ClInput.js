@@ -4,6 +4,7 @@ import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
 
 import config from "../configs";
+import ClTip from "./ClTip";
 
 function ClInput() {
   const [count, setCount] = useState(0);
@@ -64,7 +65,7 @@ function ClInput() {
             이용하려면 입니다.
           </p>
         </div> */}
-
+      <ClTip />
       {/* 자기소개서 문항 입력 */}
       <ClInputDiv
         className="clInputDiv"

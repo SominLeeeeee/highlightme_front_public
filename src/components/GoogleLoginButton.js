@@ -3,26 +3,33 @@ import { GoogleLogin } from "react-google-login";
 import config from "../configs";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { SIGN_UP } from "../store";
+import { SIGN_UP, SIGN_UP_REGISTER } from "../store";
 
 function GoogleLoginButton() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const responseGoogle = async (response) => {
-    /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
-    // const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
-    //   method: "POST",
-    //   body: new URLSearchParams({
-    //     email: response.profileObj.email,
-    //     type: "google",
-    //     tokenId: response.tokenId,
-    //   }),
-    // });
+  // const responseGoogle = async (response) => {
+  //   /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
+  //   const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
+  //     method: "POST",
+  //     body: new URLSearchParams({
+  //       email: response.profileObj.email,
+  //       type: "google",
+  //       tokenId: response.tokenId,
+  //     }),
+  //   });
+  //   console.log(alreadySignUp);
+  // };
 
-    // console.log(alreadySignUp);
-    const email = response.profileObj.email;
-    dispatch({ type: SIGN_UP, email });
+  const googleBtnOnClick = async () => {
+    const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
+      method: "GET",
+    });
+
+    console.log(alreadySignUp);
+    // dispatch({ type: SIGN_UP, email });
+    dispatch({ type: SIGN_UP_REGISTER, level: 0 });
     history.push("/signup_info");
   };
 
@@ -40,22 +47,29 @@ function GoogleLoginButton() {
   };
 
   return (
-    <GoogleLogin
-      clientId="568158562597-qu7pvd53laqmvfsas5bihd5k1lk53c3s.apps.googleusercontent.com"
-      render={(renderProps) => (
-        <button style={googleLoginButtonStyle} onClick={renderProps.onClick}>
-          <img
-            src="/images/btn-google-signin.png"
-            style={{ width: "24px", height: "24px", marginRight: "8px" }}
-          ></img>
-          구글 계정으로 간편하게 시작하기
-        </button>
-      )}
-      onSuccess={responseGoogle}
-      onFailure={responseGoogle}
-      cookiePolicy={"single_host_origin"}
-      // isSignedIn={true}
-    />
+    // <GoogleLogin
+    //   clientId="568158562597-qu7pvd53laqmvfsas5bihd5k1lk53c3s.apps.googleusercontent.com"
+    //   render={(renderProps) => (
+    //     <button style={googleLoginButtonStyle} onClick={renderProps.onClick}>
+    //       <img
+    //         src="/images/btn-google-signin.png"
+    //         style={{ width: "24px", height: "24px", marginRight: "8px" }}
+    //       ></img>
+    //       구글 계정으로 간편하게 시작하기
+    //     </button>
+    //   )}
+    //   onSuccess={responseGoogle}
+    //   onFailure={responseGoogle}
+    //   cookiePolicy={"single_host_origin"}
+    //   // isSignedIn={true}
+    // />
+    <button onClick={googleBtnOnClick} style={googleLoginButtonStyle}>
+      <img
+        src="/images/btn-google-signin.png"
+        style={{ width: "24px", height: "24px", marginRight: "8px" }}
+      />
+      구글 계정으로 간편하게 시작하기
+    </button>
   );
 }
 

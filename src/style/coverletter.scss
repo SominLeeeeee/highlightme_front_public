@@ -1,5 +1,11 @@
 .coverletterWrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  .coverletter {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    width: 1200px;
+  }
 }
