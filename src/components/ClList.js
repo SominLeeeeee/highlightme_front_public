@@ -3,6 +3,7 @@ import ClElementTitle from "./ClElementTitle";
 import "./clList.scss";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../recoil/userStore";
+import produce from "immer";
 
 function ClList() {
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
@@ -15,6 +16,13 @@ function ClList() {
       ...prev,
       { problem: "자기소개서 문항을 입력해주세요", answer: "" },
     ]);
+
+    setCoverLetterElements((prev) =>
+      produce(prev, (draft) => {
+        draft.push({ problem: "자소서 문항 입력하세요", answer: "" });
+        return draft;
+      })
+    );
   }
 
   console.log("coverLetterElements", coverLetterElements);
