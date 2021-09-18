@@ -90,10 +90,13 @@ export default function reducer(state = initialState, action) {
       };
     case EDIT_COVERLETTER:
       if (state.coverLetter.length == action.number) {
-        state.coverLetter.push({
-          problem: action.problem,
-          answer: action.answer,
-        });
+        state.coverLetter = [
+          ...state.coverLetter,
+          {
+            problem: action.problem,
+            answer: action.answer,
+          },
+        ];
       } else {
         state.coverLetter[action.number] = {
           problem: action.problem,
