@@ -1,7 +1,5 @@
 import config from "./configs";
 
-console.log("hello");
-
 /* 리덕스에서 관리할 상태 정의 */
 const initialState = {
   id: 2,
@@ -9,18 +7,17 @@ const initialState = {
   selectedKeyword: "selectedKeywordTemp",
   email: "a@b.c",
   signUpLevel: 0,
-  coverLetter: [
-    { problem: "", answer: "" },
-    { problem: "", answer: "" },
-  ],
+  coverLetter: [{ problem: "자기소개서 문항 입력", answer: "" }],
   selectedCoverLetterElement: 1,
 };
 
 /* 액션 타입 정의 */
 export const SELECT_KEYWORD = "SELECT_KEYWORD";
 export const VIEW_KEYWORDS = "VIEW_KEYWORDS";
+
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_REGISTER = "SIGN_UP_REGISTER";
+
 export const EDIT_COVERLETTER = "EDIT_COVERLETTER";
 
 /* 액션 생성 함수 정의 */
