@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import ClElementTitle from "./ClElementTitle";
 import { useSelector, useDispatch } from "react-redux";
 import "./clList.scss";
-import { EDIT_COVERLETTER } from "../store";
+import { editCoverLetter } from "../store";
 
 function ClList() {
   const dispatch = useDispatch();
@@ -11,12 +10,14 @@ function ClList() {
 
   function clPlusOnClick() {
     console.log(coverLetter.length);
-    dispatch({
-      type: EDIT_COVERLETTER,
-      number: coverLetter.length,
-      problem: "",
-      answer: "",
-    });
+
+    dispatch(
+      editCoverLetter({
+        number: coverLetter.length,
+        problem: "직무를 선택해주세요",
+        answer: "",
+      })
+    );
   }
 
   return (
@@ -29,10 +30,9 @@ function ClList() {
         </div>
       </div>
       <div>
-        <ClElementTitle
-          number="1"
-          problem="자기소개서 문항 입력"
-        ></ClElementTitle>
+        {coverLetter.map((element, index) => (
+          <ClElementTitle number={index + 1} problem={element.problem} />
+        ))}
       </div>
     </div>
   );

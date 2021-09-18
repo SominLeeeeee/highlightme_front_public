@@ -43,11 +43,16 @@ const signUpRegister = (level) => ({
   level,
 });
 
-const editCoverLetter = (number, problem, answer) => ({
+/**
+ *
+ * @param {{number,problem,answer}} payload
+ * @returns
+ */
+export const editCoverLetter = (payload) => ({
   type: EDIT_COVERLETTER,
-  number,
-  problem,
-  answer,
+  number: payload.number,
+  problem: payload.problem,
+  answer: payload.answer,
 });
 
 /* 리듀서 만들기 */
