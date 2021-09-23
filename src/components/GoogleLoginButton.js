@@ -9,21 +9,22 @@ function GoogleLoginButton() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const responseGoogle = async (response) => {
-    /* TODO - 서버에 회원 정보를 보내고 가입이 되어있는지 확인하기 */
+  const googleBtnOnClick = async (response) => {
+    console.log(response);
+
     const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
       method: "POST",
       body: new URLSearchParams({
         email: response.profileObj.email,
-        accessToken: response.accessToken,
+        googleId: response.googleId,
+        tokenId: response.accessToken,
       }),
     });
 
-    console.log(alreadySignUp);
+    console.log("회원가입 결과", alreadySignUp);
     // dispatch({ type: SIGN_UP, email });
     dispatch({ type: SIGN_UP_REGISTER, level: 0 });
     history.push("/signup_info");
-    console.log(response);
   };
 
   // const googleBtnOnClick = async () => {
@@ -63,8 +64,8 @@ function GoogleLoginButton() {
           구글 계정으로 간편하게 시작하기
         </button>
       )}
-      onSuccess={responseGoogle}
-      onFailure={responseGoogle}
+      onSuccess={googleBtnOnClick}
+      onFailure={googleBtnOnClick}
       cookiePolicy={"single_host_origin"}
       // isSignedIn={true}
     />
