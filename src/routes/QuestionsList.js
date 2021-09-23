@@ -20,7 +20,7 @@ function QuestionsList(props) {
           method: "GET",
         }
       );
-      console.log(result);
+      console.log("result", result);
     }
 
     if (questions.length === 0) {

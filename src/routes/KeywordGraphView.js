@@ -85,13 +85,15 @@ function KeywordGraphView() {
       return res.json();
     })
     .then((res) => {
-      setKeyword((prev, res) =>
-        produce(prev, (res, draft) => {
+      console.log("res", res);
+      setKeyword((prev) =>
+        produce(prev, (draft) => {
           draft.userKeywords = res;
           return draft;
         })
       );
     });
+  console.log("keyword", keyword);
 
   function pickColor(answerExist) {
     if (answerExist === "y") return `${colors.mainyellow}`;
@@ -108,8 +110,7 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        {console.log(keywordArrRedux)}
-        {keywordArr.map((element) => (
+        {keyword.map((element) => (
           <ShadowBoxMedium paddingTop="3.1rem">
             <HighlightText
               text={element.parentKeyword}
@@ -118,8 +119,8 @@ function KeywordGraphView() {
             />
 
             <div className="keywordParent">
-              {element.childKeywords.map((e) => (
-                <Keyword text={e.name} color={pickColor(e.answerExist)} />
+              {element.map((e) => (
+                <Keyword text={e.keyword} color={pickColor(e.answerExist)} />
               ))}
             </div>
           </ShadowBoxMedium>
