@@ -9,13 +9,13 @@ function ClList() {
   const coverLetter = useSelector((state) => state.coverLetter);
 
   function clPlusOnClick() {
-    console.log(coverLetter.length);
-
-    dispatch(
-      editCoverLetter({
-        number: coverLetter.length,
-        problem: "직무를 선택해주세요",
-        answer: "",
+    setCoverLetterElements((prev) =>
+      produce(prev, (draft) => {
+        draft.element.push({
+          problem: "자기소개서 문항을 입력해주세요",
+          answer: "",
+        });
+        return draft;
       })
     );
   }
@@ -30,8 +30,8 @@ function ClList() {
         </div>
       </div>
       <div>
-        {coverLetter.map((element, index) => (
-          <ClElementTitle number={index + 1} problem={element.problem} />
+        {coverLetterElements.element.map((e, index) => (
+          <ClElementTitle number={index + 1} problem={e.problem} />
         ))}
       </div>
     </div>
