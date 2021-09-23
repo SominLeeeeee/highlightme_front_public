@@ -1,12 +1,14 @@
 import React from "react";
 import ClElementTitle from "./ClElementTitle";
-import { useSelector, useDispatch } from "react-redux";
 import "./clList.scss";
-import { editCoverLetter } from "../store";
+import { useRecoilState } from "recoil";
+import { atomCoverLetterElements } from "../recoil/userStore";
+import produce from "immer";
 
 function ClList() {
-  const dispatch = useDispatch();
-  const coverLetter = useSelector((state) => state.coverLetter);
+  const [coverLetterElements, setCoverLetterElements] = useRecoilState(
+    atomCoverLetterElements
+  );
 
   function clPlusOnClick() {
     setCoverLetterElements((prev) =>
@@ -19,6 +21,8 @@ function ClList() {
       })
     );
   }
+
+  console.log("coverLetterElements", coverLetterElements);
 
   return (
     <div className="clListWrapper">

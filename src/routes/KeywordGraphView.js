@@ -6,6 +6,10 @@ import ItemCircle from "../components/ItemCircle";
 import Keyword from "../components/Keyword";
 import ShadowBoxMedium from "../components/ShadowBoxMedium";
 import { useSelector } from "react-redux";
+import config from "../configs";
+import { useRecoilState } from "recoil";
+import { atomKeyword, atomUserInfo } from "../recoil/userStore";
+import produce from "immer";
 
 function KeywordGraphView() {
   const keywordArr = [
@@ -70,6 +74,24 @@ function KeywordGraphView() {
   ];
 
   const keywordArrRedux = useSelector((state) => state.keywords);
+
+  const [keyword, setKeyword] = useRecoilState(atomKeyword);
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
+  fetch(`${config.URL}/api/keywords?user_id=${userInfo.id}`, {
+    method: "GET",
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      setKeyword((prev, res) =>
+        produce(prev, (res, draft) => {
+          draft.userKeywords = res;
+          return draft;
+        })
+      );
+    });
 
   function pickColor(answerExist) {
     if (answerExist === "y") return `${colors.mainyellow}`;
