@@ -6,6 +6,7 @@ import colors from "../style/colors";
 import "./signUpInfo.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
+import config from "../configs";
 
 function SignUpInfo(props) {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
@@ -45,6 +46,23 @@ function SignUpInfo(props) {
 
   function registerOnClick() {
     setSignUp({ signUpLevel: 1 });
+    /* 직무정보 보내기 */
+    const fieldJobArr = [];
+
+    fieldJob.map((element, index, array) => {
+      console.log(index);
+      fieldJobArr.push(index);
+    });
+
+    const postFieldJobResult = fetch(`${config.URL}/api/fields`, {
+      method: "POST",
+      body: new URLSearchParams({
+        user_id: userInfo.id,
+        field_ids: JSON.stringify(fieldJobArr),
+      }),
+    });
+
+    console.log("postFieldJobResult", postFieldJobResult);
   }
 
   return (

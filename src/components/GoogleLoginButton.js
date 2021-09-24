@@ -27,7 +27,7 @@ function GoogleLoginButton() {
       .then((res) => {
         setUserInfo((prev) =>
           produce(prev, (draft) => {
-            draft.id = res.googleId;
+            draft.id = res.user_id;
             draft.email = res.email;
             draft.accessToken = response.accessToken;
           })
