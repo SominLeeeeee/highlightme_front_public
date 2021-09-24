@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { SIGN_UP, SIGN_UP_REGISTER } from "../store";
 import { useRecoilState } from "recoil";
 import { atomUserInfo } from "../recoil/userStore";
+import produce from "immer";
 
 function GoogleLoginButton() {
   const history = useHistory();
@@ -23,11 +24,13 @@ function GoogleLoginButton() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setUserInfo((prev) => {
-          prev.id = res.user_id;
-          prev.email = res.email;
-          prev.accessToken = response.accessToken;
-        });
+        setUserInfo((prev) =>
+          produce(prev, (draft) => {
+            draft.id = res.googleId;
+            draft.email = res.email;
+            draft.accessToken = response.accessToken;
+          })
+        );
       });
 
     console.log("회원가입 결과", alreadySignUp);
