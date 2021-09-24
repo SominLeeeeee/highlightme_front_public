@@ -11,15 +11,12 @@ function ClList() {
   );
 
   function clPlusOnClick() {
-    // coverLetterElements가 list이기 때문에 똑같이 list로 return
-    setCoverLetterElements((prev) => [
-      ...prev,
-      { problem: "자기소개서 문항을 입력해주세요", answer: "" },
-    ]);
-
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
-        draft.push({ problem: "자소서 문항 입력하세요", answer: "" });
+        draft.element.push({
+          problem: "자기소개서 문항을 입력해주세요",
+          answer: "",
+        });
         return draft;
       })
     );
@@ -37,8 +34,8 @@ function ClList() {
         </div>
       </div>
       <div>
-        {coverLetterElements.map((element, index) => (
-          <ClElementTitle number={index + 1} problem={element.problem} />
+        {coverLetterElements.element.map((e, index) => (
+          <ClElementTitle number={index + 1} problem={e.problem} />
         ))}
       </div>
     </div>
