@@ -85,7 +85,6 @@ function KeywordGraphView() {
       return res.json();
     })
     .then((res) => {
-      console.log("res", res);
       setKeyword((prev) =>
         produce(prev, (draft) => {
           draft.userKeywords = res;
