@@ -4,22 +4,31 @@ import config from "../configs";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SIGN_UP, SIGN_UP_REGISTER } from "../store";
+import { useRecoilState } from "recoil";
+import { atomUserInfo } from "../recoil/userStore";
 
 function GoogleLoginButton() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   const googleBtnOnClick = async (response) => {
-    console.log(response);
-
     const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
       method: "POST",
       body: new URLSearchParams({
         email: response.profileObj.email,
         googleId: response.googleId,
-        tokenId: response.accessToken,
+        accessToken: response.accessToken,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setUserInfo((prev) => {
+          prev.id = res.user_id;
+          prev.email = res.email;
+          prev.accessToken = response.accessToken;
+        });
+      });
 
     console.log("회원가입 결과", alreadySignUp);
     // dispatch({ type: SIGN_UP, email });

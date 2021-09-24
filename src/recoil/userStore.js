@@ -11,8 +11,9 @@ export const atomCoverLetterElements = atom({
 export const atomUserInfo = atom({
   key: "atomUserInfo",
   default: {
-    id: "2",
+    id: "0",
     email: "",
+    accessToken: "",
   },
 });
 
