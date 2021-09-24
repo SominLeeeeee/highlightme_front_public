@@ -4,8 +4,12 @@ import ShadowBoxLarge from "../components/ShadowBoxLarge";
 import SignUpInfo from "../components/SignUpInfo";
 import { useSelector } from "react-redux";
 import SignUpComplete from "../components/SignUpComplete";
+import { useRecoilState } from "recoil";
+import { atomUserInfo } from "../recoil/userStore";
 
 function SignUp() {
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
   return (
     <div className="signUpParent">
       <img src="/images/ic-sign-logo.svg" id="logo"></img>
@@ -13,7 +17,7 @@ function SignUp() {
         {useSelector((state) => state.signUpLevel) ? (
           <SignUpComplete />
         ) : (
-          <SignUpInfo />
+          <SignUpInfo email={userInfo.email} />
         )}
       </ShadowBoxLarge>
     </div>

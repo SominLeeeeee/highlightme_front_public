@@ -7,13 +7,13 @@ import { SIGN_UP_REGISTER } from "../store";
 import colors from "../style/colors";
 import "./signUpInfo.scss";
 
-function SignUpInfo() {
+function SignUpInfo(props) {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
 
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.email);
+  const email = props.email;
   const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
   const jobArr = [
     ["직무를 선택해주세요."],
