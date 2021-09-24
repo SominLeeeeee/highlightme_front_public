@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import Asterisk from "./Asterisk";
 import HighlightButton from "./HighlightButton";
 import SelectedFieldJob from "../components/SelectedFieldJob";
-import { useSelector, useDispatch } from "react-redux";
-import { SIGN_UP_REGISTER } from "../store";
 import colors from "../style/colors";
 import "./signUpInfo.scss";
+import { useRecoilState } from "recoil";
+import { atomSignUp, atomUserInfo } from "../recoil/userStore";
 
 function SignUpInfo(props) {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
+  const [signUp, setSignUp] = useRecoilState(atomSignUp);
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
-  const dispatch = useDispatch();
-  const email = props.email;
+  const email = userInfo.email;
   const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
   const jobArr = [
     ["직무를 선택해주세요."],
@@ -43,7 +44,7 @@ function SignUpInfo(props) {
   }
 
   function registerOnClick() {
-    dispatch({ type: SIGN_UP_REGISTER, level: 1 });
+    setSignUp({ signUpLevel: 1 });
   }
 
   return (

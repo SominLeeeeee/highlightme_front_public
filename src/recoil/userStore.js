@@ -24,3 +24,10 @@ export const atomKeyword = atom({
     selectedKeyword: "",
   },
 });
+
+export const atomSignUp = atom({
+  key: "atomSignUp",
+  default: {
+    signUpLevel: 0,
+  },
+});
