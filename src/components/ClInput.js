@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
-
 import config from "../configs";
 import ClTip from "./ClTip";
+import { useRecoilState } from "recoil";
+import { atomCoverLetterElements } from "../recoil/userStore";
 
 function ClInput() {
   const [count, setCount] = useState(0);
@@ -13,6 +13,10 @@ function ClInput() {
 
   const [problem, setProblem] = useState("");
   const [answer, setAnswer] = useState("");
+
+  const [coverLetterElements, setCoverLetterElements] = useRecoilState(
+    atomCoverLetterElements
+  );
 
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
@@ -51,22 +55,20 @@ function ClInput() {
     setDeleteHover(!deleteHover);
   };
 
+  function deleteButtonOnClick() {
+    const temp = coverLetterElements.element.filter(
+      (e, index, array) => index != coverLetterElements.selectedElement
+    );
+
+    setCoverLetterElements((prev) => ({
+      ...prev,
+      element: temp,
+    }));
+  }
+
   return (
     <div className="clInputWrapper">
-      {/* Tip
-        <div>
-          <div>
-            <img src="/images/ic-mydocs-tip.svg" />
-            <p> Tip</p>
-          </div>
-          <p>
-            질문하기 서비스를 이용하려면 자기소개서 항목이 필요합니다. 질문하기
-            서비스를 이용하려면 자기소개서 항목이 필요합니다. 질문하기 서비스를
-            이용하려면 입니다.
-          </p>
-        </div> */}
       <ClTip />
-      {/* 자기소개서 문항 입력 */}
       <ClInputDiv
         className="clInputDiv"
         title="자기소개서 문항 입력"
@@ -90,9 +92,10 @@ function ClInput() {
 
       <div className="clInputButtons">
         <div
-          className="clInputDeleteButton"
+          className="clInputDeleteButton noselect"
           onMouseOver={onDeleteButtonMouseOver}
           onMouseOut={onDeleteButtonMouseOver}
+          onClick={deleteButtonOnClick}
         >
           <img
             src={
