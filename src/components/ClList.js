@@ -1,6 +1,7 @@
 import React from "react";
 import ClElementTitle from "./ClElementTitle";
 import "./clList.scss";
+import "../index.css";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../recoil/userStore";
 import produce from "immer";
@@ -25,10 +26,10 @@ function ClList() {
   console.log("coverLetterElements", coverLetterElements);
 
   return (
-    <div className="clListWrapper">
+    <div className="clListWrapper ">
       <div className="clListHeader">
-        <p className="clListTitle">자기소개서 등록</p>
-        <div className="clElementPlus" onClick={clPlusOnClick}>
+        <p className="clListTitle noselect">자기소개서 등록</p>
+        <div className="clElementPlus noselect" onClick={clPlusOnClick}>
           <img src="/images/ic-mydocs-plus.svg" />
           <p>추가하기</p>
         </div>

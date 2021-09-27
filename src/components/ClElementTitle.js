@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../recoil/userStore";
 import "./clElementTitle.scss";
+import "../index.css";
 
 function ClElementTitle(props) {
   const { number, problem } = { ...props };
@@ -20,8 +21,8 @@ function ClElementTitle(props) {
     <div
       className={
         number - 1 === coverLetterElements.selectedElement
-          ? "clElementTitleActive"
-          : "clElementTitleDefault"
+          ? "clElementTitleActive noselect"
+          : "clElementTitleDefault noselect"
       }
       onClick={clElementTitleOnClick}
     >
