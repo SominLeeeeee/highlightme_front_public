@@ -1,23 +1,12 @@
 @import "../style/colors.scss";
 
 .clInputTitle {
-  display: flex;
   word-wrap: break-word;
-
-  div {
-    display: inline-block;
-    width: 0.6rem;
-    height: 2.3rem;
-    background-color: black;
-    margin-right: 1.1rem;
-  }
-  p {
-    margin: 0;
-    display: inline;
-    color: black;
-    font-size: 2.2rem;
-    font-family: "AppleSDGothicNeo-SemiBold";
-  }
+  border-left: black 0.6rem solid;
+  padding-left: 1.1rem;
+  color: black;
+  font-size: 2.2rem;
+  font-family: "AppleSDGothicNeo-SemiBold";
 }
 
 .clInputAnswer {

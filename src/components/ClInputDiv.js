@@ -6,10 +6,7 @@ function ClInputDiv(props) {
 
   return (
     <div className="clInputDivWrapper">
-      <span className="clInputTitle">
-        <div />
-        <p>{title}</p>
-      </span>
+      <span className="clInputTitle">{title}</span>
       <textarea
         className="clInputAnswer"
         placeholder={hint}
