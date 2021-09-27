@@ -1,7 +1,7 @@
 @import "../style/colors.scss";
 @import "../style/font.scss";
 
-.clElementTitle {
+.clElementTitleDefault {
   display: flex;
   align-items: center;
   padding: 23px 17px 23px 17px;
@@ -29,15 +29,31 @@
   }
 }
 
-.clElementTitle:active {
+.clElementTitleActive {
+  display: flex;
+  align-items: center;
+  padding: 23px 17px 23px 17px;
   background-color: rgba(255, 187, 0, 0.17);
 
   .clElementNumber {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     color: white;
     background-color: $mainyellowa;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-family: "GmarketSansBold";
+    margin-right: 13px;
   }
 
   p {
+    display: inline;
+    font-size: 22px;
+    font-family: "AppleSDGothicNeo-Medium";
+    margin: 0;
     color: black;
   }
 }
