@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
 import config from "../configs";
 
-function SignUpInfo(props) {
+function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
@@ -30,6 +30,14 @@ function SignUpInfo(props) {
     setJobSelected(0);
   }
 
+  fetch(`${config.URL}/api/fields`, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log("getJob", res);
+    });
+
   function jobOnChange(e) {
     setJobSelected(e.target.selectedIndex);
     setFieldJob(
@@ -46,9 +54,8 @@ function SignUpInfo(props) {
 
   function registerOnClick() {
     setSignUp({ signUpLevel: 1 });
-    /* 직무정보 보내기 */
-    const fieldJobArr = [];
 
+    const fieldJobArr = [];
     fieldJob.map((element, index, array) => {
       console.log(index);
       fieldJobArr.push(index);
