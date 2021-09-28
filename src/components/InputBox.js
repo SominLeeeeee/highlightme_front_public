@@ -1,32 +1,22 @@
 import React from "react";
+import TextareaAutosize from "react-textarea-autosize";
 import "./InputBox.scss";
 
 function InputBox(props) {
-  const {
-    text,
-    backgroundColor,
-    color,
-    disabled,
-    type,
-    width,
-    padding,
-    radius,
-    marginBottom,
-  } = {
+  const { text, padding, radius, marginBottom, maxRows, minRows } = {
     ...props,
   };
 
   return (
-    <input
-      type={type}
+    <TextareaAutosize
+      placeholder={text}
       className="inputBox"
-      placeholder={`${text} 입력해주세요.`}
+      maxRows={maxRows}
+      minRows={minRows}
       style={{
         padding: padding,
         borderRadius: radius,
         width: `calc(100% - 2*${padding})`,
-        backgroundColor: backgroundColor,
-        color: color,
         marginBottom: marginBottom,
       }}
     />
