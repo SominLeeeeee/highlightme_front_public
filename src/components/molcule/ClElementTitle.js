@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { atomCoverLetterElements } from "../recoil/userStore";
+import { atomCoverLetterElements } from "../../recoil/userStore";
 import "./clElementTitle.scss";
-import "../index.css";
+import "../../index.css";
 
 function ClElementTitle(props) {
   const { number, problem } = { ...props };
