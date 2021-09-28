@@ -11,9 +11,9 @@ export const atomCoverLetterElements = atom({
 export const atomUserInfo = atom({
   key: "atomUserInfo",
   default: {
-    id: "0",
-    email: "",
-    accessToken: "",
+    id: localStorage.getItem("user_id"),
+    email: localStorage.getItem("email"),
+    accessToken: localStorage.getItem("token"),
   },
 });
 

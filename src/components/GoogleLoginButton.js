@@ -25,13 +25,9 @@ function GoogleLoginButton() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setUserInfo((prev) =>
-          produce(prev, (draft) => {
-            draft.id = res.user_id;
-            draft.email = res.email;
-            draft.accessToken = response.accessToken;
-          })
-        );
+        localStorage.setItem("token", response.accessToken);
+        localStorage.setItem("email", res.email);
+        localStorage.setItem("user_id", res.user_id);
       });
 
     console.log("회원가입 결과", alreadySignUp);
