@@ -2,7 +2,7 @@ import React from "react";
 import "./HighlightText.scss";
 
 function HighlightText(props) {
-  const { penColor, color, marginBottom, fontSize, fontFamily } = {
+  const { penColor, color, marginBottom, fontSize, fontFamily, text } = {
     ...props,
   };
 
@@ -15,7 +15,7 @@ function HighlightText(props) {
           fontFamily: fontFamily,
         }}
       >
-        {props.children}
+        {text}
       </p>
       <div
         style={{
