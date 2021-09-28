@@ -1,7 +1,7 @@
 import React from "react";
 import "../style/login.scss";
 import colors from "../style/colors";
-import HighlightButton from "../components/HighlightButton";
+import HighlightButton from "../components/atom/HighlightButton";
 
 function Home() {
   return (

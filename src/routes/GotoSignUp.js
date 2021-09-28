@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleLoginPage from "../components/GoogleLoginButton";
-import HighlightText from "../components/HighlightText";
+import HighlightText from "../components/atom/HighlightText";
 import "../style/gotoSignUp.scss";
 
 function GotoSignUp() {
@@ -21,9 +21,8 @@ function GotoSignUp() {
             fontSize="3rem"
             marginBottom="0"
             fontFamily="AppleSDGothicNeo-ExtraBold"
-          >
-            하이라이트미
-          </HighlightText>
+            text="하이라이트미"
+          />
         </p>
         <GoogleLoginPage />
       </div>

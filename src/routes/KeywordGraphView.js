@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/keywordGraphView.scss";
 import colors from "../style/colors.js";
-import HighlightText from "../components/HighlightText";
+import HighlightText from "../components/atom/HighlightText";
 import ItemCircle from "../components/ItemCircle";
 import Keyword from "../components/Keyword";
 import ShadowBoxMedium from "../components/atom/ShadowBoxMedium";

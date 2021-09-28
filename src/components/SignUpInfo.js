@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Asterisk from "./atom/Asterisk";
-import HighlightButton from "./HighlightButton";
+import HighlightButton from "./atom/HighlightButton";
 import SelectedFieldJob from "../components/SelectedFieldJob";
 import colors from "../style/colors";
 import "./signUpInfo.scss";
