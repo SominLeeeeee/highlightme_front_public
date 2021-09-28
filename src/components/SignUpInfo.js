@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Asterisk from "./Asterisk";
+import Asterisk from "./atom/Asterisk";
 import HighlightButton from "./HighlightButton";
 import SelectedFieldJob from "../components/SelectedFieldJob";
 import colors from "../style/colors";
