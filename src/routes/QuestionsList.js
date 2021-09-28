@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "../style/questionsList.scss";
 import Question from "../components/Question.js";
 import HighlightText from "../components/HighlightText";
-import ShadowBoxMedium from "../components/ShadowBoxMedium";
+import ShadowBoxMedium from "../components/atom/ShadowBoxMedium";
 
 function QuestionsList(props) {
   const { keyword } = { ...props };

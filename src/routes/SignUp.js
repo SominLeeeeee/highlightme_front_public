@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/signup.scss";
-import ShadowBoxLarge from "../components/ShadowBoxLarge";
+import ShadowBoxLarge from "../components/atom/ShadowBoxLarge";
 import SignUpInfo from "../components/SignUpInfo";
 import { useSelector } from "react-redux";
 import SignUpComplete from "../components/SignUpComplete";

@@ -4,7 +4,7 @@ import colors from "../style/colors.js";
 import HighlightText from "../components/HighlightText";
 import ItemCircle from "../components/ItemCircle";
 import Keyword from "../components/Keyword";
-import ShadowBoxMedium from "../components/ShadowBoxMedium";
+import ShadowBoxMedium from "../components/atom/ShadowBoxMedium";
 import { useSelector } from "react-redux";
 import config from "../configs";
 import { useRecoilState } from "recoil";
