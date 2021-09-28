@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Question.scss";
-import InputBox from "./InputBox";
+import InputBox from "./atom/InputBox";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question(props) {
@@ -39,10 +39,12 @@ function Question(props) {
     <div>
       <p id="questionText">Q. {questionText}</p>
       <InputBox
-        text="답변을"
-        padding="2.3rem"
+        text="답변을 입력해주세요."
+        padding="1.6rem"
         radius="1.6rem"
         marginBottom="1rem"
+        maxRows="4"
+        minRows="2"
       ></InputBox>
       <div id="underQuestion">
         <span id="evaluateQuestionBox">
