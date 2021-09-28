@@ -1,7 +1,7 @@
 import React from "react";
 import KeywordGraphView from "./KeywordGraphView";
 import QuestionList from "./QuestionsList";
-import "../style/findQuestion.scss";
+import "./findQuestion.scss";
 
 function FindQuestion() {
   return (

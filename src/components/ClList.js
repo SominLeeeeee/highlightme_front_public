@@ -1,5 +1,5 @@
 import React from "react";
-import ClElementTitle from "./ClElementTitle";
+import ClElementTitle from "./molcule/ClElementTitle";
 import "./clList.scss";
 import "../index.css";
 import { useRecoilState } from "recoil";

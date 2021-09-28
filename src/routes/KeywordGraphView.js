@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../style/keywordGraphView.scss";
+import "./keywordGraphView.scss";
 import colors from "../style/colors.js";
 import HighlightText from "../components/atom/HighlightText";
-import ItemCircle from "../components/ItemCircle";
+import ItemCircle from "../components/atom/ItemCircle";
 import Keyword from "../components/Keyword";
 import ShadowBoxMedium from "../components/atom/ShadowBoxMedium";
 import { useSelector } from "react-redux";

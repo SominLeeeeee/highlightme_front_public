@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleLoginPage from "../components/GoogleLoginButton";
 import HighlightText from "../components/atom/HighlightText";
-import "../style/gotoSignUp.scss";
+import "./gotoSignUp.scss";
 
 function GotoSignUp() {
   return (

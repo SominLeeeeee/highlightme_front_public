@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./clInputDiv.scss";
-import InputBox from "./InputBox";
+import InputBox from "./atom/InputBox";
 
 function ClInputDiv(props) {
   const { hint, title, onChange, height, text } = { ...props };

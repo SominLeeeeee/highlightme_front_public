@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./clInput.scss";
 import ClInputDiv from "./ClInputDiv";
 import config from "../configs";
-import ClTip from "./ClTip";
+import ClTip from "./molcule/ClTip";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../recoil/userStore";
 
