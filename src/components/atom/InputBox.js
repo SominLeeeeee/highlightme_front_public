@@ -3,12 +3,13 @@ import TextareaAutosize from "react-textarea-autosize";
 import "./InputBox.scss";
 
 function InputBox(props) {
-  const { text, padding, radius, marginBottom, maxRows, minRows } = {
+  const { text, padding, radius, marginBottom, maxRows, minRows, onChange } = {
     ...props,
   };
 
   return (
     <TextareaAutosize
+      onChange={onChange}
       placeholder={text}
       className="inputBox"
       maxRows={maxRows}

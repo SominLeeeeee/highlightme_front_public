@@ -5,6 +5,8 @@ import config from "../configs";
 import ClTip from "./molcule/ClTip";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../recoil/userStore";
+import InputTitle from "./atom/InputTitle";
+import InputBox from "./atom/InputBox";
 
 function ClInput() {
   const [count, setCount] = useState(0);
@@ -20,14 +22,11 @@ function ClInput() {
 
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
-    console.log(textAreaHeight);
   };
 
   const onInputChangeAnswer = (event) => {
     setCount(event.target.value.length);
-    setTextAreaHeight(`${event.target.scrollHeight}px`);
     setAnswer(event.target.value);
-    console.log(textAreaHeight);
   };
 
   const onSaveButtonClicked = async () => {
@@ -69,18 +68,24 @@ function ClInput() {
   return (
     <div className="clInputWrapper">
       <ClTip />
-      <ClInputDiv
-        className="clInputDiv"
-        title="자기소개서 문항 입력"
-        hint="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
+      <InputTitle>자기소개서 문항 입력</InputTitle>
+      <InputBox
         onChange={onInputChangeProblem}
+        minRows="1"
+        maxRows="2"
+        placeholder="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
+        padding="1.6rem"
+        radius="0.8rem"
+        marginBottom="3.4rem"
       />
-      <ClInputDiv
-        className="clInputDiv"
-        title="자기소개서 답변 입력"
-        hint="ex) 저의 장점은 어떤 일이든 책임감을 가지고 수행해내는 것입니다."
-        height={textAreaHeight}
+      <InputTitle>자기소개서 문항 입력</InputTitle>
+      <InputBox
         onChange={onInputChangeAnswer}
+        minRows="4"
+        maxRows="7"
+        placeholder="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
+        padding="1.6rem"
+        radius="0.8rem"
       />
 
       <div className="clInputNotice">
