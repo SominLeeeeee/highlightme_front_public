@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../../recoil/userStore";
 import "./clElementTitle.scss";
 import "../../index.css";
+import NumberCircle from "../atom/NumberCircle";
 
 function ClElementTitle(props) {
   const { number, problem } = { ...props };
@@ -26,7 +27,16 @@ function ClElementTitle(props) {
       }
       onClick={clElementTitleOnClick}
     >
-      <div className="clElementNumber">{number}</div>
+      {/* <div className="clElementNumber">{number}</div> */}
+      <NumberCircle
+        type={
+          number - 1 === coverLetterElements.selectedElement
+            ? "active"
+            : "default"
+        }
+      >
+        {number}
+      </NumberCircle>
       <p>{problem}</p>
     </div>
   );

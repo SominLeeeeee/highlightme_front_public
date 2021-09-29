@@ -1,0 +1,28 @@
+@import "../../style/colors.scss";
+@import "../../style/font.scss";
+
+.numberCircleDefault {
+  display: inline-flex;
+  font-family: "GmarketSansBold";
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #363636;
+  background-color: $graya;
+  justify-content: center;
+  align-items: center;
+}
+
+.numberCircleActive {
+  display: inline-flex;
+  font-family: "GmarketSansBold";
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  background-color: $mainyellowa;
+  justify-content: center;
+  align-items: center;
+}
