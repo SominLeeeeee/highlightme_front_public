@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./clInput.scss";
-import ClInputDiv from "./ClInputDiv";
 import config from "../configs";
 import ClTip from "./molcule/ClTip";
 import { useRecoilState } from "recoil";
@@ -83,7 +82,7 @@ function ClInput() {
         onChange={onInputChangeAnswer}
         minRows="4"
         maxRows="7"
-        placeholder="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
+        placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
         padding="1.6rem"
         radius="0.8rem"
       />
