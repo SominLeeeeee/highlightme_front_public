@@ -12,7 +12,9 @@ import produce from "immer";
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
-  const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
+  const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무 (string)
+  const [userJob, setUserJob] = useState([]); // 선택한 분야와 직무 (int)
+
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
@@ -24,13 +26,6 @@ function SignUpInfo() {
   ]);
 
   const email = userInfo.email;
-  const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
-  const jobArr = [
-    ["직무를 선택해주세요."],
-    ["직무를 선택해주세요.", "iOS 개발", "ab", "ac"],
-    ["직무를 선택해주세요.", "그래픽 디자인", "UI/UX 디자인", "bc"],
-    ["직무를 선택해주세요.", "ca", "cb", "cc"],
-  ];
 
   /* 서버로부터 직무 정보 불러오기 */
   useEffect(() => {
@@ -98,6 +93,9 @@ function SignUpInfo() {
         job: jobList[fieldSelected][e.target.selectedIndex].name,
       })
     );
+    setUserJob(
+      userJob.concat(jobList[fieldSelected][e.target.selectedIndex].id)
+    );
   }
 
   function fieldJobOnRemove(idx) {
@@ -117,7 +115,7 @@ function SignUpInfo() {
       method: "POST",
       body: new URLSearchParams({
         user_id: userInfo.id,
-        field_ids: JSON.stringify(fieldJobArr),
+        field_ids: JSON.stringify(userJob),
       }),
     });
 
