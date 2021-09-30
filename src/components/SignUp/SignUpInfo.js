@@ -7,7 +7,6 @@ import "./signUpInfo.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
 import config from "../../configs";
-import produce from "immer";
 
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
@@ -27,7 +26,7 @@ function SignUpInfo() {
 
   const email = userInfo.email;
 
-  /* 서버로부터 직무 정보 불러오기 */
+  /* 서버로부터 직무 정보 불러오고 파싱 */
   useEffect(() => {
     fetch(`${config.URL}/api/fields`, {
       method: "GET",
@@ -35,25 +34,6 @@ function SignUpInfo() {
       .then((res) => res.json())
       .then((res) => {
         fieldParsing(res.result.bigField);
-        console.log("Field List", fieldList);
-        console.log("Job List", jobList);
-        // res.result.bigField.map((e) => {
-        //   console.log("Field List", fieldList);
-        //   console.log("Job List", jobList);
-
-        //   fieldParsing(bigField);
-
-        //   console.log("Field List", fieldList);
-
-        //   setJobList((prev) => {
-        //     prev.concat([{ id: 0, name: "직무를 입력해주세요" }]);
-        //   });
-        //   e.smallGroup.map((f) => {
-        //     setJobList((prev) => {
-        //       prev[e.id].concat([{ id: f.id, name: f.name }]);
-        //     });
-        //   });
-        // });
       });
   }, []);
 
@@ -161,7 +141,6 @@ function SignUpInfo() {
           <select
             id="selectJobForm"
             background="/images/ic-sign-dropdown.svg"
-            // style={jobSelected ? { color: "black" } : { color: "#c1c1c1" }}
             style={
               jobSelected !== 0 ? { color: "black" } : { color: "#c1c1c1" }
             }
