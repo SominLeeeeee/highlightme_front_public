@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Asterisk from "../atom/Asterisk";
 import HighlightButton from "../atom/HighlightButton";
 import SelectedFieldJob from "../molcule/SelectedFieldJob";
@@ -11,18 +11,53 @@ import config from "../../configs";
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
-  const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
+  const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무 (string)
+  const [userJob, setUserJob] = useState([]); // 선택한 분야와 직무 (int)
+
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
+  const [fieldList, setFieldList] = useState([
+    { id: 0, name: "직무를 선택해주세요." },
+  ]);
+  const [jobList, setJobList] = useState([
+    [{ id: 0, name: "직무를 선택해주세요." }],
+  ]);
+
   const email = userInfo.email;
-  const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
-  const jobArr = [
-    ["직무를 선택해주세요."],
-    ["직무를 선택해주세요.", "iOS 개발", "ab", "ac"],
-    ["직무를 선택해주세요.", "그래픽 디자인", "UI/UX 디자인", "bc"],
-    ["직무를 선택해주세요.", "ca", "cb", "cc"],
-  ];
+
+  /* 서버로부터 직무 정보 불러오고 파싱 */
+  useEffect(() => {
+    fetch(`${config.URL}/api/fields`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        fieldParsing(res.result.bigField);
+      });
+  }, []);
+
+  function fieldParsing(bigField) {
+    var tempArr = fieldList;
+    bigField.map((e) => {
+      tempArr = tempArr.concat([{ id: e.id, name: e.name }]);
+      jobParsing(e.id, e.smallGroup);
+    });
+
+    setFieldList(tempArr);
+  }
+
+  function jobParsing(fieldId, smallGroup) {
+    var tempArr = [{ id: 0, name: "직무를 입력해주세요" }];
+    smallGroup.map((e) => {
+      tempArr = tempArr.concat([{ id: e.id, name: e.name }]);
+    });
+
+    var tempArr2 = jobList;
+    tempArr2[fieldId] = tempArr;
+
+    setJobList(tempArr2);
+  }
 
   function fieldOnChange(e) {
     setFieldSelected(e.target.selectedIndex);
@@ -30,21 +65,16 @@ function SignUpInfo() {
     setJobSelected(0);
   }
 
-  fetch(`${config.URL}/api/fields`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log("getJob", res);
-    });
-
   function jobOnChange(e) {
     setJobSelected(e.target.selectedIndex);
     setFieldJob(
       fieldJob.concat({
-        field: fieldArr[fieldSelected],
-        job: jobArr[fieldSelected][e.target.selectedIndex],
+        field: fieldList[fieldSelected].name,
+        job: jobList[fieldSelected][e.target.selectedIndex].name,
       })
+    );
+    setUserJob(
+      userJob.concat(jobList[fieldSelected][e.target.selectedIndex].id)
     );
   }
 
@@ -65,7 +95,7 @@ function SignUpInfo() {
       method: "POST",
       body: new URLSearchParams({
         user_id: userInfo.id,
-        field_ids: JSON.stringify(fieldJobArr),
+        field_ids: JSON.stringify(userJob),
       }),
     });
 
@@ -94,13 +124,13 @@ function SignUpInfo() {
             style={fieldSelected ? { color: "black" } : { color: "#c1c1c1" }}
             onChange={fieldOnChange}
           >
-            {fieldArr.map((element, index) =>
+            {fieldList.map((element, index) =>
               index == 0 ? (
                 <option disabled selected>
-                  {element}
+                  {element.name}
                 </option>
               ) : (
-                <option>{element}</option>
+                <option>{element.name}</option>
               )
             )}
           </select>
@@ -111,19 +141,18 @@ function SignUpInfo() {
           <select
             id="selectJobForm"
             background="/images/ic-sign-dropdown.svg"
-            // style={jobSelected ? { color: "black" } : { color: "#c1c1c1" }}
             style={
               jobSelected !== 0 ? { color: "black" } : { color: "#c1c1c1" }
             }
             onChange={jobOnChange}
           >
-            {jobArr[fieldSelected].map((element, index) =>
+            {jobList[fieldSelected].map((element, index) =>
               index == 0 ? (
                 <option disabled selected style={{ color: "#c1c1c1" }}>
-                  {element}
+                  {element.name}
                 </option>
               ) : (
-                <option style={{ color: "black" }}>{element}</option>
+                <option style={{ color: "black" }}>{element.name}</option>
               )
             )}
           </select>
