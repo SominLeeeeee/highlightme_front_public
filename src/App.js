@@ -14,7 +14,6 @@ const KeywordGraphView = lazy(() =>
 const Coverletter = lazy(() => import("./routes/Coverletter"));
 const FindQuestion = lazy(() => import("./routes/FindQuestion"));
 const Header = lazy(() => import("./components/Header"));
-const SignUpComplete = lazy(() => import("./components/SignUp/SignUpComplete"));
 
 function App() {
   return (
