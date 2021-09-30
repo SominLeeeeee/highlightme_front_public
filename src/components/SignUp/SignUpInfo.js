@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Asterisk from "../atom/Asterisk";
 import HighlightButton from "../atom/HighlightButton";
 import SelectedFieldJob from "../molcule/SelectedFieldJob";
@@ -7,6 +7,7 @@ import "./signUpInfo.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
 import config from "../../configs";
+import produce from "immer";
 
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
@@ -14,6 +15,13 @@ function SignUpInfo() {
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
+  const [fieldList, setFieldList] = useState([
+    { id: 0, name: "직무를 선택해주세요." },
+  ]);
+  const [jobList, setJobList] = useState([
+    [{ id: 0, name: "직무를 선택해주세요." }],
+  ]);
 
   const email = userInfo.email;
   const fieldArr = ["분야를 선택해주세요", "IT / 컴퓨터", "디자인", "c"];
@@ -24,26 +32,70 @@ function SignUpInfo() {
     ["직무를 선택해주세요.", "ca", "cb", "cc"],
   ];
 
+  /* 서버로부터 직무 정보 불러오기 */
+  useEffect(() => {
+    fetch(`${config.URL}/api/fields`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        fieldParsing(res.result.bigField);
+        console.log("Field List", fieldList);
+        console.log("Job List", jobList);
+        // res.result.bigField.map((e) => {
+        //   console.log("Field List", fieldList);
+        //   console.log("Job List", jobList);
+
+        //   fieldParsing(bigField);
+
+        //   console.log("Field List", fieldList);
+
+        //   setJobList((prev) => {
+        //     prev.concat([{ id: 0, name: "직무를 입력해주세요" }]);
+        //   });
+        //   e.smallGroup.map((f) => {
+        //     setJobList((prev) => {
+        //       prev[e.id].concat([{ id: f.id, name: f.name }]);
+        //     });
+        //   });
+        // });
+      });
+  }, []);
+
+  function fieldParsing(bigField) {
+    var tempArr = fieldList;
+    bigField.map((e) => {
+      tempArr = tempArr.concat([{ id: e.id, name: e.name }]);
+      jobParsing(e.id, e.smallGroup);
+    });
+
+    setFieldList(tempArr);
+  }
+
+  function jobParsing(fieldId, smallGroup) {
+    var tempArr = [{ id: 0, name: "직무를 입력해주세요" }];
+    smallGroup.map((e) => {
+      tempArr = tempArr.concat([{ id: e.id, name: e.name }]);
+    });
+
+    var tempArr2 = jobList;
+    tempArr2[fieldId] = tempArr;
+
+    setJobList(tempArr2);
+  }
+
   function fieldOnChange(e) {
     setFieldSelected(e.target.selectedIndex);
     document.getElementById("selectJobForm").options.selectedIndex = 0;
     setJobSelected(0);
   }
 
-  fetch(`${config.URL}/api/fields`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log("getJob", res);
-    });
-
   function jobOnChange(e) {
     setJobSelected(e.target.selectedIndex);
     setFieldJob(
       fieldJob.concat({
-        field: fieldArr[fieldSelected],
-        job: jobArr[fieldSelected][e.target.selectedIndex],
+        field: fieldList[fieldSelected].name,
+        job: jobList[fieldSelected][e.target.selectedIndex].name,
       })
     );
   }
@@ -94,13 +146,13 @@ function SignUpInfo() {
             style={fieldSelected ? { color: "black" } : { color: "#c1c1c1" }}
             onChange={fieldOnChange}
           >
-            {fieldArr.map((element, index) =>
+            {fieldList.map((element, index) =>
               index == 0 ? (
                 <option disabled selected>
-                  {element}
+                  {element.name}
                 </option>
               ) : (
-                <option>{element}</option>
+                <option>{element.name}</option>
               )
             )}
           </select>
@@ -117,13 +169,13 @@ function SignUpInfo() {
             }
             onChange={jobOnChange}
           >
-            {jobArr[fieldSelected].map((element, index) =>
+            {jobList[fieldSelected].map((element, index) =>
               index == 0 ? (
                 <option disabled selected style={{ color: "#c1c1c1" }}>
-                  {element}
+                  {element.name}
                 </option>
               ) : (
-                <option style={{ color: "black" }}>{element}</option>
+                <option style={{ color: "black" }}>{element.name}</option>
               )
             )}
           </select>
