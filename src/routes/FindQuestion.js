@@ -1,6 +1,6 @@
 import React from "react";
-import KeywordGraphView from "./KeywordGraphView";
-import QuestionList from "./QuestionsList";
+import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
+import QuestionList from "../components/FindQuestion/QuestionsList";
 import "./findQuestion.scss";
 
 function FindQuestion() {

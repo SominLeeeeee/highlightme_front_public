@@ -2,15 +2,19 @@ import React, { Suspense, lazy } from "react";
 import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const SignIn = lazy(() => import("./components/GoogleLoginButton"));
+const SignIn = lazy(() => import("./components/SignUp/GoogleLoginButton"));
 const SignUp = lazy(() => import("./routes/SignUp"));
 const GotoSignUp = lazy(() => import("./routes/GotoSignUp"));
-const QuestionsList = lazy(() => import("./routes/QuestionsList"));
-const KeywordGraphView = lazy(() => import("./routes/KeywordGraphView"));
+const QuestionsList = lazy(() =>
+  import("./components/FindQuestion/QuestionsList")
+);
+const KeywordGraphView = lazy(() =>
+  import("./components/FindQuestion/KeywordGraphView")
+);
 const Coverletter = lazy(() => import("./routes/Coverletter"));
 const FindQuestion = lazy(() => import("./routes/FindQuestion"));
 const Header = lazy(() => import("./components/Header"));
-const SignUpComplete = lazy(() => import("./components/SignUpComplete"));
+const SignUpComplete = lazy(() => import("./components/SignUp/SignUpComplete"));
 
 function App() {
   return (

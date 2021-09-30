@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./keywordGraphView.scss";
-import colors from "../style/colors.js";
-import HighlightText from "../components/atom/HighlightText";
-import ItemCircle from "../components/atom/ItemCircle";
-import Keyword from "../components/Keyword";
-import ShadowBoxMedium from "../components/atom/ShadowBoxMedium";
+import colors from "../../style/colors.js";
+import HighlightText from "../atom/HighlightText";
+import ItemCircle from "../atom/ItemCircle";
+import Keyword from "../atom/Keyword";
+import ShadowBoxMedium from "../atom/ShadowBoxMedium";
 import { useSelector } from "react-redux";
-import config from "../configs";
+import config from "../../configs";
 import { useRecoilState } from "recoil";
-import { atomKeyword, atomUserInfo } from "../recoil/userStore";
+import { atomKeyword, atomUserInfo } from "../../recoil/userStore";
 import produce from "immer";
 
 function KeywordGraphView() {

@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleLoginPage from "../components/GoogleLoginButton";
+import GoogleLoginPage from "../components/SignUp/GoogleLoginButton";
 import HighlightText from "../components/atom/HighlightText";
 import "./gotoSignUp.scss";
 

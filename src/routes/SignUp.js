@@ -1,9 +1,9 @@
 import React from "react";
 import "./signup.scss";
 import ShadowBoxLarge from "../components/atom/ShadowBoxLarge";
-import SignUpInfo from "../components/SignUpInfo";
+import SignUpInfo from "../components/SignUp/SignUpInfo";
 import { useSelector } from "react-redux";
-import SignUpComplete from "../components/SignUpComplete";
+import SignUpComplete from "../components/SignUp/SignUpComplete";
 import { useRecoilState } from "recoil";
 import { atomUserInfo, atomSignUp } from "../recoil/userStore";
 

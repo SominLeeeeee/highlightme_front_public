@@ -1,11 +1,10 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import config from "../configs";
+import config from "../../configs";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { SIGN_UP, SIGN_UP_REGISTER } from "../store";
 import { useRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo } from "../recoil/userStore";
+import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
 import produce from "immer";
 
 function GoogleLoginButton() {

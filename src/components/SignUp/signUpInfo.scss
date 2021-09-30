@@ -1,5 +1,5 @@
-@import "../style/colors.scss";
-@import "../style/font.scss";
+@import "../../style/colors.scss";
+@import "../../style/font.scss";
 
 .signUpTitle {
   font-family: "AppleSDGothicNeo-Bold";
@@ -54,7 +54,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url("../images/ic-sign-dropdown.svg") no-repeat 96% 50%;
+  background: url("../../images/ic-sign-dropdown.svg") no-repeat 96% 50%;
   font-size: 1.8rem;
   font-family: "AppleSDGothicNeo-Regular";
   border-radius: 0.8rem;

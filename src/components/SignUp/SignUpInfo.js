@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Asterisk from "./atom/Asterisk";
-import HighlightButton from "./atom/HighlightButton";
-import SelectedFieldJob from "./molcule/SelectedFieldJob";
-import colors from "../style/colors";
+import Asterisk from "../atom/Asterisk";
+import HighlightButton from "../atom/HighlightButton";
+import SelectedFieldJob from "../molcule/SelectedFieldJob";
+import colors from "../../style/colors";
 import "./signUpInfo.scss";
 import { useRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo } from "../recoil/userStore";
-import config from "../configs";
+import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
+import config from "../../configs";
 
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야

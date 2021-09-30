@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./clInput.scss";
-import config from "../configs";
-import ClTip from "./molcule/ClTip";
+import config from "../../configs";
+import ClTip from "../molcule/ClTip";
 import { useRecoilState } from "recoil";
-import { atomCoverLetterElements } from "../recoil/userStore";
-import InputTitle from "./atom/InputTitle";
-import InputBox from "./atom/InputBox";
+import { atomCoverLetterElements } from "../../recoil/userStore";
+import InputTitle from "../atom/InputTitle";
+import InputBox from "../atom/InputBox";
 
 function ClInput() {
   const [count, setCount] = useState(0);

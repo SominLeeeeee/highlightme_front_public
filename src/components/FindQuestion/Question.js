@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Question.scss";
-import InputBox from "./atom/InputBox";
+import InputBox from "../atom/InputBox";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question(props) {
