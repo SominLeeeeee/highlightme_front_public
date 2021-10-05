@@ -68,8 +68,6 @@ function SignUpInfo() {
   }
 
   function jobOnChange(e) {
-    console.log("size is ", userJob.length);
-
     if (userJob.length < 3) {
       setJobSelected(e.target.selectedIndex);
       setFieldJob(
@@ -152,9 +150,10 @@ function SignUpInfo() {
           <select
             id="selectJobForm"
             background="/images/ic-sign-dropdown.svg"
-            style={
-              jobSelected !== 0 ? { color: "black" } : { color: "#c1c1c1" }
-            }
+            style={{
+              borderColor: jobSelectErr ? "red" : "",
+              color: jobSelected !== 0 ? "black" : "#c1c1c1",
+            }}
             onChange={jobOnChange}
           >
             {jobList[fieldSelected].map((element, index) =>
