@@ -7,12 +7,14 @@ import "./signUpInfo.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
 import config from "../../configs";
+import ErrNotice from "../atom/ErrNotice";
 
 function SignUpInfo() {
   const [fieldSelected, setFieldSelected] = useState(0); // 분야
   const [jobSelected, setJobSelected] = useState(0); // 직무
   const [fieldJob, setFieldJob] = useState([]); // 선택한 분야와 직무 (string)
   const [userJob, setUserJob] = useState([]); // 선택한 분야와 직무 (int)
+  const [jobSelectErr, setJobSelectErr] = useState(false);
 
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
@@ -66,16 +68,23 @@ function SignUpInfo() {
   }
 
   function jobOnChange(e) {
-    setJobSelected(e.target.selectedIndex);
-    setFieldJob(
-      fieldJob.concat({
-        field: fieldList[fieldSelected].name,
-        job: jobList[fieldSelected][e.target.selectedIndex].name,
-      })
-    );
-    setUserJob(
-      userJob.concat(jobList[fieldSelected][e.target.selectedIndex].id)
-    );
+    console.log("size is ", userJob.length);
+
+    if (userJob.length < 3) {
+      setJobSelected(e.target.selectedIndex);
+      setFieldJob(
+        fieldJob.concat({
+          field: fieldList[fieldSelected].name,
+          job: jobList[fieldSelected][e.target.selectedIndex].name,
+        })
+      );
+      setUserJob(
+        userJob.concat(jobList[fieldSelected][e.target.selectedIndex].id)
+      );
+    } else {
+      setJobSelectErr(true);
+      setTimeout(() => setJobSelectErr(false), 1500);
+    }
   }
 
   function fieldJobOnRemove(idx) {
@@ -115,7 +124,7 @@ function SignUpInfo() {
           <input type="text" disabled value={email} />
         </div>
 
-        <div className="inputDivJob">
+        <div className="selectFieldJobDiv">
           <label for="field" className="inputLabel">
             분야선택 <Asterisk />
           </label>
@@ -134,7 +143,9 @@ function SignUpInfo() {
               )
             )}
           </select>
+        </div>
 
+        <div className="selectFieldJobDiv">
           <label for="job" className="inputLabel">
             직무선택 <span id="jobLimitHint">(최대 3개)</span> <Asterisk />
           </label>
@@ -156,6 +167,10 @@ function SignUpInfo() {
               )
             )}
           </select>
+          <ErrNotice
+            hint="직무는 3개까지 선택할 수 있습니다."
+            flag={jobSelectErr}
+          />
         </div>
       </div>
 

@@ -61,7 +61,7 @@ select {
   border: solid 1px #ddd;
   padding: 1.6rem;
   padding-bottom: 1.2rem;
-  margin-bottom: 2.6rem;
+  margin-bottom: 0.7rem;
 
   &:disabled {
     color: #c1c1c1;
@@ -77,4 +77,8 @@ select {
   font-family: "AppleSDGothicNeo-Regular";
   font-size: 2rem;
   color: #8b8b8b;
+}
+
+.selectFieldJobDiv {
+  margin-bottom: 2.2rem;
 }
