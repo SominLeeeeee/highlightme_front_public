@@ -11,6 +11,7 @@ function InputBox(props) {
     maxRows,
     minRows,
     onChange,
+    borderColor,
   } = {
     ...props,
   };
@@ -27,6 +28,7 @@ function InputBox(props) {
         borderRadius: radius,
         width: `calc(100% - 2*${padding})`,
         marginBottom: marginBottom,
+        borderColor: borderColor,
       }}
     />
   );

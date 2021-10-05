@@ -85,13 +85,12 @@ function ClInput() {
         placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
         padding="1.6rem"
         radius="0.8rem"
+        borderColor={countErr ? "red" : ""}
       />
 
       <div className="clInputNotice">
         <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
-        <div>
-          <p id="errNotice">답변을 200자 이상 입력해주세요.</p>
-        </div>
+        <div />
         <p className="typingCount">({answer.length} / 5000자)</p>
       </div>
 
