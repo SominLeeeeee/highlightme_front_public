@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./clInput.scss";
 import config from "../../configs";
 import ClTip from "../molcule/ClTip";
@@ -6,11 +6,11 @@ import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../../recoil/userStore";
 import InputTitle from "../atom/InputTitle";
 import InputBox from "../atom/InputBox";
+import ErrNotice from "../atom/ErrNotice";
 
 function ClInput() {
-  const [count, setCount] = useState(0);
   const [deleteHover, setDeleteHover] = useState(false);
-  const [textAreaHeight, setTextAreaHeight] = useState("auto");
+  const [countErr, setCountErr] = useState(false);
 
   const [problem, setProblem] = useState("");
   const [answer, setAnswer] = useState("");
@@ -24,14 +24,11 @@ function ClInput() {
   };
 
   const onInputChangeAnswer = (event) => {
-    setCount(event.target.value.length);
     setAnswer(event.target.value);
   };
 
   const onSaveButtonClicked = async () => {
-    if (count < 200)
-      document.getElementById("errNotice").style.display = "inline-block";
-    else {
+    if (answer.length > 200) {
       document.getElementById("errNotice").style.display = "none";
 
       //Upload
@@ -46,6 +43,9 @@ function ClInput() {
       });
 
       console.log(result);
+    } else {
+      setCountErr(true);
+      setTimeout(() => setCountErr(false), 1500);
     }
   };
 
@@ -88,10 +88,11 @@ function ClInput() {
       />
 
       <div className="clInputNotice">
+        <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
         <div>
           <p id="errNotice">답변을 200자 이상 입력해주세요.</p>
         </div>
-        <p className="typingCount">({count} / 5000자)</p>
+        <p className="typingCount">({answer.length} / 5000자)</p>
       </div>
 
       <div className="clInputButtons">
@@ -116,7 +117,7 @@ function ClInput() {
           className="clInputSaveButton"
           onClick={onSaveButtonClicked}
           style={
-            count > 0
+            answer.length > 0 && problem.length > 0
               ? { backgroundColor: "#febb2d" }
               : { backgroundColor: "#eaeaea" }
           }
