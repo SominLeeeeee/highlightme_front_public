@@ -12,17 +12,22 @@ function InputBox(props) {
     minRows,
     onChange,
     borderColor,
+    value,
+    id,
+    children,
   } = {
     ...props,
   };
 
   return (
     <TextareaAutosize
+      id={id}
       onChange={onChange}
       placeholder={placeholder}
       className="inputBox"
       maxRows={maxRows}
       minRows={minRows}
+      value={value}
       style={{
         padding: padding,
         borderRadius: radius,
@@ -30,7 +35,9 @@ function InputBox(props) {
         marginBottom: marginBottom,
         borderColor: borderColor,
       }}
-    />
+    >
+      {children}
+    </TextareaAutosize>
   );
 }
 

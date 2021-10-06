@@ -7,17 +7,52 @@ import { atomCoverLetterElements } from "../../recoil/userStore";
 import InputTitle from "../atom/InputTitle";
 import InputBox from "../atom/InputBox";
 import ErrNotice from "../atom/ErrNotice";
+import produce from "immer";
 
 function ClInput() {
-  const [deleteHover, setDeleteHover] = useState(false);
-  const [countErr, setCountErr] = useState(false);
-
-  const [problem, setProblem] = useState("");
-  const [answer, setAnswer] = useState("");
-
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
   );
+
+  const [deleteHover, setDeleteHover] = useState(false);
+  const [countErr, setCountErr] = useState(false);
+
+  const [problem, setProblem] = useState(coverLetterElements.element.problem);
+  const [answer, setAnswer] = useState(coverLetterElements.element.answer);
+  const [curr, setCurr] = useState(coverLetterElements.selectedElement);
+
+  /* 쓸 때마다 recoil에 반영 */
+  useEffect(() => {
+    setCoverLetterElements((prev) =>
+      produce(prev, (draft) => {
+        draft.element[curr].problem = problem;
+        return draft;
+      })
+    );
+  }, [problem]);
+
+  useEffect(() => {
+    setCoverLetterElements((prev) =>
+      produce(prev, (draft) => {
+        draft.element[curr].answer = answer;
+        return draft;
+      })
+    );
+  }, [answer]);
+
+  /* 다른 문항을 선택 시 problem과 answer 수정 */
+  useEffect(() => {
+    setCurr(coverLetterElements.selectedElement);
+    const curr = coverLetterElements.selectedElement;
+    const tempProblem = coverLetterElements.element[curr].problem;
+    const tempAnswer = coverLetterElements.element[curr].answer;
+
+    if (tempProblem == null) setProblem("");
+    else setProblem(coverLetterElements.element[curr].problem);
+
+    if (tempAnswer == null) setAnswer("");
+    else setAnswer(coverLetterElements.element[curr].answer);
+  }, [coverLetterElements.selectedElement]);
 
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
@@ -69,29 +104,35 @@ function ClInput() {
       <ClTip />
       <InputTitle>자기소개서 문항 입력</InputTitle>
       <InputBox
+        id="problemInput"
         onChange={onInputChangeProblem}
         minRows="1"
         maxRows="2"
-        placeholder="ex) 본인의 특성 및 성격의 장단점을 자유롭게 기술해주세요."
-        padding="1.6rem"
-        radius="0.8rem"
-        marginBottom="3.4rem"
-      />
-      <InputTitle>자기소개서 문항 입력</InputTitle>
+        placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
+        borderColor={countErr ? "red" : ""}
+        value={problem}
+      >
+        {problem}
+      </InputBox>
+      <InputTitle>자기소개서 답변 입력</InputTitle>
       <InputBox
+        id="answerInput"
         onChange={onInputChangeAnswer}
         minRows="4"
         maxRows="7"
         placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
-        padding="1.6rem"
-        radius="0.8rem"
         borderColor={countErr ? "red" : ""}
-      />
+        value={answer}
+      >
+        {answer}
+      </InputBox>
 
       <div className="clInputNotice">
         <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
         <div />
-        <p className="typingCount">({answer.length} / 5000자)</p>
+        <p className="typingCount">
+          ({answer == null ? 0 : answer.length} / 5000자)
+        </p>
       </div>
 
       <div className="clInputButtons">
@@ -116,7 +157,7 @@ function ClInput() {
           className="clInputSaveButton"
           onClick={onSaveButtonClicked}
           style={
-            answer.length > 0 && problem.length > 0
+            answer !== null && problem !== null
               ? { backgroundColor: "#febb2d" }
               : { backgroundColor: "#eaeaea" }
           }
