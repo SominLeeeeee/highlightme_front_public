@@ -150,9 +150,7 @@ function ClInput() {
         placeholder="ex) 본인의 장단점에 대해 얘기해주세요."
         borderColor={countErr ? "red" : ""}
         value={problem}
-      >
-        {problem}
-      </InputBox>
+      />
       <InputTitle>자기소개서 답변 입력</InputTitle>
       <InputBox
         id="answerInput"
@@ -162,9 +160,7 @@ function ClInput() {
         placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
         borderColor={countErr ? "red" : ""}
         value={answer}
-      >
-        {answer}
-      </InputBox>
+      />
 
       <div className="clInputNotice">
         <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />

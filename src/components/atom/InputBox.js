@@ -14,7 +14,6 @@ function InputBox(props) {
     borderColor,
     value,
     id,
-    children,
   } = {
     ...props,
   };
@@ -35,9 +34,7 @@ function InputBox(props) {
         marginBottom: marginBottom,
         borderColor: borderColor,
       }}
-    >
-      {children}
-    </TextareaAutosize>
+    />
   );
 }
 
