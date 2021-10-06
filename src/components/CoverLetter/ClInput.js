@@ -21,7 +21,7 @@ function ClInput() {
   const [answer, setAnswer] = useState(coverLetterElements.element.answer);
   const [curr, setCurr] = useState(coverLetterElements.selectedElement);
 
-  /* 쓸 때마다 recoil에 반영 */
+  /* 문항을 쓸 때마다 recoil에 반영 */
   useEffect(() => {
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
@@ -31,6 +31,7 @@ function ClInput() {
     );
   }, [problem]);
 
+  /* 답변을 쓸 때마다 recoil에 반영 */
   useEffect(() => {
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
@@ -54,6 +55,31 @@ function ClInput() {
     else setAnswer(coverLetterElements.element[curr].answer);
   }, [coverLetterElements.selectedElement]);
 
+  /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
+  useEffect(() => {
+    fetch(`${config.URL}/api/cls`, {
+      method: "GET",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (res.isNew === 0) {
+          res.result.map((e, idx, arr) => {
+            setCoverLetterElements((prev) =>
+              produce(prev, (draft) => {
+                if (draft.element.length < res.result.length)
+                  draft.element[idx] = { problem: e.problem, answer: e.answer };
+                else
+                  draft.element.push({ problem: e.problem, answer: e.answer });
+                return draft;
+              })
+            );
+          });
+        }
+      });
+  }, []);
+
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
   };
@@ -76,8 +102,6 @@ function ClInput() {
           _public: 1,
         }),
       });
-
-      console.log(result);
     } else {
       setCountErr(true);
       setTimeout(() => setCountErr(false), 1500);
