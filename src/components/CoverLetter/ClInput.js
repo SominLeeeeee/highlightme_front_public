@@ -29,8 +29,6 @@ function ClInput() {
         return draft;
       })
     );
-
-    console.log(problem);
   }, [problem]);
 
   /* 답변을 쓸 때마다 recoil에 반영 */
@@ -83,7 +81,6 @@ function ClInput() {
 
     setProblem(res.result[0].problem);
     setAnswer(res.result[0].answer);
-    console.log(res.result);
   }, []);
 
   const onInputChangeProblem = (event) => {
@@ -98,14 +95,7 @@ function ClInput() {
     if (answer.length > 200) {
       //Upload
       const request = {
-        CLES: [
-          coverLetterElements.element.map((e, idx, arr) => ({
-            cl_element_id: idx + 1,
-            problem: e.problem,
-            answer: e.answer,
-            _public: 1,
-          })),
-        ],
+        CLES: [],
         cl_id: localStorage.getItem("coverletter_id"),
         title: `${localStorage.getItem("user_id")}의 자기소개서`,
         company: "카뱅",
@@ -113,9 +103,21 @@ function ClInput() {
         comments: "잘부탁드려용",
       };
 
+      coverLetterElements.element.map((e, idx, arr) => {
+        request.CLES.push({
+          cl_element_id: idx + 1,
+          problem: e.problem,
+          answer: e.answer,
+          _public: 1,
+        });
+      });
+
+      const data = new URLSearchParams(request);
+      data.set("CLES", JSON.stringify(request.CLES));
+
       const result = await fetch(`${config.URL}/api/cls`, {
         method: "POST",
-        body: JSON.stringify(request),
+        body: data,
       });
     } else {
       setCountErr(true);
@@ -128,6 +130,13 @@ function ClInput() {
   };
 
   function deleteButtonOnClick() {
+    fetch(`${config.URL}/api/cls`, {
+      method: "DELETE",
+      body: new URLSearchParams({
+        cl_element_id: coverLetterElements.selectedElement + 1,
+      }),
+    });
+
     const temp = coverLetterElements.element.filter(
       (e, index, array) => index != coverLetterElements.selectedElement
     );
