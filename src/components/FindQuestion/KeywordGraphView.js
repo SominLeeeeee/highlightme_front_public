@@ -18,7 +18,7 @@ function KeywordGraphView() {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   useEffect(() => {
-    fetch(`${config.URL}/api/keywords?user_id=${userInfo.id}`, {
+    fetch(`${config.URL}/api/keywords`, {
       method: "GET",
     })
       .then((res) => {
@@ -27,17 +27,21 @@ function KeywordGraphView() {
       .then((res) => {
         setKeyword((prev) =>
           produce(prev, (draft) => {
-            draft.userKeywords = res;
-            return draft;
+            res.result.map((e) => {
+              draft.userKeywords.push({
+                keyword_id: e.keyword_id,
+                keyword: e.keyword,
+                answered: e.answered,
+              });
+            });
           })
         );
       });
-    console.log("keyword", keyword);
   }, []);
 
-  function pickColor(answerExist) {
-    if (answerExist === "y") return `${colors.mainyellow}`;
-    else if (answerExist === "n") return `${colors.subyellow}`;
+  function pickColor(answered) {
+    if (answered === 2) return `${colors.mainyellow}`;
+    else if (answered === 1) return `${colors.subyellow}`;
     else return `${colors.gray}`;
   }
 
@@ -50,21 +54,19 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        {keyword.userKeywords.map((element) => (
-          <ShadowBoxMedium paddingTop="3.1rem">
-            <HighlightText
+        <ShadowBoxMedium paddingTop="3.1rem">
+          {/* <HighlightText
               text={element.parentKeyword}
               marginBottom="0"
               color={colors.mainyellowa}
-            />
+            /> */}
 
-            <div className="keywordParent">
-              {element.map((e) => (
-                <Keyword text={e.keyword} color={pickColor(e.answerExist)} />
-              ))}
-            </div>
-          </ShadowBoxMedium>
-        ))}
+          <div className="keywordParent">
+            {keyword.userKeywords.map((e) => (
+              <Keyword text={e.keyword} color={pickColor(e.answered)} />
+            ))}
+          </div>
+        </ShadowBoxMedium>
       </div>
     </div>
   );
