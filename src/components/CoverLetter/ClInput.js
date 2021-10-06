@@ -58,36 +58,32 @@ function ClInput() {
   }, [coverLetterElements.selectedElement]);
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
-  useEffect(() => {
-    fetch(`${config.URL}/api/cls`, {
+  useEffect(async () => {
+    let res = await fetch(`${config.URL}/api/cls`, {
       method: "GET",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res.isNew === 0) {
-          localStorage.setItem("coverletter_id", res.result[0].cl_id);
-          setCoverLetterElements((prev) => ({
-            ...prev,
-            element: [],
-          }));
+    });
+    res = await res.json();
 
-          res.result.map((e, idx, arr) => {
-            setCoverLetterElements((prev) =>
-              produce(prev, (draft) => {
-                draft.element.push({ problem: e.problem, answer: e.answer });
-                return draft;
-              })
-            );
-          });
-        }
+    if (res.isNew === 0) {
+      localStorage.setItem("coverletter_id", res.result[0].cl_id);
+      setCoverLetterElements((prev) => ({
+        ...prev,
+        element: [],
+      }));
 
-        console.log(res.result);
+      res.result.map((e) => {
+        setCoverLetterElements((prev) =>
+          produce(prev, (draft) => {
+            draft.element.push({ problem: e.problem, answer: e.answer });
+            return draft;
+          })
+        );
       });
+    }
 
-    setProblem(coverLetterElements.element[0].problem);
-    setAnswer(coverLetterElements.element[0].answer);
+    setProblem(res.result[0].problem);
+    setAnswer(res.result[0].answer);
+    console.log(res.result);
   }, []);
 
   const onInputChangeProblem = (event) => {
