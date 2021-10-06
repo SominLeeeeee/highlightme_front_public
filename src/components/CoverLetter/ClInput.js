@@ -29,6 +29,8 @@ function ClInput() {
         return draft;
       })
     );
+
+    console.log(problem);
   }, [problem]);
 
   /* 답변을 쓸 때마다 recoil에 반영 */
@@ -48,11 +50,11 @@ function ClInput() {
     const tempProblem = coverLetterElements.element[curr].problem;
     const tempAnswer = coverLetterElements.element[curr].answer;
 
-    if (tempProblem == null) setProblem("");
-    else setProblem(coverLetterElements.element[curr].problem);
+    // if (tempProblem == null) setProblem("");
+    setProblem(coverLetterElements.element[curr].problem);
 
-    if (tempAnswer == null) setAnswer("");
-    else setAnswer(coverLetterElements.element[curr].answer);
+    // if (tempAnswer == null) setAnswer("");
+    setAnswer(coverLetterElements.element[curr].answer);
   }, [coverLetterElements.selectedElement]);
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
@@ -65,19 +67,27 @@ function ClInput() {
       })
       .then((res) => {
         if (res.isNew === 0) {
+          localStorage.setItem("coverletter_id", res.result[0].cl_id);
+          setCoverLetterElements((prev) => ({
+            ...prev,
+            element: [],
+          }));
+
           res.result.map((e, idx, arr) => {
             setCoverLetterElements((prev) =>
               produce(prev, (draft) => {
-                if (draft.element.length < res.result.length)
-                  draft.element[idx] = { problem: e.problem, answer: e.answer };
-                else
-                  draft.element.push({ problem: e.problem, answer: e.answer });
+                draft.element.push({ problem: e.problem, answer: e.answer });
                 return draft;
               })
             );
           });
         }
+
+        console.log(res.result);
       });
+
+    setProblem(coverLetterElements.element[0].problem);
+    setAnswer(coverLetterElements.element[0].answer);
   }, []);
 
   const onInputChangeProblem = (event) => {
@@ -90,17 +100,26 @@ function ClInput() {
 
   const onSaveButtonClicked = async () => {
     if (answer.length > 200) {
-      document.getElementById("errNotice").style.display = "none";
-
       //Upload
+      const request = {
+        CLES: [
+          coverLetterElements.element.map((e, idx, arr) => ({
+            cl_element_id: idx + 1,
+            problem: e.problem,
+            answer: e.answer,
+            _public: 1,
+          })),
+        ],
+        cl_id: localStorage.getItem("coverletter_id"),
+        title: `${localStorage.getItem("user_id")}의 자기소개서`,
+        company: "카뱅",
+        tags: ["카카오", "뱅크"],
+        comments: "잘부탁드려용",
+      };
+
       const result = await fetch(`${config.URL}/api/cls`, {
         method: "POST",
-        body: new URLSearchParams({
-          user_id: 2,
-          problem: problem,
-          answer: answer,
-          _public: 1,
-        }),
+        body: JSON.stringify(request),
       });
     } else {
       setCountErr(true);
