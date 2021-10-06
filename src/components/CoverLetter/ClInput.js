@@ -132,7 +132,7 @@ function ClInput() {
         onChange={onInputChangeProblem}
         minRows="1"
         maxRows="2"
-        placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
+        placeholder="ex) 본인의 장단점에 대해 얘기해주세요."
         borderColor={countErr ? "red" : ""}
         value={problem}
       >
