@@ -7,25 +7,28 @@ import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
 
 function GoogleLoginButton() {
   const history = useHistory();
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
 
   const googleBtnOnClick = async (response) => {
-    const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
+    const res = await fetch(`${config.URL}/api/users/oauth/google`, {
       method: "POST",
       body: new URLSearchParams({
         email: response.profileObj.email,
         googleId: response.googleId,
         accessToken: response.accessToken,
       }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("token", response.accessToken);
-        localStorage.setItem("email", res.email);
-        localStorage.setItem("user_id", res.user_id);
-      });
+    });
+    const statusCode = res.status;
+    const data = await res.json();
 
-    console.log("회원가입 결과", alreadySignUp);
+    setUserInfo({
+      id: data.user_id,
+      email: data.email,
+      accessToken: response.accessToken,
+    });
+
+    console.log("회원가입 결과", statusCode);
     setSignUp({ signUpLevel: 0 });
     history.push("/signup_info");
   };
