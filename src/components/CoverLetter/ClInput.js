@@ -16,6 +16,7 @@ function ClInput() {
 
   const [deleteHover, setDeleteHover] = useState(false);
   const [countErr, setCountErr] = useState(false);
+  const [emptyErr, setEmptyErr] = useState(false);
 
   const [problem, setProblem] = useState(coverLetterElements.element.problem);
   const [answer, setAnswer] = useState(coverLetterElements.element.answer);
@@ -48,11 +49,11 @@ function ClInput() {
     const tempProblem = coverLetterElements.element[curr].problem;
     const tempAnswer = coverLetterElements.element[curr].answer;
 
-    // if (tempProblem == null) setProblem("");
-    setProblem(coverLetterElements.element[curr].problem);
+    if (tempProblem == null) setProblem("");
+    else setProblem(coverLetterElements.element[curr].problem);
 
-    // if (tempAnswer == null) setAnswer("");
-    setAnswer(coverLetterElements.element[curr].answer);
+    if (tempAnswer == null) setAnswer("");
+    else setAnswer(coverLetterElements.element[curr].answer);
   }, [coverLetterElements.selectedElement]);
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
@@ -61,6 +62,7 @@ function ClInput() {
       method: "GET",
     });
     res = await res.json();
+    console.log(res);
 
     if (res.isNew === 0) {
       localStorage.setItem("coverletter_id", res.result[0].cl_id);
@@ -92,7 +94,7 @@ function ClInput() {
   };
 
   const onSaveButtonClicked = async () => {
-    if (answer.length > 200) {
+    if (answer.length >= 200 && problem.length !== 0) {
       //Upload
       const request = {
         CLES: [],
@@ -119,9 +121,18 @@ function ClInput() {
         method: "POST",
         body: data,
       });
+
+      console.log(result);
     } else {
-      setCountErr(true);
-      setTimeout(() => setCountErr(false), 1500);
+      if (answer.length < 200) {
+        setCountErr(true);
+        setTimeout(() => setCountErr(false), 1500);
+      }
+
+      if (problem.length === 0) {
+        setEmptyErr(true);
+        setTimeout(() => setEmptyErr(false), 1500);
+      }
     }
   };
 
@@ -150,33 +161,38 @@ function ClInput() {
   return (
     <div className="clInputWrapper">
       <ClTip />
-      <InputTitle>자기소개서 문항 입력</InputTitle>
-      <InputBox
-        id="problemInput"
-        onChange={onInputChangeProblem}
-        minRows="1"
-        maxRows="2"
-        placeholder="ex) 본인의 장단점에 대해 얘기해주세요."
-        borderColor={countErr ? "red" : ""}
-        value={problem}
-      />
-      <InputTitle>자기소개서 답변 입력</InputTitle>
-      <InputBox
-        id="answerInput"
-        onChange={onInputChangeAnswer}
-        minRows="4"
-        maxRows="7"
-        placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
-        borderColor={countErr ? "red" : ""}
-        value={answer}
-      />
+      <div id="problemInputDiv">
+        <InputTitle>자기소개서 문항 입력</InputTitle>
+        <InputBox
+          id="problemInput"
+          onChange={onInputChangeProblem}
+          minRows="1"
+          maxRows="2"
+          placeholder="ex) 본인의 장단점에 대해 얘기해주세요."
+          borderColor={emptyErr ? "red" : ""}
+          value={problem}
+        />
+        <ErrNotice hint="내용을 입력해주세요." flag={emptyErr} />
+      </div>
 
-      <div className="clInputNotice">
-        <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
-        <div />
-        <p className="typingCount">
-          ({answer == null ? 0 : answer.length} / 5000자)
-        </p>
+      <div id="answerInputDiv">
+        <InputTitle>자기소개서 답변 입력</InputTitle>
+        <InputBox
+          id="answerInput"
+          onChange={onInputChangeAnswer}
+          minRows="4"
+          maxRows="7"
+          placeholder="ex) 저의 장점은 근면성실하다는 것입니다."
+          borderColor={countErr ? "red" : ""}
+          value={answer}
+        />
+        <div className="clInputNotice">
+          <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
+          <div />
+          <p className="typingCount">
+            ({answer == null ? 0 : answer.length} / 5000자)
+          </p>
+        </div>
       </div>
 
       <div className="clInputButtons">
@@ -206,7 +222,7 @@ function ClInput() {
               : { backgroundColor: "#eaeaea" }
           }
         >
-          저장하기
+          등록하기
         </button>
       </div>
     </div>
