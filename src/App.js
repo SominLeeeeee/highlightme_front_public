@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from "react";
 import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const Home = lazy(() => import("./routes/Home"));
 const SignIn = lazy(() => import("./components/SignUp/GoogleLoginButton"));
 const SignUp = lazy(() => import("./routes/SignUp"));
 const GotoSignUp = lazy(() => import("./routes/GotoSignUp"));
