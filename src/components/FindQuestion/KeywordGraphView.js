@@ -17,22 +17,19 @@ function KeywordGraphView() {
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
-  useEffect(() => {
-    fetch(`${config.URL}/api/keywords?user_id=${userInfo.id}`, {
+  useEffect(async () => {
+    let res = await fetch(`${config.URL}/api/keywords?user_id=${userInfo.id}`, {
       method: "GET",
-    })
-      .then((res) => {
-        return res.json();
+    });
+
+    res = await res.json();
+
+    setKeyword((prev) =>
+      produce(prev, (draft) => {
+        draft.userKeywords = res;
+        return draft;
       })
-      .then((res) => {
-        setKeyword((prev) =>
-          produce(prev, (draft) => {
-            draft.userKeywords = res;
-            return draft;
-          })
-        );
-      });
-    console.log("keyword", keyword);
+    );
   }, []);
 
   function pickColor(answerExist) {
@@ -50,7 +47,9 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        {keyword.userKeywords.map((element) => (
+
+        {/* TODO 서버에서 내려받는 포맷이랑 호환이 안되는 상태임 */}
+        {/* {keyword.userKeywords.result.map((element) => (
           <ShadowBoxMedium paddingTop="3.1rem">
             <HighlightText
               text={element.parentKeyword}
@@ -64,7 +63,7 @@ function KeywordGraphView() {
               ))}
             </div>
           </ShadowBoxMedium>
-        ))}
+        ))} */}
       </div>
     </div>
   );
