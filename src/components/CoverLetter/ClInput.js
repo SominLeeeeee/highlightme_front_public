@@ -137,6 +137,7 @@ function ClInput() {
     setCoverLetterElements((prev) => ({
       ...prev,
       element: temp,
+      selectedElement: coverLetterElements.selectedElement - 1,
     }));
   }
 
