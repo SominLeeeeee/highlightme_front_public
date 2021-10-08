@@ -94,47 +94,6 @@ function ClInput() {
   };
 
   const onSaveButtonClicked = async () => {
-    //if (answer.length >= 200 && problem.length !== 0) {
-    //   //Upload
-    //   const request = {
-    //     CLES: [],
-    //     cl_id: localStorage.getItem("coverletter_id"),
-    //     title: `${localStorage.getItem("user_id")}의 자기소개서`,
-    //     company: "카뱅",
-    //     tags: ["카카오", "뱅크"],
-    //     comments: "잘부탁드려용",
-    //   };
-
-    //   coverLetterElements.element.map((e, idx, arr) => {
-    //     request.CLES.push({
-    //       cl_element_id: idx + 1,
-    //       problem: e.problem,
-    //       answer: e.answer,
-    //       _public: 1,
-    //     });
-    //   });
-
-    //   const data = new URLSearchParams(request);
-    //   data.set("CLES", JSON.stringify(request.CLES));
-
-    //   const result = await fetch(`${config.URL}/api/cls`, {
-    //     method: "POST",
-    //     body: data,
-    //   });
-
-    //   console.log(result);
-    // } else {
-    //   if (answer.length < 200) {
-    //     setCountErr(true);
-    //     setTimeout(() => setCountErr(false), 1500);
-    //   }
-
-    //   if (problem.length === 0) {
-    //     setEmptyErr(true);
-    //     setTimeout(() => setEmptyErr(false), 1500);
-    //   }
-    // }
-
     const abnormal = checkAbnormal();
 
     if (abnormal) {
@@ -155,32 +114,7 @@ function ClInput() {
       }
     } else {
       /* 모든 element 값이 온전한 경우 */
-      //Upload
-      const request = {
-        CLES: [],
-        cl_id: localStorage.getItem("coverletter_id"),
-        title: `${localStorage.getItem("user_id")}의 자기소개서`,
-        company: "카뱅",
-        tags: ["카카오", "뱅크"],
-        comments: "잘부탁드려용",
-      };
-
-      coverLetterElements.element.map((e, idx, arr) => {
-        request.CLES.push({
-          cl_element_id: idx + 1,
-          problem: e.problem,
-          answer: e.answer,
-          _public: 1,
-        });
-      });
-
-      const data = new URLSearchParams(request);
-      data.set("CLES", JSON.stringify(request.CLES));
-
-      const result = await fetch(`${config.URL}/api/cls`, {
-        method: "POST",
-        body: data,
-      });
+      uploadCoverLetter();
     }
   };
 
