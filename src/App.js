@@ -30,7 +30,7 @@ function App() {
           <Route path="/signup" component={GotoSignUp} />
           <Route path="/questions/:keyword" component={QuestionsList} />
           <Route path="/quest" component={FindQuestion} />
-          <Route path="/keywordview/graph" component={KeywordGraphView} />
+          {/* <Route path="/keywordview/graph" component={KeywordGraphView} /> */}
           <Route path="/coverletter" component={Coverletter} />
           <Route path="/headerTest" component={Header} />
 
