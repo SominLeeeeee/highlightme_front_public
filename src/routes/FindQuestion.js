@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
 import Header from "../components/Header";
 import "./findQuestion.scss";
+import { useRecoilState } from "recoil";
+import { atomSignUp, atomUserInfo } from "../recoil/userStore";
+import { isUserValid } from "../utils";
 
 function FindQuestion() {
+  const history = useHistory();
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
+  useEffect(() => {
+    if (!isUserValid(userInfo)) {
+      history.push("/signup");
+    }
+  }, []);
+
   return (
     <div>
       <Header />
