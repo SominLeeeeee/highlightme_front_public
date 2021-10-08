@@ -2,22 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
-
-/**
- * User의 로그인 여부를 확인함
- * @param {UserInfo} userInfo
- * @returns {Boolean} isUserValid
- */
-function isUserValid(userInfo) {
-  return (
-    userInfo &&
-    userInfo.id &&
-    userInfo.email &&
-    userInfo.accessToken &&
-    userInfo.email.length > 0 &&
-    userInfo.accessToken.length > 0
-  );
-}
+import { isUserValid } from "../utils";
 
 function Home() {
   const history = useHistory();
