@@ -15,7 +15,7 @@ const KeywordGraphView = lazy(() =>
 );
 const Coverletter = lazy(() => import("./routes/Coverletter"));
 const FindQuestion = lazy(() => import("./routes/FindQuestion"));
-const Header = lazy(() => import("./components/Header"));
+const MyPage = lazy(() => import("./routes/MyPage"));
 
 function App() {
   return (
@@ -28,11 +28,14 @@ function App() {
           <Route path="/signin" component={SignIn} />
           <Route path="/signup_info" component={SignUp} />
           <Route path="/signup" component={GotoSignUp} />
+
+          <Route path="/mypage" component={MyPage} />
+
           <Route path="/questions/:keyword" component={QuestionsList} />
-          <Route path="/quest" component={FindQuestion} />
+          <Route path="/find" component={FindQuestion} />
           {/* <Route path="/keywordview/graph" component={KeywordGraphView} /> */}
+
           <Route path="/coverletter" component={Coverletter} />
-          <Route path="/headerTest" component={Header} />
 
           {/* <Route path="/signin/logout" component={Logout} />
           <Route path="/field" component={Field} />
