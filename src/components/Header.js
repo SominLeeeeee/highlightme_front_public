@@ -28,7 +28,10 @@ function Header() {
   return (
     <div id="headerWrapper">
       <div id="header">
-        <img src="/images/ic-sign-logo.svg" />
+        <Link to="/">
+          <img src="/images/ic-sign-logo.svg" />
+        </Link>
+
         <ul id="headerNavigators">
           {menus.map((e) =>
             e.underConstruction ? (
