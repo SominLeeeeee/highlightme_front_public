@@ -38,9 +38,9 @@ deploy-to-s3:
 purge:
   image: python:latest
   stage: deploy
-  script
+  script:
     - pip install awscli
-# $PROD_CLOUDFRONT_DIST는 Cloudfront를 생성하면서 발급된 아이디를 활용한다.
+    # $PROD_CLOUDFRONT_DIST는 Cloudfront를 생성하면서 발급된 아이디를 활용한다.
     - aws cloudfront create-invalidation --distribution-id E2ULU0EJV6MZLA --paths "/*"
   only:
     - master
