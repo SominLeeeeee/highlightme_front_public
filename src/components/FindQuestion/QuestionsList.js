@@ -11,22 +11,21 @@ function QuestionsList(props) {
   const { keyword } = { ...props };
   const [questions, setQuestions] = useState([]);
   //41, 53
-  // useEffect(async () => {
-  //   console.log("yes!!");
-  //   async function yes() {
-  //     const result = await fetch(
-  //       `${config.URL}/api/questions?keyword=${keyword}`,
-  //       {
-  //         method: "GET",
-  //       }
-  //     );
-  //     console.log("result", result);
-  //   }
+  useEffect(() => {
+    async function yes() {
+      const result = await fetch(
+        `${config.URL}/api/questions?keyword=${keyword}`,
+        {
+          method: "GET",
+        }
+      );
+      console.log(result);
+    }
 
-  //   if (questions.length === 0) {
-  //     yes();
-  //   }
-  // }, []);
+    if (questions.length === 0) {
+      yes();
+    }
+  }, []);
 
   const arr = [
     {

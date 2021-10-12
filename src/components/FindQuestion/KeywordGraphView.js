@@ -17,8 +17,8 @@ function KeywordGraphView() {
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
-  useEffect(() => {
-    fetch(`${config.URL}/api/keywords`, {
+  useEffect(async () => {
+    let res = await fetch(`${config.URL}/api/keywords`, {
       method: "GET",
     });
 
