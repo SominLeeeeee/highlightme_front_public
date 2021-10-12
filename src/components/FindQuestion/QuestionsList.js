@@ -21,10 +21,6 @@ function QuestionsList(props) {
       );
       console.log(result);
     }
-
-    if (questions.length === 0) {
-      yes();
-    }
   }, []);
 
   const arr = [
