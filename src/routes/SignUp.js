@@ -15,7 +15,7 @@ function SignUp() {
     <div className="signUpParent">
       <img src="/images/ic-sign-logo.svg" id="logo"></img>
       <ShadowBoxLarge>
-        {signUp.signUpLevel ? (
+        {signUp.signUpLevel && userInfo ? (
           <SignUpComplete />
         ) : (
           <SignUpInfo email={userInfo.email} />

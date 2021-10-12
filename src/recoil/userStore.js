@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const atomCoverLetterElements = atom({
   key: "atomCoverLetterElements",
@@ -6,15 +9,17 @@ export const atomCoverLetterElements = atom({
     element: [{ problem: null, answer: null }],
     selectedElement: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const atomUserInfo = atom({
   key: "atomUserInfo",
   default: {
-    id: localStorage.getItem("user_id"),
-    email: localStorage.getItem("email"),
-    accessToken: localStorage.getItem("token"),
+    id: undefined,
+    email: undefined,
+    accessToken: undefined,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const atomKeyword = atom({
@@ -23,6 +28,7 @@ export const atomKeyword = atom({
     userKeywords: [],
     selectedKeyword: "",
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const atomSignUp = atom({
@@ -30,4 +36,5 @@ export const atomSignUp = atom({
   default: {
     signUpLevel: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });

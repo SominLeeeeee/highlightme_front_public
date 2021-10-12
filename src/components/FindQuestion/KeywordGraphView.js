@@ -20,23 +20,16 @@ function KeywordGraphView() {
   useEffect(() => {
     fetch(`${config.URL}/api/keywords`, {
       method: "GET",
-    })
-      .then((res) => {
-        return res.json();
+    });
+
+    res = await res.json();
+
+    setKeyword((prev) =>
+      produce(prev, (draft) => {
+        draft.userKeywords = res;
+        return draft;
       })
-      .then((res) => {
-        setKeyword((prev) =>
-          produce(prev, (draft) => {
-            res.result.map((e) => {
-              draft.userKeywords.push({
-                keyword_id: e.keyword_id,
-                keyword: e.keyword,
-                answered: e.answered,
-              });
-            });
-          })
-        );
-      });
+    );
   }, []);
 
   function pickColor(answered) {
@@ -54,19 +47,21 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        <ShadowBoxMedium paddingTop="3.1rem">
-          {/* <HighlightText
+
+        {/* TODO 서버에서 내려받는 포맷이랑 호환이 안되는 상태임 */}
+        {/* {keyword.userKeywords.result.map((element) => (
+          <ShadowBoxMedium paddingTop="3.1rem">
+            <HighlightText
               text={element.parentKeyword}
               marginBottom="0"
               color={colors.mainyellowa}
             /> */}
 
-          <div className="keywordParent">
-            {keyword.userKeywords.map((e) => (
-              <Keyword text={e.keyword} color={pickColor(e.answered)} />
-            ))}
-          </div>
-        </ShadowBoxMedium>
+        <div className="keywordParent">
+          {keyword.userKeywords.map((e) => (
+            <Keyword text={e.keyword} color={pickColor(e.answered)} />
+          ))}
+        </div>
       </div>
     </div>
   );
