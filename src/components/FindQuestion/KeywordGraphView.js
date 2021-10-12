@@ -34,15 +34,16 @@ function KeywordGraphView() {
     console.log("res", res);
   }, []);
 
-  useEffect(() => {
-    console.log("keyword", keyword);
-  }, [keyword]);
-
   function pickColor(answered) {
     if (answered === 2) return `${colors.mainyellow}`;
     else if (answered === 1) return `${colors.subyellow}`;
     else return `${colors.gray}`;
   }
+
+  const keywordOnClick = (e) => {
+    console.log("e", e);
+    setKeyword((prev) => ({ ...prev, selectedKeyword: e }));
+  };
 
   return (
     <div className="parentForCenter">
@@ -56,7 +57,11 @@ function KeywordGraphView() {
 
         <ShadowBoxMedium paddingTop="3.1rem">
           {keyword.userKeywords.result.map((e) => (
-            <Keyword text={e.keyword} color={pickColor(e.answered)} />
+            <Keyword
+              text={e.keyword}
+              color={pickColor(e.answered)}
+              onClick={() => keywordOnClick(e.user_keyword_id)}
+            />
           ))}
         </ShadowBoxMedium>
       </div>
