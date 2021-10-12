@@ -12,7 +12,7 @@ build:
   stage: build
   script:
     - yarn
-    - yarn build
+    - CI=false yarn build
   artifacts:
     # 만료 시간을 설정해 줍니다.
     expire_in: 1 hour
