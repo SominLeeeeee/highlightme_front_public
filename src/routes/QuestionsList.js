@@ -10,10 +10,10 @@ import ShadowBoxMedium from "../components/ShadowBoxMedium";
 function QuestionsList(props) {
   const { keyword } = { ...props };
   const [questions, setQuestions] = useState([]);
+
   //41, 53
   useEffect(async () => {
-    console.log("yes!!");
-    async function yes() {
+    if (questions.length === 0) {
       const result = await fetch(
         `${config.URL}/api/questions?keyword=${keyword}`,
         {
@@ -21,10 +21,6 @@ function QuestionsList(props) {
         }
       );
       console.log(result);
-    }
-
-    if (questions.length === 0) {
-      yes();
     }
   }, []);
 
