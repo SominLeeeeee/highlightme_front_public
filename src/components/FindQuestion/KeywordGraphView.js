@@ -30,7 +30,13 @@ function KeywordGraphView() {
         return draft;
       })
     );
+
+    console.log("res", res);
   }, []);
+
+  useEffect(() => {
+    console.log("keyword", keyword);
+  }, [keyword]);
 
   function pickColor(answered) {
     if (answered === 2) return `${colors.mainyellow}`;
@@ -48,20 +54,11 @@ function KeywordGraphView() {
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
 
-        {/* TODO 서버에서 내려받는 포맷이랑 호환이 안되는 상태임 */}
-        {/* {keyword.userKeywords.result.map((element) => (
-          <ShadowBoxMedium paddingTop="3.1rem">
-            <HighlightText
-              text={element.parentKeyword}
-              marginBottom="0"
-              color={colors.mainyellowa}
-            /> */}
-
-        <div className="keywordParent">
-          {keyword.userKeywords.map((e) => (
+        <ShadowBoxMedium paddingTop="3.1rem">
+          {keyword.userKeywords.result.map((e) => (
             <Keyword text={e.keyword} color={pickColor(e.answered)} />
           ))}
-        </div>
+        </ShadowBoxMedium>
       </div>
     </div>
   );
