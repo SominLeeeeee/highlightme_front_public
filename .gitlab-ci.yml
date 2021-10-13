@@ -27,6 +27,7 @@ deploy-to-s3:
   script:
     - pip install awscli
     # aws s3 sync 명령어를 활용하여 빌드된 파일을 나의 버킷에 올려주고 public-read가 가능하도록 설정해 줍니다.
+    - aws s3 sync build s3://hlight.me --acl public-read
     - aws s3 sync build s3://www.hlight.me --acl public-read
   # 해당 stage는 master branch에서만 실행 가능하도록 설정해 줍니다.
   only:
@@ -41,7 +42,8 @@ purge:
   script:
     - pip install awscli
     # $PROD_CLOUDFRONT_DIST는 Cloudfront를 생성하면서 발급된 아이디를 활용한다.
-    - aws cloudfront create-invalidation --distribution-id E2ULU0EJV6MZLA --paths "/*"
+    - aws cloudfront create-invalidation --distribution-id E1CLJZ1B2NB83A --paths "/*"
+    - aws cloudfront create-invalidation --distribution-id E138R7NQIKZJJQ --paths "/*"
   only:
     - master
   when: manual
