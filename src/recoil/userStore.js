@@ -52,3 +52,9 @@ export const atomSignUp = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const atomMenu = atom({
+  key: "atomMenu",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
