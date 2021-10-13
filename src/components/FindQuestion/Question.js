@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Question.scss";
+import "../../index.css";
 import InputBox from "../atom/InputBox";
 import InputBoxDisable from "../atom/InputBoxDisable";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
@@ -69,7 +70,7 @@ function Question(props) {
         </InputBoxDisable>
       )}
       <div id="underQuestion">
-        <span id="evaluateQuestionBox">
+        <span className="evaluateQuestionBox noselect">
           이 질문이 마음에 드셨나요?
           <img
             id="icGood"
@@ -107,7 +108,10 @@ function Question(props) {
                 : "/images/ic-mydocs-g-write.svg"
             }
           />
-          <p style={isEditClicked ? { color: "#fe894b" } : {}}>
+          <p
+            className="noselect"
+            style={isEditClicked ? { color: "#fe894b" } : {}}
+          >
             {isEditClicked ? "수정완료" : "수정"}
           </p>
         </span>
