@@ -32,11 +32,6 @@ function QuestionsList(props) {
       });
   }, [keyword.selectedKeywordId]);
 
-  /* questions 변경되면 로그 띄우기 */
-  useEffect(() => {
-    console.log("questions", questions);
-  }, [questions]);
-
   return (
     <div className="questionsListParent">
       <HighlightText text="예상질문 리스트" marginBottom="3.6rem" />
