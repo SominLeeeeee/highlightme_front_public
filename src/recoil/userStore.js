@@ -32,6 +32,19 @@ export const atomKeyword = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const atomQuestion = atom({
+  key: "atomQuestion",
+  default: [
+    {
+      question_id: "",
+      content: "",
+      answer: "",
+      user_question_id: "",
+      user_keyword_id: "",
+    },
+  ],
+});
+
 export const atomSignUp = atom({
   key: "atomSignUp",
   default: {

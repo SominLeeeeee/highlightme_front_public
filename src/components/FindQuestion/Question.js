@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import config from "../../configs";
 import "./Question.scss";
 import "../../index.css";
 import InputBox from "../atom/InputBox";
 import InputBoxDisable from "../atom/InputBoxDisable";
+import { useRecoilState } from "recoil";
+import { atomQuestion } from "../../recoil/userStore";
+import produce from "immer";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question(props) {
-  const [question, setQuestion] = useState(props.question);
-  const [answer, setAnswer] = useState(props.answer);
+  const [question, setQuestion] = useRecoilState(atomQuestion);
+  const [questionId, setQuestionId] = useState(props.id);
 
   const [isThumbClicked, setIsThumbClicked] = useState("x");
   const [isThumbHovered, setIsThumbHovered] = useState("x");
@@ -25,7 +29,17 @@ function Question(props) {
 
   function editOnClick() {
     /* 수정완료 버튼을 눌렀다면 서버에 전송 */
-    console.log(answer);
+    console.log(question[questionId].answer);
+    let res = fetch(`${config.URL}/api/questions/answer`, {
+      method: "POST",
+      body: new URLSearchParams({
+        user_question_id: question[questionId].user_question_id,
+        user_keyword_id: question[questionId].user_keyword_id,
+        answer: question[questionId].answer,
+      }),
+    });
+
+    console.log(res);
 
     setIsEditClicked(!isEditClicked);
   }
@@ -43,12 +57,18 @@ function Question(props) {
   }
 
   const onInputChangeAnswer = (event) => {
-    setAnswer(event.target.value);
+    setQuestion((prev) =>
+      produce(prev, (draft) => {
+        console.log(draft);
+        draft[questionId].answer = event.target.value;
+        return draft;
+      })
+    );
   };
 
   return (
     <div>
-      <p id="questionText">Q. {question}</p>
+      <p id="questionText">Q. {question[questionId].content}</p>
       {isEditClicked ? (
         <InputBox
           placeholder="답변을 입력해주세요."
@@ -56,7 +76,7 @@ function Question(props) {
           maxRows="4"
           minRows="2"
           onChange={onInputChangeAnswer}
-          value={answer}
+          value={question[questionId].answer}
         />
       ) : (
         <InputBoxDisable
@@ -65,9 +85,8 @@ function Question(props) {
           maxRows="4"
           minRows="2"
           onChange={onInputChangeAnswer}
-        >
-          {answer}
-        </InputBoxDisable>
+          value={question[questionId].answer}
+        />
       )}
       <div id="underQuestion">
         <span className="evaluateQuestionBox noselect">
