@@ -1,40 +1,27 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import config from "../../configs";
-import { Redirect, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
-import produce from "immer";
 
 function GoogleLoginButton() {
   const history = useHistory();
-  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
 
   const googleBtnOnClick = async (response) => {
-    const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
+    const res = await fetch(`${config.URL}/api/users/oauth/google`, {
       method: "POST",
       body: new URLSearchParams({
         email: response.profileObj.email,
         googleId: response.googleId,
         accessToken: response.accessToken,
       }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("token", response.accessToken);
-        localStorage.setItem("email", res.email);
-        localStorage.setItem("user_id", res.user_id);
-      });
+    });
+    const statusCode = res.status;
+    const data = await res.json();
 
-<<<<<<< Updated upstream
-    console.log("회원가입 결과", alreadySignUp);
-    // dispatch({ type: SIGN_UP, email });
-    setSignUp({ signUpLevel: 0 });
-    history.push("/signup_info");
-=======
     setUserInfo({
       id: data.user_id,
       email: data.email,
@@ -45,20 +32,7 @@ function GoogleLoginButton() {
       setSignUp({ signUpLevel: 0 });
       history.push("/signup_info");
     } else history.push("/find");
->>>>>>> Stashed changes
   };
-
-  // const googleBtnOnClick = async () => {
-  //   console.log("aaa");
-  //   const alreadySignUp = await fetch(`${config.URL}/api/users/oauth/google`, {
-  //     method: "GET",
-  //   });
-
-  //   console.log(alreadySignUp);
-  //   // dispatch({ type: SIGN_UP, email });
-  //   dispatch({ type: SIGN_UP_REGISTER, level: 0 });
-  //   history.push("/signup_info");
-  // };
 
   const googleLoginButtonStyle = {
     backgroundColor: "white",
@@ -90,13 +64,6 @@ function GoogleLoginButton() {
       cookiePolicy={"single_host_origin"}
       // isSignedIn={true}
     />
-    // <button onClick={googleBtnOnClick} style={googleLoginButtonStyle}>
-    //   <img
-    //     src="/images/btn-google-signin.png"
-    //     style={{ width: "24px", height: "24px", marginRight: "8px" }}
-    //   />
-    //   구글 계정으로 간편하게 시작하기
-    // </button>
   );
 }
 

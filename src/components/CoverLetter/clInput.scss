@@ -64,3 +64,16 @@
   width: auto;
   padding: 4.8rem 2rem 0 2rem;
 }
+
+#problemInputDiv {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  margin-bottom: 4.3rem;
+}
+
+#answerInputDiv {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}

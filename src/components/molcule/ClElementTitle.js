@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../../recoil/userStore";
 import "./clElementTitle.scss";
@@ -27,7 +27,6 @@ function ClElementTitle(props) {
       }
       onClick={clElementTitleOnClick}
     >
-      {/* <div className="clElementNumber">{number}</div> */}
       <NumberCircle
         type={
           number - 1 === coverLetterElements.selectedElement

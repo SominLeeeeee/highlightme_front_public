@@ -12,34 +12,38 @@ import { atomKeyword, atomUserInfo } from "../../recoil/userStore";
 import produce from "immer";
 
 function KeywordGraphView() {
-  const keywordArrRedux = useSelector((state) => state.keywords);
-
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
-  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
-  useEffect(() => {
-    fetch(`${config.URL}/api/keywords?user_id=${userInfo.id}`, {
+  useEffect(async () => {
+    let res = await fetch(`${config.URL}/api/keywords`, {
       method: "GET",
-    })
-      .then((res) => {
-        return res.json();
+    });
+
+    res = await res.json();
+
+    setKeyword((prev) =>
+      produce(prev, (draft) => {
+        draft.userKeywords = res;
+        return draft;
       })
-      .then((res) => {
-        setKeyword((prev) =>
-          produce(prev, (draft) => {
-            draft.userKeywords = res;
-            return draft;
-          })
-        );
-      });
-    console.log("keyword", keyword);
+    );
+
+    console.log("res", res);
   }, []);
 
-  function pickColor(answerExist) {
-    if (answerExist === "y") return `${colors.mainyellow}`;
-    else if (answerExist === "n") return `${colors.subyellow}`;
+  function pickColor(answered) {
+    if (answered === 2) return `${colors.mainyellow}`;
+    else if (answered === 1) return `${colors.subyellow}`;
     else return `${colors.gray}`;
   }
+
+  const keywordOnClick = (keyword, keywordId) => {
+    setKeyword((prev) => ({
+      ...prev,
+      selectedKeyword: keyword,
+      selectedKeywordId: keywordId,
+    }));
+  };
 
   return (
     <div className="parentForCenter">
@@ -50,21 +54,18 @@ function KeywordGraphView() {
           <ItemCircle text="답변하지 않은 키워드" color={colors.subyellow} />
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
-        {keyword.userKeywords.map((element) => (
-          <ShadowBoxMedium paddingTop="3.1rem">
-            <HighlightText
-              text={element.parentKeyword}
-              marginBottom="0"
-              color={colors.mainyellowa}
-            />
 
-            <div className="keywordParent">
-              {element.map((e) => (
-                <Keyword text={e.keyword} color={pickColor(e.answerExist)} />
-              ))}
-            </div>
-          </ShadowBoxMedium>
-        ))}
+        <ShadowBoxMedium>
+          <div id="keywordWrapper">
+            {keyword.userKeywords.result.map((e) => (
+              <Keyword
+                text={e.keyword}
+                color={pickColor(e.answered)}
+                onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
+              />
+            ))}
+          </div>
+        </ShadowBoxMedium>
       </div>
     </div>
   );

@@ -1,0 +1,34 @@
+.myPageWrapperParent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6.1rem;
+}
+
+.myPageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.keywordQuestionWrapper {
+  display: grid;
+  width: 1200px;
+  grid-template-columns: 5fr 6fr;
+  column-gap: 4rem;
+  align-items: start;
+}
+
+.myPageHeader {
+  margin-bottom: 4.1rem;
+  #myPageTitle {
+    font-size: 3.6rem;
+    font-family: "AppleSDGothicNeo-Bold";
+    margin: 0;
+  }
+  #myPageExplain {
+    font-size: 2.2rem;
+    margin-top: 0.7rem;
+  }
+}

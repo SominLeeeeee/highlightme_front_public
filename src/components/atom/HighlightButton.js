@@ -2,7 +2,7 @@ import React from "react";
 import "./HighlightButton.scss";
 
 function HighlightButton(props) {
-  const { text, backgroundColor, color, disabled, onClick } = { ...props };
+  const { text, backgroundColor, color, onClick } = { ...props };
 
   return (
     <button

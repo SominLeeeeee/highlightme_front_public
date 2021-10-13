@@ -22,6 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/src/configs/
+# Add config files for gitlab ci
+# /src/configs/
+
 /src/components/func&params.txt
 /src/components/rem.txt

@@ -15,15 +15,13 @@ function ClList() {
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
         draft.element.push({
-          problem: "자기소개서 문항을 입력해주세요",
-          answer: "",
+          problem: null,
+          answer: null,
         });
         return draft;
       })
     );
   }
-
-  console.log("coverLetterElements", coverLetterElements);
 
   return (
     <div className="clListWrapper ">
@@ -36,7 +34,14 @@ function ClList() {
       </div>
       <div>
         {coverLetterElements.element.map((e, index) => (
-          <ClElementTitle number={index + 1} problem={e.problem} />
+          <ClElementTitle
+            number={index + 1}
+            problem={
+              e.problem === null || e.problem === undefined || e.problem === ""
+                ? "자기소개서 문항을 입력해주세요"
+                : e.problem
+            }
+          />
         ))}
       </div>
     </div>
