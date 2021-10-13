@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./Question.scss";
 import InputBox from "../atom/InputBox";
+import InputBoxDisable from "../atom/InputBoxDisable";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question(props) {
-  const { questionText, answerText } = { ...props };
+  const [question, setQuestion] = useState(props.question);
+  const [answer, setAnswer] = useState(props.answer);
+
   const [isThumbClicked, setIsThumbClicked] = useState("x");
   const [isThumbHovered, setIsThumbHovered] = useState("x");
   const [isEditClicked, setIsEditClicked] = useState(false);
@@ -20,6 +23,9 @@ function Question(props) {
   }
 
   function editOnClick() {
+    /* 수정완료 버튼을 눌렀다면 서버에 전송 */
+    console.log(answer);
+
     setIsEditClicked(!isEditClicked);
   }
 
@@ -35,17 +41,33 @@ function Question(props) {
     setIsThumbHovered("x");
   }
 
+  const onInputChangeAnswer = (event) => {
+    setAnswer(event.target.value);
+  };
+
   return (
     <div>
-      <p id="questionText">Q. {questionText}</p>
-      <InputBox
-        text="답변을 입력해주세요."
-        padding="1.6rem"
-        radius="1.6rem"
-        marginBottom="1rem"
-        maxRows="4"
-        minRows="2"
-      ></InputBox>
+      <p id="questionText">Q. {question}</p>
+      {isEditClicked ? (
+        <InputBox
+          placeholder="답변을 입력해주세요."
+          radius="1.6rem"
+          maxRows="4"
+          minRows="2"
+          onChange={onInputChangeAnswer}
+          value={answer}
+        />
+      ) : (
+        <InputBoxDisable
+          placeholder="답변을 입력해주세요."
+          radius="1.6rem"
+          maxRows="4"
+          minRows="2"
+          onChange={onInputChangeAnswer}
+        >
+          {answer}
+        </InputBoxDisable>
+      )}
       <div id="underQuestion">
         <span id="evaluateQuestionBox">
           이 질문이 마음에 드셨나요?

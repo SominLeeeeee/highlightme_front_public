@@ -13,16 +13,16 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3rem;
+  font-family: "AppleSDGothicNeo-Regular";
 
   #evaluateQuestionBox {
     border-radius: 2.5rem;
-    background-color: #f7f7f7;
-    padding: 1.55rem 2.2rem 1.35rem 2.2rem;
+    background-color: #ffffff;
+    padding: 0 2.2rem 0 0.5rem;
     color: #818181;
     font-size: 1.8rem;
     display: flex;
     width: fit-content;
-    font-family: "AppleSDGothicNeo-Regular";
 
     #icGood,
     #icBad {

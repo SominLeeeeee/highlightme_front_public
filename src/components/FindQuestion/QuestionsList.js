@@ -38,7 +38,7 @@ function QuestionsList(props) {
       <ShadowBoxMedium paddingTop="4.8rem">
         <p id="keywordName">{keyword.selectedKeyword}</p>
         {questions.map((element) => (
-          <Question questionText={element.content} />
+          <Question question={element.content} />
         ))}
       </ShadowBoxMedium>
     </div>
