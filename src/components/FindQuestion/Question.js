@@ -80,7 +80,7 @@ function Question(props) {
         />
       ) : (
         <InputBoxDisable
-          placeholder="답변을 입력해주세요."
+          placeholder="답변을 입력해주세요"
           radius="1.6rem"
           maxRows="4"
           minRows="2"
