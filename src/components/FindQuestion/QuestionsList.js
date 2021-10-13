@@ -22,9 +22,12 @@ function QuestionsList(props) {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         setQuestions([]);
         res.questions.map((e) => {
-          setQuestions((prev) => prev.concat({ content: e.content }));
+          setQuestions((prev) =>
+            prev.concat({ content: e.content, answer: e.answer })
+          );
         });
       });
   }, [keyword.selectedKeywordId]);
@@ -35,7 +38,7 @@ function QuestionsList(props) {
       <ShadowBoxMedium paddingTop="4.8rem">
         <p id="keywordName">{keyword.selectedKeyword}</p>
         {questions.map((element) => (
-          <Question question={element.content} />
+          <Question question={element.content} answer={element.answer} />
         ))}
       </ShadowBoxMedium>
     </div>
