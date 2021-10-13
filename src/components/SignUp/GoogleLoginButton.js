@@ -29,10 +29,23 @@ function GoogleLoginButton() {
         localStorage.setItem("user_id", res.user_id);
       });
 
+<<<<<<< Updated upstream
     console.log("회원가입 결과", alreadySignUp);
     // dispatch({ type: SIGN_UP, email });
     setSignUp({ signUpLevel: 0 });
     history.push("/signup_info");
+=======
+    setUserInfo({
+      id: data.user_id,
+      email: data.email,
+      accessToken: response.accessToken,
+    });
+
+    if (data.isNew) {
+      setSignUp({ signUpLevel: 0 });
+      history.push("/signup_info");
+    } else history.push("/find");
+>>>>>>> Stashed changes
   };
 
   // const googleBtnOnClick = async () => {
