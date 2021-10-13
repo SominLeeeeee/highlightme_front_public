@@ -12,10 +12,7 @@ import { atomKeyword, atomUserInfo } from "../../recoil/userStore";
 import produce from "immer";
 
 function KeywordGraphView() {
-  const keywordArrRedux = useSelector((state) => state.keywords);
-
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
-  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   useEffect(async () => {
     let res = await fetch(`${config.URL}/api/keywords`, {
@@ -40,9 +37,12 @@ function KeywordGraphView() {
     else return `${colors.gray}`;
   }
 
-  const keywordOnClick = (e) => {
-    console.log("e", e);
-    setKeyword((prev) => ({ ...prev, selectedKeyword: e }));
+  const keywordOnClick = (keyword, keywordId) => {
+    setKeyword((prev) => ({
+      ...prev,
+      selectedKeyword: keyword,
+      selectedKeywordId: keywordId,
+    }));
   };
 
   return (
@@ -60,7 +60,7 @@ function KeywordGraphView() {
             <Keyword
               text={e.keyword}
               color={pickColor(e.answered)}
-              onClick={() => keywordOnClick(e.user_keyword_id)}
+              onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
             />
           ))}
         </ShadowBoxMedium>

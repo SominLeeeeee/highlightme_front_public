@@ -17,7 +17,7 @@ function QuestionsList(props) {
     await fetch(`${config.URL}/api/questions`, {
       method: "POST",
       body: new URLSearchParams({
-        user_keyword_id: keyword.selectedKeyword,
+        user_keyword_id: keyword.selectedKeywordId,
       }),
     })
       .then((res) => res.json())
@@ -29,7 +29,7 @@ function QuestionsList(props) {
           });
         });
       });
-  }, [keyword.selectedKeyword]);
+  }, [keyword.selectedKeywordId]);
 
   /* questions 변경되면 로그 띄우기 */
   useEffect(() => {

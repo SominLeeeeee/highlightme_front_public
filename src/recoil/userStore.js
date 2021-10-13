@@ -27,6 +27,7 @@ export const atomKeyword = atom({
   default: {
     userKeywords: [],
     selectedKeyword: "",
+    selectedKeywordId: "",
   },
   effects_UNSTABLE: [persistAtom],
 });
