@@ -22,9 +22,10 @@ function QuestionsList(props) {
     })
       .then((res) => res.json())
       .then((res) => {
+        let temp = [];
         res.questions.map((e) => {
-          setQuestions((prev) => {
-            let temp = prev.concat({ content: e.content });
+          setQuestions(() => {
+            temp = temp.concat({ content: e.content });
             return temp;
           });
         });
