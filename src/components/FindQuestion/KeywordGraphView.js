@@ -55,14 +55,16 @@ function KeywordGraphView() {
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
 
-        <ShadowBoxMedium paddingTop="3.1rem">
-          {keyword.userKeywords.result.map((e) => (
-            <Keyword
-              text={e.keyword}
-              color={pickColor(e.answered)}
-              onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
-            />
-          ))}
+        <ShadowBoxMedium>
+          <div id="keywordWrapper">
+            {keyword.userKeywords.result.map((e) => (
+              <Keyword
+                text={e.keyword}
+                color={pickColor(e.answered)}
+                onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
+              />
+            ))}
+          </div>
         </ShadowBoxMedium>
       </div>
     </div>
