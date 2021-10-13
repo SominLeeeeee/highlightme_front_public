@@ -28,9 +28,10 @@ function GoogleLoginButton() {
       accessToken: response.accessToken,
     });
 
-    console.log("회원가입 결과", statusCode);
-    setSignUp({ signUpLevel: 0 });
-    history.push("/signup_info");
+    if (data.isNew) {
+      setSignUp({ signUpLevel: 0 });
+      history.push("/signup_info");
+    } else history.push("/find");
   };
 
   const googleLoginButtonStyle = {
