@@ -22,12 +22,9 @@ function QuestionsList(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        let temp = [];
+        setQuestions([]);
         res.questions.map((e) => {
-          setQuestions(() => {
-            temp = temp.concat({ content: e.content });
-            return temp;
-          });
+          setQuestions((prev) => prev.concat({ content: e.content }));
         });
       });
   }, [keyword.selectedKeywordId]);
