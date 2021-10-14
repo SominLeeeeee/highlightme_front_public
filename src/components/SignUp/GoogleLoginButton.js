@@ -3,7 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import config from "../../configs";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
+import { atomSignUp, atomUserInfo, atomMenu } from "../../recoil/userStore";
 
 function GoogleLoginButton(props) {
   const { usage } = { ...props };
@@ -11,6 +11,7 @@ function GoogleLoginButton(props) {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
+  const [menu, setMenu] = useRecoilState(atomMenu);
 
   const googleBtnOnClick = async (response) => {
     const res = await fetch(`${config.URL}/api/users/oauth/google`, {
@@ -34,6 +35,7 @@ function GoogleLoginButton(props) {
       setSignUp({ signUpLevel: 0 });
       history.push("/signup_info");
     } else {
+      setMenu(0);
       history.push("/find");
     }
   };
