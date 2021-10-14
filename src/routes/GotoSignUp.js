@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleLoginPage from "../components/SignUp/GoogleLoginButton";
+import GoogleLoginButton from "../components/SignUp/GoogleLoginButton";
 import HighlightText from "../components/atom/HighlightText";
 import "./gotoSignUp.scss";
 
@@ -24,7 +24,8 @@ function GotoSignUp() {
             text="하이라이트미"
           />
         </p>
-        <GoogleLoginPage />
+        <GoogleLoginButton usage="signup" />
+        <GoogleLoginButton usage="login" />
       </div>
       <p id="signupAgree">
         간편하게 시작하기를 통해 <b>서비스 이용약관</b>과{" "}

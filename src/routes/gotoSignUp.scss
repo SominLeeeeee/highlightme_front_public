@@ -7,6 +7,7 @@
   .gotoSignUp {
     display: flex;
     flex-direction: column;
+    padding-bottom: 15rem;
 
     #signupQuotation {
       display: inline;
@@ -27,10 +28,6 @@
       font-size: 3rem;
       color: black;
       margin-bottom: 6rem;
-    }
-
-    button {
-      margin-bottom: 15rem;
     }
   }
 }
