@@ -32,6 +32,7 @@ function Question(props) {
     console.log(question[questionId].answer);
     let res = fetch(`${config.URL}/api/questions/answer`, {
       method: "POST",
+      credentials: "include",
       body: new URLSearchParams({
         user_question_id: question[questionId].user_question_id,
         user_keyword_id: question[questionId].user_keyword_id,

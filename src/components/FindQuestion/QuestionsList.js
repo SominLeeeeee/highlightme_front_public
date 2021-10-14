@@ -16,6 +16,7 @@ function QuestionsList(props) {
   useEffect(async () => {
     await fetch(`${config.URL}/api/questions`, {
       method: "POST",
+      credentials: "include",
       body: new URLSearchParams({
         user_keyword_id: keyword.selectedKeywordId,
       }),

@@ -32,6 +32,7 @@ function SignUpInfo() {
   useEffect(() => {
     fetch(`${config.URL}/api/fields`, {
       method: "GET",
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((res) => {

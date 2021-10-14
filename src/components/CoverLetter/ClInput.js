@@ -129,6 +129,7 @@ function ClInput() {
   function deleteButtonOnClick() {
     fetch(`${config.URL}/api/cls`, {
       method: "DELETE",
+      credentials: "include",
       body: new URLSearchParams({
         cl_element_id: coverLetterElements.selectedElement + 1,
       }),
