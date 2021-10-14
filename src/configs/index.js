@@ -1,5 +1,5 @@
 const config = {
-  URL: "https://api.hlight.me:3001",
+  URL: "https://api.hlight.me",
 };
 
 export default config;

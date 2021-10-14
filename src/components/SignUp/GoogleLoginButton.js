@@ -14,6 +14,7 @@ function GoogleLoginButton(props) {
   const [menu, setMenu] = useRecoilState(atomMenu);
 
   const googleBtnOnClick = async (response) => {
+    console.log(response);
     const res = await fetch(`${config.URL}/api/users/oauth/google`, {
       method: "POST",
       body: new URLSearchParams({
