@@ -75,6 +75,8 @@ function ClInput() {
 
   /* 다른 문항을 선택 시 problem과 answer 수정 */
   useEffect(() => {
+    console.log(Date().toLocaleString());
+    console.log("coverLetterElements", coverLetterElements);
     setCurr(coverLetterElements.selectedElement);
     const curr = coverLetterElements.selectedElement;
     const tempProblem = coverLetterElements.element[curr].problem;
@@ -139,7 +141,10 @@ function ClInput() {
     setCoverLetterElements((prev) => ({
       ...prev,
       element: temp,
-      selectedElement: coverLetterElements.selectedElement - 1,
+      selectedElement:
+        coverLetterElements.selectedElement === 0
+          ? 0
+          : coverLetterElements.selectedElement - 1,
     }));
   }
 
