@@ -18,9 +18,40 @@ function ClInput() {
   const [countErr, setCountErr] = useState(false);
   const [emptyErr, setEmptyErr] = useState(false);
 
-  const [problem, setProblem] = useState(coverLetterElements.element.problem);
-  const [answer, setAnswer] = useState(coverLetterElements.element.answer);
-  const [curr, setCurr] = useState(coverLetterElements.selectedElement);
+  const [problem, setProblem] = useState(
+    coverLetterElements.element[0].problem
+  );
+  const [answer, setAnswer] = useState(coverLetterElements.element[0].answer);
+  const [curr, setCurr] = useState(0);
+
+  /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
+  useEffect(async () => {
+    let res = await fetch(`${config.URL}/api/cls`, {
+      method: "GET",
+    });
+    res = await res.json();
+    console.log(res);
+
+    if (res.isNew === 0 && res.result.length !== 0) {
+      localStorage.setItem("coverletter_id", res.result[0].cl_id);
+      setCoverLetterElements((prev) => ({
+        ...prev,
+        element: [],
+      }));
+
+      res.result.map((e) => {
+        setCoverLetterElements((prev) =>
+          produce(prev, (draft) => {
+            draft.element.push({ problem: e.problem, answer: e.answer });
+            return draft;
+          })
+        );
+      });
+
+      setProblem(res.result[0].problem);
+      setAnswer(res.result[0].answer);
+    }
+  }, []);
 
   /* 문항을 쓸 때마다 recoil에 반영 */
   useEffect(() => {
@@ -55,35 +86,6 @@ function ClInput() {
     if (tempAnswer == null) setAnswer("");
     else setAnswer(coverLetterElements.element[curr].answer);
   }, [coverLetterElements.selectedElement]);
-
-  /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
-  useEffect(async () => {
-    let res = await fetch(`${config.URL}/api/cls`, {
-      method: "GET",
-    });
-    res = await res.json();
-    console.log(res);
-
-    if (res.isNew === 0) {
-      localStorage.setItem("coverletter_id", res.result[0].cl_id);
-      setCoverLetterElements((prev) => ({
-        ...prev,
-        element: [],
-      }));
-
-      res.result.map((e) => {
-        setCoverLetterElements((prev) =>
-          produce(prev, (draft) => {
-            draft.element.push({ problem: e.problem, answer: e.answer });
-            return draft;
-          })
-        );
-      });
-    }
-
-    setProblem(res.result[0].problem);
-    setAnswer(res.result[0].answer);
-  }, []);
 
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
