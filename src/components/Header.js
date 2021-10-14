@@ -1,6 +1,8 @@
 import "./header.scss";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { atomMenu } from "../recoil/userStore";
 
 const menus = [
   {
@@ -21,8 +23,14 @@ const menus = [
 ];
 
 function Header() {
+  const [menu, setMenu] = useRecoilState(atomMenu);
+
   const onUnderConstructingMenuClick = (name) => {
     alert(`${name}는 현재 열심히 준비중! 😃`);
+  };
+
+  const onMenuClick = (idx) => {
+    setMenu(idx);
   };
 
   return (
@@ -33,19 +41,25 @@ function Header() {
         </Link>
 
         <ul id="headerNavigators">
-          {menus.map((e) =>
-            e.underConstruction ? (
-              <li>
-                <Link onClick={() => onUnderConstructingMenuClick(e.name)}>
+          {menus.map((e, idx, arr) => (
+            <li>
+              {e.underConstruction ? (
+                <Link
+                  onClick={() => onUnderConstructingMenuClick(menus[idx].name)}
+                >
                   {e.name}
                 </Link>
-              </li>
-            ) : (
-              <li>
-                <Link to={e.route}>{e.name}</Link>
-              </li>
-            )
-          )}
+              ) : (
+                <Link
+                  to={e.route}
+                  onClick={onMenuClick(idx)}
+                  style={menu == idx ? { color: "#ffbb00" } : { color: "" }}
+                >
+                  {e.name}
+                </Link>
+              )}
+            </li>
+          ))}
 
           <li>
             <Link to="/mypage">
