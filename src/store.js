@@ -63,7 +63,9 @@ export default function reducer(state = initialState, action) {
     case VIEW_KEYWORDS:
       var keywordArr = [];
       fetch(`${config.URL}/api/keywords?user_id=${state.id}`, {
+        // fetch(`/api/keywords?user_id=${state.id}`, {
         method: "GET",
+        credentials: "include",
       })
         .then((res) => {
           return res.json();

@@ -16,6 +16,7 @@ function KeywordGraphView() {
 
   useEffect(async () => {
     let res = await fetch(`${config.URL}/api/keywords`, {
+      // let res = await fetch(`/api/keywords`, {
       method: "GET",
       credentials: "include",
     });
