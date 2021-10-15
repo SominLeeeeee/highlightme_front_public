@@ -23,6 +23,7 @@ function ClInput() {
   );
   const [answer, setAnswer] = useState(coverLetterElements.element[0].answer);
   const [curr, setCurr] = useState(0);
+  const [storeTime, setStoreTime] = useState();
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
   useEffect(async () => {
@@ -55,6 +56,8 @@ function ClInput() {
 
   /* 문항을 쓸 때마다 recoil에 반영 */
   useEffect(() => {
+    memoryTime();
+
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
         draft.element[curr].problem = problem;
@@ -65,6 +68,8 @@ function ClInput() {
 
   /* 답변을 쓸 때마다 recoil에 반영 */
   useEffect(() => {
+    memoryTime();
+
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
         draft.element[curr].answer = answer;
@@ -95,6 +100,16 @@ function ClInput() {
 
   const onInputChangeAnswer = (event) => {
     setAnswer(event.target.value);
+  };
+
+  const memoryTime = () => {
+    var time = new Date();
+    var month = time.getMonth();
+    var date = time.getDate();
+    var hour = time.getHours();
+    var minute = time.getMinutes();
+
+    setStoreTime(`${month + 1}/${date} ${hour}:${minute}`);
   };
 
   const onSaveButtonClicked = async () => {
@@ -244,17 +259,19 @@ function ClInput() {
             삭제
           </p>
         </div>
-        <button
-          className="clInputSaveButton"
-          onClick={onSaveButtonClicked}
-          style={
-            answer !== null && problem !== null
-              ? { backgroundColor: "#febb2d" }
-              : { backgroundColor: "#eaeaea" }
-          }
-        >
-          등록하기
-        </button>
+        <div className="clInputSaveButton">
+          <p>({storeTime}에 임시 저장됨)</p>
+          <button
+            onClick={onSaveButtonClicked}
+            style={
+              answer !== null && problem !== null
+                ? { backgroundColor: "#febb2d" }
+                : { backgroundColor: "#eaeaea" }
+            }
+          >
+            등록하기
+          </button>
+        </div>
       </div>
     </div>
   );

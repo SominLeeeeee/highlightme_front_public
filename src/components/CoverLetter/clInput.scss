@@ -48,13 +48,23 @@
   }
 
   .clInputSaveButton {
-    background-color: #eaeaea;
-    border-radius: 8px;
-    outline: none;
-    padding: 18px 48px;
-    border: none;
-    font-size: 20px;
-    font-family: "AppleSDGothicNeo-SemiBold";
+    display: flex;
+    flex-direction: column;
+
+    p {
+      margin: 5px;
+      color: #818181;
+    }
+
+    button {
+      background-color: #eaeaea;
+      border-radius: 8px;
+      outline: none;
+      padding: 18px 48px;
+      border: none;
+      font-size: 20px;
+      font-family: "AppleSDGothicNeo-SemiBold";
+    }
   }
 }
 
