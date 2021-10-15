@@ -37,7 +37,6 @@ function FindQuestion() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

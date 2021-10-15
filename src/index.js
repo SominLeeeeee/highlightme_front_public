@@ -15,7 +15,10 @@ const store = createStore(rootReducer, devTools);
 ReactDOM.render(
   <Provider store={store}>
     <RecoilRoot>
-      <App />
+      <div className="wrapper">
+        <App />
+        <Footer />
+      </div>
     </RecoilRoot>
   </Provider>,
   document.getElementById("root")

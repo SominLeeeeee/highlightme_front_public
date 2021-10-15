@@ -15,8 +15,6 @@ function Coverletter() {
           <ClInput />
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }
