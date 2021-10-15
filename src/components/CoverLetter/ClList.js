@@ -15,8 +15,8 @@ function ClList() {
     setCoverLetterElements((prev) =>
       produce(prev, (draft) => {
         draft.element.push({
-          problem: null,
-          answer: null,
+          problem: "",
+          answer: "",
         });
         return draft;
       })

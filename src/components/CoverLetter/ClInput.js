@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./clInput.scss";
 import config from "../../configs";
 import ClTip from "../molcule/ClTip";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../../recoil/userStore";
 import InputTitle from "../atom/InputTitle";
 import InputBox from "../atom/InputBox";
@@ -33,12 +33,13 @@ function ClInput() {
       credentials: "include",
     });
     res = await res.json();
+    localStorage.setItem("coverletter_id", res.cl_id);
 
     if (res.isNew === 0 && res.result.length !== 0) {
-      localStorage.setItem("coverletter_id", res.result[0].cl_id);
       setCoverLetterElements((prev) => ({
         ...prev,
         element: [],
+        selectedElement: 0,
       }));
 
       res.result.map((e) => {
@@ -84,17 +85,18 @@ function ClInput() {
     changeProblemAnswer();
   }, [coverLetterElements, coverLetterElements.selectedElement]);
 
-  const changeProblemAnswer = (abc) => {
+  const changeProblemAnswer = () => {
     setCurr(coverLetterElements.selectedElement);
-    const curr = coverLetterElements.selectedElement;
-    const tempProblem = coverLetterElements.element[curr].problem;
-    const tempAnswer = coverLetterElements.element[curr].answer;
+    const idx = coverLetterElements.selectedElement;
 
-    if (tempProblem == null) setProblem("", () => {});
-    else setProblem(coverLetterElements.element[curr].problem, () => {});
+    const tempProblem = coverLetterElements.element[idx].problem;
+    const tempAnswer = coverLetterElements.element[idx].answer;
 
-    if (tempAnswer == null) setAnswer("", () => {});
-    else setAnswer(coverLetterElements.element[curr].answer, () => {});
+    if (tempProblem == null) setProblem("");
+    else setProblem(coverLetterElements.element[idx].problem);
+
+    if (tempAnswer == null) setAnswer("");
+    else setAnswer(coverLetterElements.element[idx].answer);
   };
 
   const onInputChangeProblem = (event) => {
@@ -118,19 +120,20 @@ function ClInput() {
   const onSaveButtonClicked = async () => {
     const abnormal = checkAbnormal();
 
-    if (abnormal) {
+    if (abnormal.res === true) {
+      let idx = abnormal.index;
       /* 비어있는 문항이나 답변이 있는 경우 */
       setCoverLetterElements((prev) => ({
         ...prev,
-        selectedElement: abnormal,
+        selectedElement: idx,
       }));
 
-      if (coverLetterElements.element[abnormal].answer.length < 200) {
+      if (coverLetterElements.element[idx].answer.length < 200) {
         setCountErr(true);
         setTimeout(() => setCountErr(false), 1500);
       }
 
-      if (coverLetterElements.element[abnormal].problem.length === 0) {
+      if (coverLetterElements.element[idx].problem.length === 0) {
         setEmptyErr(true);
         setTimeout(() => setEmptyErr(false), 1500);
       }
@@ -172,11 +175,11 @@ function ClInput() {
           selectedElement: 0,
         });
       } else {
-        setCoverLetterElements({
-          ...coverLetterElements,
+        setCoverLetterElements((prev) => ({
+          ...prev,
           element: temp,
           selectedElement: curr - 1,
-        });
+        }));
       }
     }
   }
@@ -185,7 +188,9 @@ function ClInput() {
     var result = false;
 
     coverLetterElements.element.map((e, idx, arr) => {
-      if (e.problem === "" || e.answer.length < 200) result = idx;
+      if (e.problem === "" || e.answer.length < 200) {
+        result = { res: true, index: idx };
+      }
     });
 
     return result;
