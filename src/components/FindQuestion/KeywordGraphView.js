@@ -16,7 +16,6 @@ function KeywordGraphView() {
 
   useEffect(async () => {
     let res = await fetch(`${config.URL}/api/keywords`, {
-      // let res = await fetch(`/api/keywords`, {
       method: "GET",
       credentials: "include",
     });
@@ -25,12 +24,10 @@ function KeywordGraphView() {
 
     setKeyword((prev) =>
       produce(prev, (draft) => {
-        draft.userKeywords = res;
+        draft.userKeywords = res.result;
         return draft;
       })
     );
-
-    console.log("res", res);
   }, []);
 
   function pickColor(answered) {
@@ -59,7 +56,7 @@ function KeywordGraphView() {
 
         <ShadowBoxMedium>
           <div id="keywordWrapper">
-            {keyword.userKeywords.result.map((e) => (
+            {keyword.userKeywords.map((e) => (
               <Keyword
                 text={e.keyword}
                 color={pickColor(e.answered)}
