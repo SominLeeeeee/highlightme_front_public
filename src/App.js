@@ -3,6 +3,7 @@ import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const Home = lazy(() => import("./routes/Home"));
+const Test = lazy(() => import("./routes/Test"));
 const SignOut = lazy(() => import("./routes/SignOut"));
 const SignIn = lazy(() => import("./components/SignUp/GoogleLoginButton"));
 const SignUp = lazy(() => import("./routes/SignUp"));
@@ -23,6 +24,7 @@ function App() {
       <Suspense fallback={<div></div>}>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/test" component={Test} />
 
           <Route path="/signout" component={SignOut} />
           <Route path="/signin" component={SignIn} />

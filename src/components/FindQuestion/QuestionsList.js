@@ -14,8 +14,8 @@ function QuestionsList(props) {
 
   /* 선택한 키워드가 변경되면 해당 키워드의 질문을 가져와서 questions에 저장 */
   useEffect(async () => {
-    // await fetch(`${config.URL}/api/questions`, {
-    await fetch(`/api/questions`, {
+    await fetch(`${config.URL}/api/questions`, {
+      // await fetch(`/api/questions`, {
       method: "POST",
       credentials: "include",
       body: new URLSearchParams({

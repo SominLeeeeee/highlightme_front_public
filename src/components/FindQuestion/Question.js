@@ -30,8 +30,8 @@ function Question(props) {
   function editOnClick() {
     /* 수정완료 버튼을 눌렀다면 서버에 전송 */
     console.log(question[questionId].answer);
-    // let res = fetch(`${config.URL}/api/questions/answer`, {
-    let res = fetch(`/api/questions/answer`, {
+    let res = fetch(`${config.URL}/api/questions/answer`, {
+      // let res = fetch(`/api/questions/answer`, {
       method: "POST",
       credentials: "include",
       body: new URLSearchParams({

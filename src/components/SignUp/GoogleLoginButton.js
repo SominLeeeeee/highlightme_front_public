@@ -15,8 +15,8 @@ function GoogleLoginButton(props) {
 
   const googleBtnOnClick = async (response) => {
     console.log(response);
-    // const res = await fetch(`${config.URL}/api/users/oauth/google`, {
-    const res = await fetch(`/api/users/oauth/google`, {
+    const res = await fetch(`${config.URL}/api/users/oauth/google`, {
+      // const res = await fetch(`/api/users/oauth/google`, {
       method: "POST",
       credentials: "include",
       body: new URLSearchParams({
