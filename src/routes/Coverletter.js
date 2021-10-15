@@ -3,6 +3,7 @@ import "./coverletter.scss";
 import ClInput from "../components/CoverLetter/ClInput";
 import ClList from "../components/CoverLetter/ClList";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Coverletter() {
   return (
@@ -14,6 +15,8 @@ function Coverletter() {
           <ClInput />
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
