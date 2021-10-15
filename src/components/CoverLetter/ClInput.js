@@ -26,8 +26,10 @@ function ClInput() {
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
   useEffect(async () => {
-    let res = await fetch(`${config.URL}/api/cls`, {
+    // let res = await fetch(`${config.URL}/api/cls`, {
+    let res = await fetch(`/api/cls`, {
       method: "GET",
+      credentials: "include",
     });
     res = await res.json();
     console.log(res);
@@ -127,7 +129,8 @@ function ClInput() {
   };
 
   function deleteButtonOnClick() {
-    fetch(`${config.URL}/api/cls`, {
+    // fetch(`${config.URL}/api/cls`, {
+    fetch(`/api/cls`, {
       method: "DELETE",
       credentials: "include",
       body: new URLSearchParams({
@@ -181,8 +184,10 @@ function ClInput() {
     const data = new URLSearchParams(request);
     data.set("CLES", JSON.stringify(request.CLES));
 
-    const result = await fetch(`${config.URL}/api/cls`, {
+    // const result = await fetch(`${config.URL}/api/cls`, {
+    const result = await fetch(`/api/cls`, {
       method: "POST",
+      credentials: "include",
       body: data,
     });
 

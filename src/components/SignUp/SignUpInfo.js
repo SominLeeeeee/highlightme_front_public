@@ -30,7 +30,8 @@ function SignUpInfo() {
 
   /* 서버로부터 직무 정보 불러오고 파싱 */
   useEffect(() => {
-    fetch(`${config.URL}/api/fields`, {
+    // fetch(`${config.URL}/api/fields`, {
+    fetch(`/api/fields`, {
       method: "GET",
       credentials: "include",
     })
@@ -99,8 +100,10 @@ function SignUpInfo() {
       fieldJobArr.push(index);
     });
 
-    const postFieldJobResult = fetch(`${config.URL}/api/fields`, {
+    // const postFieldJobResult = fetch(`${config.URL}/api/fields`, {
+    const postFieldJobResult = fetch(`/api/fields`, {
       method: "POST",
+      credentials: "include",
       body: new URLSearchParams({
         user_id: userInfo.id,
         field_ids: JSON.stringify(userJob),
