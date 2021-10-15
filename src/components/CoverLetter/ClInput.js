@@ -31,7 +31,6 @@ function ClInput() {
       method: "GET",
     });
     res = await res.json();
-    console.log(res);
 
     if (res.isNew === 0 && res.result.length !== 0) {
       localStorage.setItem("coverletter_id", res.result[0].cl_id);
@@ -80,19 +79,21 @@ function ClInput() {
 
   /* 다른 문항을 선택 시 problem과 answer 수정 */
   useEffect(() => {
-    console.log(Date().toLocaleString());
-    console.log("coverLetterElements", coverLetterElements);
+    changeProblemAnswer();
+  }, [coverLetterElements, coverLetterElements.selectedElement]);
+
+  const changeProblemAnswer = (abc) => {
     setCurr(coverLetterElements.selectedElement);
     const curr = coverLetterElements.selectedElement;
     const tempProblem = coverLetterElements.element[curr].problem;
     const tempAnswer = coverLetterElements.element[curr].answer;
 
-    if (tempProblem == null) setProblem("");
-    else setProblem(coverLetterElements.element[curr].problem);
+    if (tempProblem == null) setProblem("", () => {});
+    else setProblem(coverLetterElements.element[curr].problem, () => {});
 
-    if (tempAnswer == null) setAnswer("");
-    else setAnswer(coverLetterElements.element[curr].answer);
-  }, [coverLetterElements.selectedElement]);
+    if (tempAnswer == null) setAnswer("", () => {});
+    else setAnswer(coverLetterElements.element[curr].answer, () => {});
+  };
 
   const onInputChangeProblem = (event) => {
     setProblem(event.target.value);
@@ -142,26 +143,40 @@ function ClInput() {
   };
 
   function deleteButtonOnClick() {
-    fetch(`${config.URL}/api/cls`, {
-      method: "DELETE",
-      credentials: "include",
-      body: new URLSearchParams({
-        cl_element_id: coverLetterElements.selectedElement + 1,
-      }),
-    });
+    if (coverLetterElements.element.length === 1)
+      alert("자기소개서 문항, 답변은 1개 이상이어야 합니다!");
+    else {
+      fetch(`${config.URL}/api/cls`, {
+        method: "DELETE",
+        credentials: "include",
+        body: new URLSearchParams({
+          cl_element_id: coverLetterElements.selectedElement + 1,
+        }),
+      });
 
-    const temp = coverLetterElements.element.filter(
-      (e, index, array) => index != coverLetterElements.selectedElement
-    );
+      const temp = coverLetterElements.element.filter(
+        (e, index, array) => index != coverLetterElements.selectedElement
+      );
 
-    setCoverLetterElements((prev) => ({
-      ...prev,
-      element: temp,
-      selectedElement:
-        coverLetterElements.selectedElement === 0
-          ? 0
-          : coverLetterElements.selectedElement - 1,
-    }));
+      if (!coverLetterElements.selectedElement) {
+        setCoverLetterElements({
+          ...coverLetterElements,
+          element: temp,
+          selectedElement: 1,
+        });
+        setCoverLetterElements({
+          ...coverLetterElements,
+          element: temp,
+          selectedElement: 0,
+        });
+      } else {
+        setCoverLetterElements({
+          ...coverLetterElements,
+          element: temp,
+          selectedElement: curr - 1,
+        });
+      }
+    }
   }
 
   const checkAbnormal = () => {
@@ -200,8 +215,6 @@ function ClInput() {
       method: "POST",
       body: data,
     });
-
-    console.log(result);
   };
 
   return (
