@@ -9,7 +9,7 @@ function Test() {
     });
   }, []);
 
-  return <div>wtf</div>;
+  return <div>wtf2</div>;
 }
 
 export default Test;
