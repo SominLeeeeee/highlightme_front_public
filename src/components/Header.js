@@ -29,8 +29,8 @@ function Header() {
     alert(`${name}는 현재 열심히 준비중! 😃`);
   };
 
-  const onMenuClick = (idx) => {
-    setMenu(idx);
+  const onMenuClick = (name) => {
+    setMenu(name);
   };
 
   return (
@@ -41,19 +41,17 @@ function Header() {
         </Link>
 
         <ul id="headerNavigators">
-          {menus.map((e, idx, arr) => (
+          {menus.map((e) => (
             <li>
               {e.underConstruction ? (
-                <Link
-                  onClick={() => onUnderConstructingMenuClick(menus[idx].name)}
-                >
+                <Link onClick={() => onUnderConstructingMenuClick(e.name)}>
                   {e.name}
                 </Link>
               ) : (
                 <Link
                   to={e.route}
-                  onClick={onMenuClick(idx)}
-                  style={menu == idx ? { color: "#ffbb00" } : { color: "" }}
+                  onClick={() => onMenuClick(e.name)}
+                  style={menu == e.name ? { color: "#ffbb00" } : { color: "" }}
                 >
                   {e.name}
                 </Link>

@@ -4,19 +4,22 @@ import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
 import Header from "../components/Header";
 import "./findQuestion.scss";
-import { useRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo } from "../recoil/userStore";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { atomSignUp, atomUserInfo, atomMenu } from "../recoil/userStore";
 import { isUserValid } from "../utils";
 import Footer from "../components/Footer";
 
 function FindQuestion() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+  const [menu, setMenu] = useRecoilState(atomMenu);
 
   useEffect(() => {
     if (!isUserValid(userInfo)) {
       history.push("/signup");
     }
+
+    setMenu("질문찾기");
   }, []);
 
   return (
