@@ -5,7 +5,7 @@ import rootReducer from "./store";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { RecoilRoot } from "recoil";
-import Footer from "./components/Footer";
+import Footer from "./common/Footer";
 import "./index.css";
 
 const devTools =

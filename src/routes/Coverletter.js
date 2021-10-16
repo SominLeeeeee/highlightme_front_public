@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./coverletter.scss";
 import ClInput from "../components/CoverLetter/ClInput";
 import ClList from "../components/CoverLetter/ClList";
-import Header from "../components/Header";
+import Header from "../common/Header";
 import { useRecoilState } from "recoil";
 import { atomMenu } from "../recoil/userStore";
 

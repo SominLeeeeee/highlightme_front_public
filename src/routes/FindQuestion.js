@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
-import Header from "../components/Header";
+import Header from "../common/Header";
 import "./findQuestion.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo, atomMenu } from "../recoil/userStore";

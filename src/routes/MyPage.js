@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
-import Header from "../components/Header";
+import Header from "../common/Header";
 import "./myPage.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
