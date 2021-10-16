@@ -1,0 +1,20 @@
+@import "../style/colors.scss";
+
+.modalWrapper {
+  border-radius: 1.6rem;
+  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  width: fit-content;
+  // text-align: center;
+
+  .modalContent {
+    margin: 0;
+    padding: 1rem;
+    border-bottom: 1px $darkgray solid;
+  }
+
+  .modalContentLast {
+    margin: 0;
+    padding: 1rem;
+  }
+}

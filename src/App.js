@@ -17,6 +17,7 @@ const KeywordGraphView = lazy(() =>
 const Coverletter = lazy(() => import("./routes/Coverletter"));
 const FindQuestion = lazy(() => import("./routes/FindQuestion"));
 const MyPage = lazy(() => import("./routes/MyPage"));
+const Modal = lazy(() => import("./common/Modal"));
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
       <Suspense fallback={<div></div>}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/test" component={Test} />
+          <Route exact path="/test" component={Modal} />
 
           <Route path="/signout" component={SignOut} />
           <Route path="/signin" component={SignIn} />

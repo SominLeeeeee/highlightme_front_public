@@ -7,7 +7,6 @@ import "./findQuestion.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo, atomMenu } from "../recoil/userStore";
 import { isUserValid } from "../utils";
-import Footer from "../components/Footer";
 
 function FindQuestion() {
   const history = useHistory();
