@@ -18,7 +18,7 @@ const Modal = () => {
       <p className="modalContent" onClick={cleOnClick}>
         자기소개서 수정
       </p>
-      <p className="modalContentLast" onClick={logoutOnClick}>
+      <p className="modalContent" onClick={logoutOnClick}>
         로그아웃
       </p>
     </div>
