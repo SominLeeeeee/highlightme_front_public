@@ -29,7 +29,6 @@ export const atomKeyword = atom({
     selectedKeyword: "",
     selectedKeywordId: "",
   },
-  effects_UNSTABLE: [persistAtom],
 });
 
 export const atomQuestion = atom({
