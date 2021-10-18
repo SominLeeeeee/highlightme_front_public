@@ -69,7 +69,7 @@ function KeywordGraphView() {
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
 
-        <ShadowBoxMedium paddingBottom="1.2rem">
+        <ShadowBoxMedium paddingTop="4.8rem" paddingBottom="1.2rem">
           {userKeywordExist() ? (
             <div id="keywordWrapper">
               {keyword.userKeywords.map((e) => (
