@@ -1,8 +1,9 @@
 import "./header.scss";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { atomMenu } from "../recoil/userStore";
+import Modal from "./Modal";
 
 const menus = [
   {
@@ -24,13 +25,18 @@ const menus = [
 
 function Header() {
   const [menu, setMenu] = useRecoilState(atomMenu);
+  const [displayModal, setDisplayModal] = useState(false);
+
+  const onProfileClick = () => {
+    setDisplayModal(!displayModal);
+  };
 
   const onUnderConstructingMenuClick = (name) => {
     alert(`${name}는 현재 열심히 준비중! 😃`);
   };
 
-  const onMenuClick = (idx) => {
-    setMenu(idx);
+  const onMenuClick = (name) => {
+    setMenu(name);
   };
 
   return (
@@ -41,19 +47,17 @@ function Header() {
         </Link>
 
         <ul id="headerNavigators">
-          {menus.map((e, idx, arr) => (
+          {menus.map((e) => (
             <li>
               {e.underConstruction ? (
-                <Link
-                  onClick={() => onUnderConstructingMenuClick(menus[idx].name)}
-                >
+                <Link onClick={() => onUnderConstructingMenuClick(e.name)}>
                   {e.name}
                 </Link>
               ) : (
                 <Link
                   to={e.route}
-                  onClick={onMenuClick(idx)}
-                  style={menu == idx ? { color: "#ffbb00" } : { color: "" }}
+                  onClick={() => onMenuClick(e.name)}
+                  style={menu == e.name ? { color: "#ffbb00" } : { color: "" }}
                 >
                   {e.name}
                 </Link>
@@ -62,9 +66,14 @@ function Header() {
           ))}
 
           <li>
-            <Link to="/mypage">
-              <img id="myProfile" src="/images/ic-profile.svg" />
-            </Link>
+            {/* <Link to="/mypage"> */}
+            <img
+              id="myProfile"
+              src="/images/ic-profile.svg"
+              onClick={onProfileClick}
+            />
+            {displayModal ? <Modal /> : <div />}
+            {/* </Link> */}
           </li>
         </ul>
       </div>

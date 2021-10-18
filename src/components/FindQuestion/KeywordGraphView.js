@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./keywordGraphView.scss";
+import "./questionsList.scss";
 import colors from "../../style/colors.js";
 import HighlightText from "../atom/HighlightText";
 import ItemCircle from "../atom/ItemCircle";
@@ -15,21 +16,27 @@ function KeywordGraphView() {
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
 
   useEffect(async () => {
-    let res = await fetch(`${config.URL}/api/keywords`, {
-      method: "GET",
-      credentials: "include",
-    });
+    let res;
 
-    res = await res.json();
+    try {
+      res = await fetch(`${config.URL}/api/keyword`, {
+        method: "GET",
+        credentials: "include",
+      });
 
-    setKeyword((prev) =>
-      produce(prev, (draft) => {
-        draft.userKeywords = res;
-        return draft;
-      })
-    );
+      res = await res.json();
 
-    console.log("res", res);
+      setKeyword((prev) =>
+        produce(prev, (draft) => {
+          draft.userKeywords = res.result;
+          return draft;
+        })
+      );
+    } catch (e) {
+      console.log("could not fetch😭");
+    }
+
+    console.log(keyword.userKeywords);
   }, []);
 
   function pickColor(answered) {
@@ -46,6 +53,12 @@ function KeywordGraphView() {
     }));
   };
 
+  const userKeywordExist = () => {
+    if (Array.isArray(keyword.userKeywords) && keyword.userKeywords.length == 0)
+      return true;
+    return false;
+  };
+
   return (
     <div className="parentForCenter">
       <div className="parent">
@@ -56,16 +69,22 @@ function KeywordGraphView() {
           <ItemCircle text="읽지 않은 키워드" color={colors.gray} />
         </span>
 
-        <ShadowBoxMedium>
-          <div id="keywordWrapper">
-            {keyword.userKeywords.result.map((e) => (
-              <Keyword
-                text={e.keyword}
-                color={pickColor(e.answered)}
-                onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
-              />
-            ))}
-          </div>
+        <ShadowBoxMedium paddingTop="4.8rem" paddingBottom="1.2rem">
+          {userKeywordExist() ? (
+            <div id="keywordWrapper">
+              {keyword.userKeywords.map((e) => (
+                <Keyword
+                  text={e.keyword}
+                  color={pickColor(e.answered)}
+                  onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="keywordNull">
+              <p className="keywordClick">키워드가 없네요 🥲</p>
+            </div>
+          )}
         </ShadowBoxMedium>
       </div>
     </div>

@@ -1,0 +1,18 @@
+@import "../style/colors.scss";
+
+.modalWrapper {
+  border-radius: 1.6rem;
+  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.05);
+  padding: 1.2rem 1.5rem;
+  width: fit-content;
+  position: absolute;
+  left: 72%;
+  z-index: 1;
+  background-color: white;
+  margin-top: 1.7rem;
+
+  .modalContent {
+    margin: 0;
+    padding: 1rem;
+  }
+}
