@@ -44,7 +44,7 @@ function QuestionsList(props) {
   return (
     <div className="questionsListParent">
       <HighlightText text="예상질문 리스트" marginBottom="3.6rem" />
-      <ShadowBoxMedium paddingTop="4.8rem" paddingBottom="1.2rem">
+      <ShadowBoxMedium>
         {keyword.selectedKeywordId ? (
           <p id="keywordName">{keyword.selectedKeyword}</p>
         ) : (
