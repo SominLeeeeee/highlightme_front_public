@@ -1,15 +1,25 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import "./coverletter.scss";
 import ClInput from "../components/CoverLetter/ClInput";
 import ClList from "../components/CoverLetter/ClList";
 import Header from "../common/Header";
 import { useRecoilState } from "recoil";
-import { atomMenu } from "../recoil/userStore";
+import { atomMenu, atomUserInfo } from "../recoil/userStore";
+import { isUserValid } from "../utils";
 
 function Coverletter() {
   const [menu, setMenu] = useRecoilState(atomMenu);
 
+  const history = useHistory();
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
   useEffect(() => {
+    if (!isUserValid(userInfo)) {
+      history.push("/signup");
+    }
+
     setMenu("자기소개서");
   }, []);
 
