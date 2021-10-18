@@ -1,7 +1,8 @@
 .coverletterWrapper {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
+  min-height: calc(100vh - 7.8rem);
 
   .coverletter {
     display: grid;
