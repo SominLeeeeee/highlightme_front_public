@@ -30,32 +30,38 @@ function ClInput() {
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
   useEffect(async () => {
-    let res = await fetch(`${config.URL}/api/cls`, {
-      // let res = await fetch(`/api/cls`, {
-      method: "GET",
-      credentials: "include",
-    });
-    res = await res.json();
-    localStorage.setItem("coverletter_id", res.cl_id);
-
-    if (res.isNew === 0 && res.result.length !== 0) {
-      setCoverLetterElements((prev) => ({
-        ...prev,
-        element: [],
-        selectedElement: 0,
-      }));
-
-      res.result.map((e) => {
-        setCoverLetterElements((prev) =>
-          produce(prev, (draft) => {
-            draft.element.push({ problem: e.problem, answer: e.answer });
-            return draft;
-          })
-        );
+    try {
+      let res = await fetch(`${config.URL}/api/cls`, {
+        // let res = await fetch(`/api/cls`, {
+        method: "GET",
+        credentials: "include",
       });
+      res = await res.json();
+      localStorage.setItem("coverletter_id", res.cl_id);
 
-      setProblem(res.result[0].problem);
-      setAnswer(res.result[0].answer);
+      if (res.isNew === 0 && res.result.length !== 0) {
+        setCoverLetterElements((prev) => ({
+          ...prev,
+          element: [],
+          selectedElement: 0,
+        }));
+
+        res.result.map((e) => {
+          setCoverLetterElements((prev) =>
+            produce(prev, (draft) => {
+              draft.element.push({ problem: e.problem, answer: e.answer });
+              return draft;
+            })
+          );
+        });
+
+        setProblem(res.result[0].problem);
+        setAnswer(res.result[0].answer);
+      }
+    } catch (e) {
+      console.log("can't load coverletter 🥲");
+      setProblem("");
+      setAnswer("");
     }
   }, []);
 
