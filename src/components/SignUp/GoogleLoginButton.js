@@ -37,10 +37,7 @@ function GoogleLoginButton(props) {
     if (data.isNew) {
       setSignUp({ signUpLevel: 0 });
       history.push("/signup_info");
-    } else {
-      setMenu(0);
-      history.push("/find");
-    }
+    } else history.push("/find");
   };
 
   const googleLoginButtonStyle = {
