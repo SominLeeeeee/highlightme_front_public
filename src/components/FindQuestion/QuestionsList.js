@@ -48,8 +48,8 @@ function QuestionsList(props) {
         {keyword.selectedKeywordId ? (
           <p id="keywordName">{keyword.selectedKeyword}</p>
         ) : (
-          <div id="keywordNull">
-            <p id="keywordClick"> 키워드를 클릭해보세요!</p>
+          <div className="keywordNull">
+            <p className="keywordClick"> 키워드를 클릭해보세요!</p>
           </div>
         )}
         {keyword.selectedKeywordId ? (
