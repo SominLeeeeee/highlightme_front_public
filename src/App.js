@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const Home = lazy(() => import("./routes/Home"));
 const Test = lazy(() => import("./routes/Test"));
-const SignOut = lazy(() => import("./routes/SignOut"));
+const SignOutPage = lazy(() => import("./routes/SignOutPage"));
 const SignIn = lazy(() => import("./components/SignUp/GoogleLoginButton"));
-const SignUp = lazy(() => import("./routes/SignUp"));
+const SignUpPage = lazy(() => import("./routes/SignUpPage"));
 const GotoSignUp = lazy(() => import("./routes/GotoSignUp"));
 const QuestionsList = lazy(() =>
   import("./components/FindQuestion/QuestionsList")
@@ -27,9 +27,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/test" component={Modal} />
 
-          <Route path="/signout" component={SignOut} />
+          <Route path="/signout" component={SignOutPage} />
           <Route path="/signin" component={SignIn} />
-          <Route path="/signup_info" component={SignUp} />
+          <Route path="/signup_info" component={SignUpPage} />
           <Route path="/signup" component={GotoSignUp} />
 
           <Route path="/mypage" component={MyPage} />
