@@ -19,7 +19,7 @@ function KeywordGraphView() {
     let res;
 
     try {
-      res = await fetch(`${config.URL}/api/keyword`, {
+      res = await fetch(`${config.URL}/api/keywords`, {
         method: "GET",
         credentials: "include",
       });
@@ -35,8 +35,6 @@ function KeywordGraphView() {
     } catch (e) {
       console.log("could not fetch😭");
     }
-
-    console.log(keyword.userKeywords);
   }, []);
 
   function pickColor(answered) {
@@ -54,9 +52,7 @@ function KeywordGraphView() {
   };
 
   const userKeywordExist = () => {
-    if (Array.isArray(keyword.userKeywords) && keyword.userKeywords.length == 0)
-      return true;
-    return false;
+    return keyword && keyword.userKeywords && keyword.userKeywords.length > 0;
   };
 
   return (
