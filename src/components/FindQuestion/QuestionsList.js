@@ -49,7 +49,7 @@ function QuestionsList(props) {
           <p id="keywordName">{keyword.selectedKeyword}</p>
         ) : (
           <div className="keywordNull">
-            <p className="keywordClick"> 키워드를 클릭해보세요!</p>
+            <p className="keywordClick"> 키워드를 클릭해보세요! 🙂</p>
           </div>
         )}
         {keyword.selectedKeywordId ? (
