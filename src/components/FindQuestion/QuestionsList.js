@@ -34,6 +34,8 @@ function QuestionsList(props) {
                 answer: e.answer,
                 user_question_id: e.user_question_id,
                 user_keyword_id: keyword.selectedKeywordId,
+                likes: e.likes,
+                dislikes: e.dislikes,
               })
             );
           });

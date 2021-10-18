@@ -17,14 +17,39 @@ function Question(props) {
   const [isThumbHovered, setIsThumbHovered] = useState("x");
   const [isEditClicked, setIsEditClicked] = useState(false);
 
+  const [likes, setLikes] = useState(props.likes);
+  const [dislikes, setDislikes] = useState(props.dislikes);
+
   function goodOnClick() {
+    if (likes === "1") setLikes("0");
+    else setLikes("1");
+
     if (isThumbClicked == "g") setIsThumbClicked("x");
     else setIsThumbClicked("g");
+
+    fetch(`${config.URL}/api/questions/like`, {
+      method: "POST",
+      credentials: "include",
+      body: new URLSearchParams({
+        question_id: question[questionId].question_id,
+      }),
+    });
   }
 
   function badOnClick() {
+    if (dislikes === "1") setDislikes("0");
+    else setDislikes("1");
+
     if (isThumbClicked == "b") setIsThumbClicked("x");
     else setIsThumbClicked("b");
+
+    fetch(`${config.URL}/api/questions/dislike`, {
+      method: "POST",
+      credentials: "include",
+      body: new URLSearchParams({
+        question_id: question[questionId].question_id,
+      }),
+    });
   }
 
   function editOnClick() {
