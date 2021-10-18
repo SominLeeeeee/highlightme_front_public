@@ -1,16 +1,18 @@
 import "./modal.scss";
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import SignOut from "../components/atom/SignOut";
 
 const Modal = () => {
   const history = useHistory();
+  const [logout, setLogOut] = useState(false);
 
   const cleOnClick = () => {
     history.push("/coverletter");
   };
 
   const logoutOnClick = () => {
-    history.push("/signout");
+    setLogOut(!logout);
   };
 
   return (
@@ -21,6 +23,7 @@ const Modal = () => {
       <p className="modalContent" onClick={logoutOnClick}>
         로그아웃
       </p>
+      {logout ? <SignOut /> : <></>}
     </div>
   );
 };
