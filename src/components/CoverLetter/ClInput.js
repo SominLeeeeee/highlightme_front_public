@@ -8,6 +8,7 @@ import InputTitle from "../atom/InputTitle";
 import InputBox from "../atom/InputBox";
 import ErrNotice from "../atom/ErrNotice";
 import produce from "immer";
+import { useHistory } from "react-router";
 
 function ClInput() {
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
@@ -24,6 +25,8 @@ function ClInput() {
   const [answer, setAnswer] = useState(coverLetterElements.element[0].answer);
   const [curr, setCurr] = useState(0);
   const [storeTime, setStoreTime] = useState();
+
+  const history = useHistory();
 
   /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
   useEffect(async () => {
@@ -135,6 +138,7 @@ function ClInput() {
     } else {
       /* 모든 element 값이 온전한 경우 */
       uploadCoverLetter();
+      history.push("/find");
     }
   };
 
