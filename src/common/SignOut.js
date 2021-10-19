@@ -14,7 +14,9 @@ function SignOut() {
       credentials: "include",
     });
 
-    if (result.status === 200) {
+    // 원래는 401도 실패이지만, 백엔드에서 세션을 디스크에 저장하기 전까지는 예외로 유지함
+    // 서버가 재시작 되는 경우 사용자가 로그아웃할 수 없기 때문임
+    if (result.status === 200 || result.status === 401) {
       setUserInfo({
         id: undefined,
         email: undefined,
