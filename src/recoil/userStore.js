@@ -26,8 +26,7 @@ export const atomKeyword = atom({
   key: "atomKeyword",
   default: {
     userKeywords: [],
-    selectedKeyword: "",
-    selectedKeywordId: "",
+    selected: "",
   },
 });
 

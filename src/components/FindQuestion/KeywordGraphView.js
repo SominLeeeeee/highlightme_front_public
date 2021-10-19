@@ -43,11 +43,10 @@ function KeywordGraphView() {
     else return `${colors.gray}`;
   }
 
-  const keywordOnClick = (keyword, keywordId, index) => {
+  const keywordOnClick = (index) => {
     setKeyword((prev) =>
       produce(prev, (draft) => {
-        draft.selectedKeyword = keyword;
-        draft.selectedKeywordId = keywordId;
+        draft.selected = index;
         draft.userKeywords[index].answered = 1;
 
         return draft;
@@ -76,9 +75,7 @@ function KeywordGraphView() {
                 <Keyword
                   text={e.keyword}
                   color={pickColor(e.answered)}
-                  onClick={() =>
-                    keywordOnClick(e.keyword, e.user_keyword_id, idx)
-                  }
+                  onClick={() => keywordOnClick(idx)}
                 />
               ))}
             </div>
