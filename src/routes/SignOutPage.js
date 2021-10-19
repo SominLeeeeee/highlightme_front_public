@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import SignOut from "../components/atom/SignOut";
+import React from "react";
+import SignOut from "../common/SignOut";
 
 function SignOutPage() {
   return <SignOut />;

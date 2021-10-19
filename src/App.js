@@ -1,57 +1,55 @@
 import React, { Suspense, lazy } from "react";
 import "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PublicRouter from "./common/PublicRouter";
+import PrivateRouter from "./common/PrivateRouter";
 
-const Home = lazy(() => import("./routes/Home"));
-const Test = lazy(() => import("./routes/Test"));
-const SignOutPage = lazy(() => import("./routes/SignOutPage"));
-const SignIn = lazy(() => import("./components/SignUp/GoogleLoginButton"));
+const LandingPage = lazy(() => import("./routes/LandingPage"));
 const SignUpPage = lazy(() => import("./routes/SignUpPage"));
-const GotoSignUp = lazy(() => import("./routes/GotoSignUp"));
-const QuestionsList = lazy(() =>
-  import("./components/FindQuestion/QuestionsList")
-);
-const KeywordGraphView = lazy(() =>
-  import("./components/FindQuestion/KeywordGraphView")
-);
-const Coverletter = lazy(() => import("./routes/Coverletter"));
-const FindQuestion = lazy(() => import("./routes/FindQuestion"));
+const SignOutPage = lazy(() => import("./routes/SignOutPage"));
+const FindQuestionPage = lazy(() => import("./routes/FindQuestionPage"));
 const MyPage = lazy(() => import("./routes/MyPage"));
-const Modal = lazy(() => import("./common/Modal"));
+const CoverLetterPage = lazy(() => import("./routes/CoverletterPage"));
+const NotFoundPage = lazy(() => import("./routes/NotFoundPage"));
+const TestPage = lazy(() => import("./routes/TestPage"));
 
 function App() {
   return (
     <Router>
       <Suspense fallback={<div></div>}>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/test" component={Modal} />
-
-          <Route path="/signout" component={SignOutPage} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/signup_info" component={SignUpPage} />
-          <Route path="/signup" component={GotoSignUp} />
-
-          <Route path="/mypage" component={MyPage} />
-
-          <Route path="/questions/:keyword" component={QuestionsList} />
-          <Route path="/find" component={FindQuestion} />
-          {/* <Route path="/keywordview/graph" component={KeywordGraphView} /> */}
-
-          <Route path="/coverletter" component={Coverletter} />
-
-          {/* <Route path="/signin/logout" component={Logout} />
-          <Route path="/field" component={Field} />
-
-
-          <Route
-            path="/questions/keywordmap?view=graph"
-            component={GraphKeyword}
+          {/* Public Routers */}
+          <PublicRouter
+            path="/"
+            exact
+            restricted={true}
+            component={LandingPage}
+          />
+          <PublicRouter
+            path="/signout"
+            exact
+            restricted={false}
+            component={SignOutPage}
+          />
+          <PublicRouter
+            path="/signup"
+            exact
+            restricted={false}
+            component={SignUpPage}
           />
 
-          <Route path="/questions/:keyword" component={Questions} />
-          <Route path="/questions/keywordmap?view=cl" component={ClKeyword} />
-          <Route path="/questions/search/:query" component={Search} /> */}
+          {/* Private Routers */}
+          <PrivateRouter path="/find" exact component={FindQuestionPage} />
+          <PrivateRouter path="/mypage" exact component={MyPage} />
+          <PrivateRouter
+            path="/coverletter"
+            exact
+            component={CoverLetterPage}
+          />
+
+          {/* ETC Routers */}
+          <Route component={NotFoundPage} />
+          {/* <Route exact path="/test" component={TestPage} /> */}
         </Switch>
       </Suspense>
     </Router>

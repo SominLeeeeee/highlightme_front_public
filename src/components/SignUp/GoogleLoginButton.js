@@ -4,6 +4,7 @@ import config from "../../configs";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo, atomMenu } from "../../recoil/userStore";
+import { isUserValid } from "../../utils";
 
 function GoogleLoginButton(props) {
   const { usage } = { ...props };
@@ -27,6 +28,7 @@ function GoogleLoginButton(props) {
     });
 
     const data = await res.json();
+    console.log(data);
 
     setUserInfo({
       id: data.user_id,
@@ -34,9 +36,11 @@ function GoogleLoginButton(props) {
       accessToken: response.accessToken,
     });
 
+    console.log(isUserValid());
+
     if (data.isNew) {
       setSignUp({ signUpLevel: 0 });
-      history.push("/signup_info");
+      history.push("/signup");
     } else history.push("/find");
   };
 

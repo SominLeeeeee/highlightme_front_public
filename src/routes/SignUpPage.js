@@ -7,7 +7,7 @@ import SignUpComplete from "../components/SignUp/SignUpComplete";
 import { useRecoilState } from "recoil";
 import { atomUserInfo, atomSignUp } from "../recoil/userStore";
 
-function SignUp() {
+function SignUpPage() {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
 
@@ -25,4 +25,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

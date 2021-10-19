@@ -4,17 +4,9 @@ import Header from "../common/Header";
 import "./myPage.scss";
 import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
-import { isUserValid } from "../utils";
 
 function MyPage() {
   const history = useHistory();
-  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
-
-  useEffect(() => {
-    if (!isUserValid(userInfo)) {
-      history.push("/signup");
-    }
-  }, []);
 
   const onSignOutClick = () => {
     history.push("/signout");
