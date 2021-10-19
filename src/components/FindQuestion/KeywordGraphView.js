@@ -43,12 +43,15 @@ function KeywordGraphView() {
     else return `${colors.gray}`;
   }
 
-  const keywordOnClick = (keyword, keywordId) => {
-    setKeyword((prev) => ({
-      ...prev,
-      selectedKeyword: keyword,
-      selectedKeywordId: keywordId,
-    }));
+  const keywordOnClick = (index) => {
+    setKeyword((prev) =>
+      produce(prev, (draft) => {
+        draft.selected = index;
+        draft.userKeywords[index].answered = 1;
+
+        return draft;
+      })
+    );
   };
 
   const userKeywordExist = () => {
@@ -68,11 +71,11 @@ function KeywordGraphView() {
         <ShadowBoxMedium>
           {userKeywordExist() ? (
             <div id="keywordWrapper">
-              {keyword.userKeywords.map((e) => (
+              {keyword.userKeywords.map((e, idx, arr) => (
                 <Keyword
                   text={e.keyword}
                   color={pickColor(e.answered)}
-                  onClick={() => keywordOnClick(e.keyword, e.user_keyword_id)}
+                  onClick={() => keywordOnClick(idx)}
                 />
               ))}
             </div>
