@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo } from "../recoil/userStore";
 import { isUserValid } from "../utils";
 
-function Home() {
+function HomePage() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
@@ -21,4 +21,4 @@ function Home() {
   return <div></div>;
 }
 
-export default Home;
+export default HomePage;
