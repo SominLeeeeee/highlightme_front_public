@@ -3,12 +3,12 @@ import { useHistory } from "react-router-dom";
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
 import Header from "../common/Header";
-import "./findQuestion.scss";
+import "./findQuestionPage.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { atomSignUp, atomUserInfo, atomMenu } from "../recoil/userStore";
 import { isUserValid } from "../utils";
 
-function FindQuestion() {
+function FindQuestionPage() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [menu, setMenu] = useRecoilState(atomMenu);
@@ -43,4 +43,4 @@ function FindQuestion() {
   );
 }
 
-export default FindQuestion;
+export default FindQuestionPage;
