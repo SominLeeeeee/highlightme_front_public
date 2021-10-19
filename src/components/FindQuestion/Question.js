@@ -5,13 +5,14 @@ import "../../index.css";
 import InputBox from "../atom/InputBox";
 import InputBoxDisable from "../atom/InputBoxDisable";
 import { useRecoilState } from "recoil";
-import { atomQuestion } from "../../recoil/userStore";
+import { atomKeyword, atomQuestion } from "../../recoil/userStore";
 import produce from "immer";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question(props) {
   const [question, setQuestion] = useRecoilState(atomQuestion);
   const [questionId, setQuestionId] = useState(props.id);
+  const [keyword, setKeyword] = useRecoilState(atomKeyword);
 
   const [isThumbClicked, setIsThumbClicked] = useState("x");
   const [isThumbHovered, setIsThumbHovered] = useState("x");
@@ -53,20 +54,25 @@ function Question(props) {
   }
 
   function editOnClick() {
-    /* 수정완료 버튼을 눌렀다면 서버에 전송 */
-    console.log(question[questionId].answer);
-    let res = fetch(`${config.URL}/api/questions/answer`, {
-      // let res = fetch(`/api/questions/answer`, {
-      method: "POST",
-      credentials: "include",
-      body: new URLSearchParams({
-        user_question_id: question[questionId].user_question_id,
-        user_keyword_id: question[questionId].user_keyword_id,
-        answer: question[questionId].answer,
-      }),
-    });
+    /* 수정완료 버튼을 눌렀다면 서버에 전송 및 키워드 색상 변경 */
+    if (isEditClicked) {
+      fetch(`${config.URL}/api/questions/answer`, {
+        method: "POST",
+        credentials: "include",
+        body: new URLSearchParams({
+          user_question_id: question[questionId].user_question_id,
+          user_keyword_id: question[questionId].user_keyword_id,
+          answer: question[questionId].answer,
+        }),
+      });
 
-    console.log(res);
+      setKeyword((prev) =>
+        produce(prev, (draft) => {
+          draft.userKeywords[draft.selected].answered = 2;
+          return draft;
+        })
+      );
+    }
 
     setIsEditClicked(!isEditClicked);
   }
