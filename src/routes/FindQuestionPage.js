@@ -1,23 +1,16 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import "./findQuestionPage.scss";
+
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
 import Header from "../common/Header";
-import "./findQuestionPage.scss";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo, atomMenu } from "../recoil/userStore";
-import { isUserValid } from "../utils";
+import { atomMenu } from "../recoil/userStore";
 
 function FindQuestionPage() {
-  const history = useHistory();
-  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [menu, setMenu] = useRecoilState(atomMenu);
 
   useEffect(() => {
-    if (!isUserValid(userInfo)) {
-      history.push("/signup");
-    }
-
     setMenu("질문찾기");
   }, []);
 
