@@ -1,9 +1,9 @@
 import React from "react";
 import GoogleLoginButton from "../components/SignUp/GoogleLoginButton";
 import HighlightText from "../components/atom/HighlightText";
-import "./gotoSignUp.scss";
+import "./landingPage.scss";
 
-function GotoSignUp() {
+function LandingPage() {
   return (
     <div className="gotoSignUpWrapper">
       <div className="gotoSignUp">
@@ -35,4 +35,4 @@ function GotoSignUp() {
   );
 }
 
-export default GotoSignUp;
+export default LandingPage;
