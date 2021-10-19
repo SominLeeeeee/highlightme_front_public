@@ -268,7 +268,7 @@ function ClInput() {
           <ErrNotice hint="답변을 200자 이상 입력해주세요." flag={countErr} />
           <div />
           <p className="typingCount">
-            ({answer == null ? 0 : answer.length} / 5000자)
+            ({answer == null ? 0 : answer.length}자)
           </p>
         </div>
       </div>
