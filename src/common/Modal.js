@@ -1,7 +1,7 @@
 import "./modal.scss";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import SignOut from "../components/atom/SignOut";
+import SignOut from "../common/SignOut";
 
 const Modal = () => {
   const history = useHistory();

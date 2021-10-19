@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import config from "../../configs";
+import config from "../configs";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { atomUserInfo } from "../../recoil/userStore";
+import { atomUserInfo } from "../recoil/userStore";
 
 function SignOut() {
   const history = useHistory();
