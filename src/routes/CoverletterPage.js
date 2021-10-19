@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./coverletter.scss";
+import "./coverletterPage.scss";
 import ClInput from "../components/CoverLetter/ClInput";
 import ClList from "../components/CoverLetter/ClList";
 import Header from "../common/Header";
@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import { atomMenu, atomUserInfo } from "../recoil/userStore";
 import { isUserValid } from "../utils";
 
-function Coverletter() {
+function CoverletterPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
 
   const history = useHistory();
@@ -36,4 +36,4 @@ function Coverletter() {
   );
 }
 
-export default Coverletter;
+export default CoverletterPage;
