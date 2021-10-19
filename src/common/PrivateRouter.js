@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isUserValid } from "../utils";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { atomUserInfo } from "../recoil/userStore";
 
 /**
  * A router that prevents unauthenticated users from accessing private pages
@@ -8,12 +10,14 @@ import { isUserValid } from "../utils";
  * @param {React.Component} component
  * @returns {React.Component}
  */
-const PrivateRouter = ({ component, ...rest }) => {
+const PrivateRouter = ({ component: Component, ...rest }) => {
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        isUserValid() ? <Component {...props} /> : <Redirect to="/signup" />
+        isUserValid(userInfo) ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

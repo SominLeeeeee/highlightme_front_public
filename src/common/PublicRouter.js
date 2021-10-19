@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isUserValid } from "../utils";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { atomUserInfo } from "../recoil/userStore";
 
 /**
  * A router that prevents authenticated users from accessing public pages
@@ -11,12 +13,14 @@ import { isUserValid } from "../utils";
  * @param {Boolean} restricted(true: restricted route, false: public route)
  * @returns {React.Component}
  */
-const PublicRouter = ({ component, restricted, ...rest }) => {
+const PublicRouter = ({ component: Component, restricted, ...rest }) => {
+  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        isUserValid() && restricted ? (
+        isUserValid(userInfo) && restricted ? (
           <Redirect to="/find" />
         ) : (
           <Component {...props} />

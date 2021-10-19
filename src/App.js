@@ -26,16 +26,16 @@ function App() {
             component={LandingPage}
           />
           <PublicRouter
-            path="/signup"
-            exact
-            restricted={true}
-            component={SignUpPage}
-          />
-          <PublicRouter
             path="/signout"
             exact
             restricted={false}
             component={SignOutPage}
+          />
+          <PublicRouter
+            path="/signup"
+            exact
+            restricted={false}
+            component={SignUpPage}
           />
 
           {/* Private Routers */}
