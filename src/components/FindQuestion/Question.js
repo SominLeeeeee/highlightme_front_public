@@ -6,110 +6,43 @@ import InputBox from "../atom/InputBox";
 import InputBoxDisable from "../atom/InputBoxDisable";
 import { useRecoilState } from "recoil";
 import { atomKeyword, atomQuestion } from "../../recoil/userStore";
-import produce from "immer";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
-function Question(props) {
-  const [question, setQuestion] = useRecoilState(atomQuestion);
-  const [questionId, setQuestionId] = useState(props.id);
-  const [keyword, setKeyword] = useRecoilState(atomKeyword);
-
-  const [isThumbClicked, setIsThumbClicked] = useState("x");
-  const [isThumbHovered, setIsThumbHovered] = useState("x");
+function Question({
+  question,
+  onLikeClick,
+  onDislikeClick,
+  onAnswerPost,
+  onAnswerEdit,
+}) {
+  const [isThumbsUpHovered, setIsThumbsUpHovered] = useState(false);
+  const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
 
-  const [likes, setLikes] = useState(props.likes);
-  const [dislikes, setDislikes] = useState(props.dislikes);
-
-  function goodOnClick() {
-    if (likes === "1") setLikes("0");
-    else setLikes("1");
-
-    if (isThumbClicked == "g") setIsThumbClicked("x");
-    else setIsThumbClicked("g");
-
-    fetch(`${config.URL}/api/questions/like`, {
-      method: "POST",
-      credentials: "include",
-      body: new URLSearchParams({
-        question_id: question[questionId].question_id,
-      }),
-    });
-  }
-
-  function badOnClick() {
-    if (dislikes === "1") setDislikes("0");
-    else setDislikes("1");
-
-    if (isThumbClicked == "b") setIsThumbClicked("x");
-    else setIsThumbClicked("b");
-
-    fetch(`${config.URL}/api/questions/dislike`, {
-      method: "POST",
-      credentials: "include",
-      body: new URLSearchParams({
-        question_id: question[questionId].question_id,
-      }),
-    });
-  }
-
-  function editOnClick() {
+  function onEditClick() {
     /* 수정완료 버튼을 눌렀다면 서버에 전송 및 키워드 색상 변경 */
-    if (isEditClicked) {
-      fetch(`${config.URL}/api/questions/answer`, {
-        method: "POST",
-        credentials: "include",
-        body: new URLSearchParams({
-          user_question_id: question[questionId].user_question_id,
-          user_keyword_id: question[questionId].user_keyword_id,
-          answer: question[questionId].answer,
-        }),
-      });
+    setIsEditClicked(!isEditClicked);
 
-      setKeyword((prev) =>
-        produce(prev, (draft) => {
-          draft.userKeywords[draft.selected].answered = 2;
-          return draft;
-        })
+    if (isEditClicked) {
+      onAnswerPost(
+        question.user_question_id,
+        question.user_keyword_id,
+        question.answer
       );
     }
-
-    setIsEditClicked(!isEditClicked);
   }
-
-  function goodOnMouseOver() {
-    setIsThumbHovered("g");
-  }
-
-  function badOnMouseOver() {
-    setIsThumbHovered("b");
-  }
-
-  function thumbOnMouseOut() {
-    setIsThumbHovered("x");
-  }
-
-  const onInputChangeAnswer = (event) => {
-    setQuestion((prev) =>
-      produce(prev, (draft) => {
-        console.log(draft);
-        draft[questionId].answer = event.target.value;
-        return draft;
-      })
-    );
-  };
 
   return (
     <div>
-      <p id="questionText">Q. {question[questionId].content}</p>
+      <p id="questionText">Q. {question.content}</p>
       {isEditClicked ? (
         <InputBox
           placeholder="답변을 입력해주세요."
           radius="1.6rem"
           maxRows="4"
           minRows="2"
-          onChange={onInputChangeAnswer}
-          value={question[questionId].answer}
+          onChange={(event) => onAnswerEdit(event.target.value)}
+          value={question.answer}
         />
       ) : (
         <InputBoxDisable
@@ -117,8 +50,8 @@ function Question(props) {
           radius="1.6rem"
           maxRows="4"
           minRows="2"
-          onChange={onInputChangeAnswer}
-          value={question[questionId].answer}
+          onChange={(event) => onAnswerEdit(event.target.value)}
+          value={question.answer}
         />
       )}
       <div id="underQuestion">
@@ -127,31 +60,31 @@ function Question(props) {
           <img
             id="icGood"
             src={
-              isThumbClicked == "g"
+              question.liked
                 ? "/images/ic-mydocs-good-clicked.svg"
-                : isThumbHovered == "g"
+                : isThumbsUpHovered
                 ? "/images/ic-mydocs-good-clicked.svg"
                 : "/images/ic-mydocs-good.svg"
             }
-            onClick={goodOnClick}
-            onMouseOver={goodOnMouseOver}
-            onMouseOut={thumbOnMouseOut}
+            onClick={onLikeClick}
+            onMouseOver={() => setIsThumbsUpHovered(true)}
+            onMouseOut={() => setIsThumbsUpHovered(false)}
           />
           <img
             id="icBad"
             src={
-              isThumbClicked == "b"
+              question.disliked
                 ? "/images/ic-mydocs-bad-clicked.svg"
-                : isThumbHovered == "b"
+                : isThumbsDownHovered
                 ? "/images/ic-mydocs-bad-clicked.svg"
                 : "/images/ic-mydocs-bad.svg"
             }
-            onClick={badOnClick}
-            onMouseOver={badOnMouseOver}
-            onMouseOut={thumbOnMouseOut}
+            onClick={onDislikeClick}
+            onMouseOver={() => setIsThumbsDownHovered(true)}
+            onMouseOut={() => setIsThumbsDownHovered(false)}
           />
         </span>
-        <span id="editAnswerBox" onClick={editOnClick}>
+        <span id="editAnswerBox" onClick={onEditClick}>
           <img
             id="icEdit"
             src={
