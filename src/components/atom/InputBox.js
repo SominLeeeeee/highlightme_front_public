@@ -2,28 +2,26 @@ import React from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import "./InputBox.scss";
 
-function InputBox(props) {
-  const {
-    placeholder,
-    padding,
-    radius,
-    marginBottom,
-    maxRows,
-    minRows,
-    onChange,
-    borderColor,
-    value,
-    id,
-  } = {
-    ...props,
-  };
-
+function InputBox({
+  placeholder,
+  padding,
+  radius,
+  marginBottom,
+  maxRows,
+  minRows,
+  onChange,
+  borderColor,
+  value,
+  id,
+  disabled,
+}) {
   return (
     <TextareaAutosize
       id={id}
       onChange={onChange}
       placeholder={placeholder}
-      className="inputBox"
+      className={disabled ? "inputBoxDisable" : "inputBox"}
+      disabled={disabled}
       maxRows={maxRows}
       minRows={minRows}
       value={value}

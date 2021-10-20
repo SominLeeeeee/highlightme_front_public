@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import config from "../../configs";
 import "./Question.scss";
 import "../../index.css";
 import InputBox from "../atom/InputBox";
-import InputBoxDisable from "../atom/InputBoxDisable";
-import { useRecoilState } from "recoil";
-import { atomKeyword, atomQuestion } from "../../recoil/userStore";
 // import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question({
@@ -35,25 +31,16 @@ function Question({
   return (
     <div>
       <p id="questionText">Q. {question.content}</p>
-      {isEditClicked ? (
-        <InputBox
-          placeholder="답변을 입력해주세요."
-          radius="1.6rem"
-          maxRows="4"
-          minRows="2"
-          onChange={(event) => onAnswerEdit(event.target.value)}
-          value={question.answer}
-        />
-      ) : (
-        <InputBoxDisable
-          placeholder="답변을 입력해주세요"
-          radius="1.6rem"
-          maxRows="4"
-          minRows="2"
-          onChange={(event) => onAnswerEdit(event.target.value)}
-          value={question.answer}
-        />
-      )}
+      <InputBox
+        placeholder="답변을 입력해주세요."
+        radius="1.6rem"
+        maxRows="4"
+        minRows="2"
+        onChange={(event) => onAnswerEdit(event.target.value)}
+        value={question.answer}
+        disabled={!isEditClicked}
+      />
+
       <div id="underQuestion">
         <span className="evaluateQuestionBox noselect">
           이 질문이 마음에 드셨나요?
