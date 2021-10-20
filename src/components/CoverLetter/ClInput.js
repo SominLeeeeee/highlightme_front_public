@@ -10,7 +10,9 @@ import ErrNotice from "../atom/ErrNotice";
 import produce from "immer";
 import { useHistory } from "react-router";
 
-function ClInput() {
+function ClInput(props) {
+  const { onChangeProblem } = { ...props };
+
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
   );
@@ -243,7 +245,7 @@ function ClInput() {
         <InputTitle>자기소개서 문항 입력</InputTitle>
         <InputBox
           id="problemInput"
-          onChange={onInputChangeProblem}
+          onChange={onChangeProblem}
           minRows="1"
           maxRows="2"
           placeholder="ex) 본인의 장단점에 대해 얘기해주세요."

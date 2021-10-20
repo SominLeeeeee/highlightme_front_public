@@ -49,13 +49,25 @@ function CoverletterPage() {
     }
   }, []);
 
+  /**
+   * 문항을 작성할 때
+   */
+  function handleChangeProblem(e) {
+    setCle((prev) =>
+      produce(prev, (draft) => {
+        draft.element[draft.selectedElement].problem = e.target.value;
+        return draft;
+      })
+    );
+  }
+
   return (
     <div>
       <Header />
       <div className="coverletterWrapper">
         <div className="coverletter">
           <ClList />
-          <ClInput />
+          <ClInput onChangeProblem={handleChangeProblem} />
         </div>
       </div>
     </div>
