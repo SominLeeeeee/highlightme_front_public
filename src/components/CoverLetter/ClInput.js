@@ -11,7 +11,7 @@ import produce from "immer";
 import { useHistory } from "react-router";
 
 function ClInput(props) {
-  const { onChangeProblem } = { ...props };
+  const { onChangeProblem, onChangeAnswer } = { ...props };
 
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
@@ -259,7 +259,7 @@ function ClInput(props) {
         <InputTitle>자기소개서 답변 입력</InputTitle>
         <InputBox
           id="answerInput"
-          onChange={onInputChangeAnswer}
+          onChange={onChangeAnswer}
           minRows="4"
           maxRows="7"
           placeholder="ex) 저의 장점은 근면성실하다는 것입니다."

@@ -61,13 +61,28 @@ function CoverletterPage() {
     );
   }
 
+  /**
+   * 답변을 작성할 때
+   */
+  function handleChangeAnswer(e) {
+    setCle((prev) =>
+      produce(prev, (draft) => {
+        draft.element[draft.selectedElement].answer = e.target.value;
+        return draft;
+      })
+    );
+  }
+
   return (
     <div>
       <Header />
       <div className="coverletterWrapper">
         <div className="coverletter">
           <ClList />
-          <ClInput onChangeProblem={handleChangeProblem} />
+          <ClInput
+            onChangeProblem={handleChangeProblem}
+            onChangeAnswer={handleChangeAnswer}
+          />
         </div>
       </div>
     </div>
