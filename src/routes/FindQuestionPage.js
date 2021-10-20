@@ -125,7 +125,7 @@ function FindQuestionPage() {
           <div className="keywordQuestionWrapper">
             <KeywordGraphView />
             <QuestionList
-              keyword={keyword}
+              keyword={keyword.userKeywords[keyword.selected]}
               questions={questions}
               onLikeClick={onLikeClick}
               onDislikeClick={onDislikeClick}
