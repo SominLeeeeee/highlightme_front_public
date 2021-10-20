@@ -33,7 +33,7 @@ function QuestionsList({
               onLikeClick={() => onLikeClick(index)}
               onDislikeClick={() => onDislikeClick(index)}
               onAnswerEdit={(answer) => onAnswerEdit(index, answer)}
-              onAnswerPost={() => onAnswerPost(index)}
+              onAnswerPost={onAnswerPost}
             />
           ))
         ) : (
