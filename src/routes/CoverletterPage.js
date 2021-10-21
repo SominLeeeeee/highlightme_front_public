@@ -19,22 +19,11 @@ function CoverletterPage() {
   useEffect(async () => {
     setMenu("자기소개서");
 
-    let res;
+    const response = await downloadCle();
 
-    try {
-      res = await fetch(`${config.URL}/api/cls`, {
-        method: "GET",
-        credentials: "include",
-      });
-      res = await res.json();
-    } catch (error) {
-      console.log("fail to load coverletter 😭");
-      res = false;
-    }
-
-    if (res) {
+    if (response) {
       let fromServerCle = [];
-      res.result.map((element) => {
+      response.cles.map((element) => {
         fromServerCle = fromServerCle.concat({
           problem: element.problem,
           answer: element.answer,
@@ -48,6 +37,22 @@ function CoverletterPage() {
       }));
     }
   }, []);
+
+  async function downloadCle() {
+    let result;
+
+    result = await fetch(`${config.URL}/api/cls`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (result.ok) {
+      result = await result.json();
+      console.log(result);
+      setCle((prev) => ({ ...prev, cl_id: result.cl_id }));
+      return result;
+    } else return result.ok;
+  }
 
   /**
    * 문항을 작성할 때
