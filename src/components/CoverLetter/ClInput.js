@@ -11,15 +11,21 @@ import produce from "immer";
 import { useHistory } from "react-router";
 
 function ClInput(props) {
-  const { onChangeProblem, onChangeAnswer, problem, answer } = { ...props };
+  const {
+    onChangeProblem,
+    onChangeAnswer,
+    onClickSaveButton,
+    countErr,
+    emptyErr,
+    problem,
+    answer,
+  } = { ...props };
 
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
   );
 
   const [deleteHover, setDeleteHover] = useState(false);
-  const [countErr, setCountErr] = useState(false);
-  const [emptyErr, setEmptyErr] = useState(false);
 
   const [curr, setCurr] = useState(0);
   const [storeTime, setStoreTime] = useState();
@@ -34,33 +40,6 @@ function ClInput(props) {
     var minute = time.getMinutes();
 
     setStoreTime(`${month + 1}/${date} ${hour}:${minute}`);
-  };
-
-  const onSaveButtonClicked = async () => {
-    const abnormal = checkAbnormal();
-
-    if (abnormal.res === true) {
-      let idx = abnormal.index;
-      /* 비어있는 문항이나 답변이 있는 경우 */
-      setCoverLetterElements((prev) => ({
-        ...prev,
-        selectedElement: idx,
-      }));
-
-      if (coverLetterElements.element[idx].answer.length < 200) {
-        setCountErr(true);
-        setTimeout(() => setCountErr(false), 1500);
-      }
-
-      if (coverLetterElements.element[idx].problem.length === 0) {
-        setEmptyErr(true);
-        setTimeout(() => setEmptyErr(false), 1500);
-      }
-    } else {
-      /* 모든 element 값이 온전한 경우 */
-      uploadCoverLetter();
-      history.push("/find");
-    }
   };
 
   const onDeleteButtonMouseOver = () => {
@@ -103,47 +82,6 @@ function ClInput(props) {
       }
     }
   }
-
-  const checkAbnormal = () => {
-    var result = false;
-
-    coverLetterElements.element.map((e, idx, arr) => {
-      if (e.problem === "" || e.answer.length < 200) {
-        result = { res: true, index: idx };
-      }
-    });
-
-    return result;
-  };
-
-  const uploadCoverLetter = async () => {
-    const request = {
-      CLES: [],
-      cl_id: localStorage.getItem("coverletter_id"),
-      title: `${localStorage.getItem("user_id")}의 자기소개서`,
-      company: "카뱅",
-      tags: ["카카오", "뱅크"],
-      comments: "잘부탁드려용",
-    };
-
-    coverLetterElements.element.map((e, idx, arr) => {
-      request.CLES.push({
-        cl_element_id: idx + 1,
-        problem: e.problem,
-        answer: e.answer,
-        _public: 1,
-      });
-    });
-
-    const data = new URLSearchParams(request);
-    data.set("CLES", JSON.stringify(request.CLES));
-
-    const result = await fetch(`${config.URL}/api/cls`, {
-      method: "POST",
-      credentials: "include",
-      body: data,
-    });
-  };
 
   return (
     <div className="clInputWrapper">
@@ -203,7 +141,7 @@ function ClInput(props) {
         <div className="clInputSaveButton">
           <p>({storeTime}에 임시 저장됨)</p>
           <button
-            onClick={onSaveButtonClicked}
+            onClick={onClickSaveButton}
             style={
               answer !== null && problem !== null
                 ? { backgroundColor: "#febb2d" }

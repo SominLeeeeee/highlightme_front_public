@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./coverletterPage.scss";
 import ClInput from "../components/CoverLetter/ClInput";
 import ClList from "../components/CoverLetter/ClList";
@@ -11,6 +11,9 @@ import produce from "immer";
 function CoverletterPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
   const [cle, setCle] = useRecoilState(atomCoverLetterElements);
+
+  const [emptyErr, setEmptyErr] = useState(false);
+  const [countErr, setCountErr] = useState(false);
 
   /**
    * 자소서 등록 페이지 처음 접속 시
@@ -103,6 +106,43 @@ function CoverletterPage() {
     return res;
   }
 
+  function checkAbnormal() {
+    let result = false;
+
+    cle.element.map((e, idx, arr) => {
+      if (e.problem === "") result = { res: true, index: idx, err: "empty" };
+      else if (e.answer.length < 200)
+        result = { res: true, index: idx, err: "count" };
+    });
+
+    return result;
+  }
+
+  function handleClickSaveButton() {
+    const abnormal = checkAbnormal();
+
+    if (abnormal.res) {
+      setCle((prev) => ({ ...prev, selectedElement: abnormal.index }));
+      setError(abnormal.err);
+    } else {
+    }
+  }
+
+  function setError(err) {
+    switch (err) {
+      case "count":
+        setCountErr(true);
+        setTimeout(() => setCountErr(false), 1500);
+        break;
+      case "empty":
+        setEmptyErr(true);
+        setTimeout(() => setEmptyErr(false), 1500);
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -116,6 +156,9 @@ function CoverletterPage() {
           <ClInput
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
+            onClickSaveButton={handleClickSaveButton}
+            countErr={countErr}
+            emptyErr={emptyErr}
             problem={cle.element[cle.selectedElement].problem}
             answer={cle.element[cle.selectedElement].answer}
           />
