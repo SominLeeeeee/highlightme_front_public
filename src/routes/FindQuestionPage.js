@@ -13,7 +13,7 @@ import {
   postQuestionAnswer,
   postQuestionLike,
   postQuestionDislike,
-} from "../apis";
+} from "../apis/questions";
 
 function FindQuestionPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
