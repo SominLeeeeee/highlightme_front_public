@@ -4,7 +4,7 @@ import "./clList.scss";
 import "../../index.css";
 
 function ClList(props) {
-  const { cleTitle, onClickPlusButton } = { ...props };
+  const { cleTitle, selectedIndex, onClickPlusButton } = { ...props };
 
   return (
     <div className="clListWrapper ">
@@ -19,7 +19,8 @@ function ClList(props) {
         {cleTitle.map((problem, index) => (
           <ClElementTitle
             number={index + 1}
-            problem={problem ? problem : "자기소개서 문항을 입력해주세요"}
+            problem={problem}
+            selected={index === selectedIndex}
           />
         ))}
       </div>

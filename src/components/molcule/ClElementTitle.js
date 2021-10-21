@@ -6,37 +6,26 @@ import "../../index.css";
 import NumberCircle from "../atom/NumberCircle";
 
 function ClElementTitle(props) {
-  const { number, problem } = { ...props };
-  const [coverLetterElements, setCoverLetterElements] = useRecoilState(
-    atomCoverLetterElements
-  );
+  const { number, problem, selected } = { ...props };
+  const [cle, setCle] = useRecoilState(atomCoverLetterElements);
 
-  function clElementTitleOnClick() {
-    setCoverLetterElements((prev) => ({
-      ...prev,
-      selectedElement: number - 1,
-    }));
+  function handleClickAnotherElement() {
+    setCle((prev) => ({ ...prev, selectedElement: number - 1 }));
   }
 
   return (
     <div
       className={
-        number - 1 === coverLetterElements.selectedElement
+        selected
           ? "clElementTitleActive noselect"
           : "clElementTitleDefault noselect"
       }
-      onClick={clElementTitleOnClick}
+      onClick={handleClickAnotherElement}
     >
-      <NumberCircle
-        type={
-          number - 1 === coverLetterElements.selectedElement
-            ? "active"
-            : "default"
-        }
-      >
+      <NumberCircle type={selected ? "active" : "default"}>
         {number}
       </NumberCircle>
-      <p>{problem}</p>
+      <p>{problem ? problem : "자기소개서 문항을 입력해주세요"}</p>
     </div>
   );
 }

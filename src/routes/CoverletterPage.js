@@ -110,6 +110,7 @@ function CoverletterPage() {
         <div className="coverletter">
           <ClList
             cleTitle={getTitleFromCle()}
+            selectedIndex={cle.selectedElement}
             onClickPlusButton={handleClickPlusButton}
           />
           <ClInput
