@@ -73,6 +73,21 @@ function CoverletterPage() {
     );
   }
 
+  /**
+   * 추가하기 버튼 눌렀을 때
+   */
+  function handleClickPlusButton() {
+    setCle((prev) =>
+      produce(prev, (draft) => {
+        draft.element.push({
+          problem: "",
+          answer: "",
+        });
+        return draft;
+      })
+    );
+  }
+
   function getTitleFromCle() {
     let res = [];
 
@@ -88,7 +103,10 @@ function CoverletterPage() {
       <Header />
       <div className="coverletterWrapper">
         <div className="coverletter">
-          <ClList cleTitle={getTitleFromCle()} />
+          <ClList
+            cleTitle={getTitleFromCle()}
+            onClickPlusButton={handleClickPlusButton}
+          />
           <ClInput
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
