@@ -11,7 +11,7 @@ import produce from "immer";
 import { useHistory } from "react-router";
 
 function ClInput(props) {
-  const { onChangeProblem, onChangeAnswer } = { ...props };
+  const { onChangeProblem, onChangeAnswer, problem, answer } = { ...props };
 
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
@@ -21,94 +21,10 @@ function ClInput(props) {
   const [countErr, setCountErr] = useState(false);
   const [emptyErr, setEmptyErr] = useState(false);
 
-  const [problem, setProblem] = useState(
-    coverLetterElements.element[0].problem
-  );
-  const [answer, setAnswer] = useState(coverLetterElements.element[0].answer);
   const [curr, setCurr] = useState(0);
   const [storeTime, setStoreTime] = useState();
 
   const history = useHistory();
-
-  /* 자소서 등록 페이지 들어올 시 서버에서 자소서 정보 받아오기 */
-  useEffect(async () => {
-    try {
-      let res = await fetch(`${config.URL}/api/cls`, {
-        // let res = await fetch(`/api/cls`, {
-        method: "GET",
-        credentials: "include",
-      });
-      res = await res.json();
-      localStorage.setItem("coverletter_id", res.cl_id);
-
-      if (res.isNew === 0 && res.result.length !== 0) {
-        setCoverLetterElements((prev) => ({
-          ...prev,
-          element: [],
-          selectedElement: 0,
-        }));
-
-        res.result.map((e) => {
-          setCoverLetterElements((prev) =>
-            produce(prev, (draft) => {
-              draft.element.push({ problem: e.problem, answer: e.answer });
-              return draft;
-            })
-          );
-        });
-
-        setProblem(res.result[0].problem);
-        setAnswer(res.result[0].answer);
-      }
-    } catch (e) {
-      console.log("can't load coverletter 🥲");
-      setProblem("");
-      setAnswer("");
-    }
-  }, []);
-
-  /* 문항을 쓸 때마다 recoil에 반영 */
-  useEffect(() => {
-    memoryTime();
-
-    setCoverLetterElements((prev) =>
-      produce(prev, (draft) => {
-        draft.element[curr].problem = problem;
-        return draft;
-      })
-    );
-  }, [problem]);
-
-  /* 답변을 쓸 때마다 recoil에 반영 */
-  useEffect(() => {
-    memoryTime();
-
-    setCoverLetterElements((prev) =>
-      produce(prev, (draft) => {
-        draft.element[curr].answer = answer;
-        return draft;
-      })
-    );
-  }, [answer]);
-
-  /* 다른 문항을 선택 시 problem과 answer 수정 */
-  useEffect(() => {
-    changeProblemAnswer();
-  }, [coverLetterElements, coverLetterElements.selectedElement]);
-
-  const changeProblemAnswer = () => {
-    setCurr(coverLetterElements.selectedElement);
-    const idx = coverLetterElements.selectedElement;
-
-    const tempProblem = coverLetterElements.element[idx].problem;
-    const tempAnswer = coverLetterElements.element[idx].answer;
-
-    if (tempProblem == null) setProblem("");
-    else setProblem(coverLetterElements.element[idx].problem);
-
-    if (tempAnswer == null) setAnswer("");
-    else setAnswer(coverLetterElements.element[idx].answer);
-  };
 
   const memoryTime = () => {
     var time = new Date();

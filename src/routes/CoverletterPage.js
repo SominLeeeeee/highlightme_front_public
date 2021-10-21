@@ -116,6 +116,8 @@ function CoverletterPage() {
           <ClInput
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
+            problem={cle.element[cle.selectedElement].problem}
+            answer={cle.element[cle.selectedElement].answer}
           />
         </div>
       </div>
