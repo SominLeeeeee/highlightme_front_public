@@ -6,7 +6,8 @@ import { useRecoilState } from "recoil";
 import { atomCoverLetterElements } from "../../recoil/userStore";
 import produce from "immer";
 
-function ClList() {
+function ClList(props) {
+  const { cleTitle } = { ...props };
   const [coverLetterElements, setCoverLetterElements] = useRecoilState(
     atomCoverLetterElements
   );
@@ -33,14 +34,10 @@ function ClList() {
         </div>
       </div>
       <div>
-        {coverLetterElements.element.map((e, index) => (
+        {cleTitle.map((problem, index) => (
           <ClElementTitle
             number={index + 1}
-            problem={
-              e.problem === null || e.problem === undefined || e.problem === ""
-                ? "자기소개서 문항을 입력해주세요"
-                : e.problem
-            }
+            problem={problem ? problem : "자기소개서 문항을 입력해주세요"}
           />
         ))}
       </div>

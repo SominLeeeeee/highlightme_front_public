@@ -52,10 +52,10 @@ function CoverletterPage() {
   /**
    * 문항을 작성할 때
    */
-  function handleChangeProblem(e) {
+  function handleChangeProblem(event) {
     setCle((prev) =>
       produce(prev, (draft) => {
-        draft.element[draft.selectedElement].problem = e.target.value;
+        draft.element[draft.selectedElement].problem = event.target.value;
         return draft;
       })
     );
@@ -64,13 +64,23 @@ function CoverletterPage() {
   /**
    * 답변을 작성할 때
    */
-  function handleChangeAnswer(e) {
+  function handleChangeAnswer(event) {
     setCle((prev) =>
       produce(prev, (draft) => {
-        draft.element[draft.selectedElement].answer = e.target.value;
+        draft.element[draft.selectedElement].answer = event.target.value;
         return draft;
       })
     );
+  }
+
+  function getTitleFromCle() {
+    let res = [];
+
+    cle.element.map((e) => {
+      res = res.concat(e.problem);
+    });
+
+    return res;
   }
 
   return (
@@ -78,7 +88,7 @@ function CoverletterPage() {
       <Header />
       <div className="coverletterWrapper">
         <div className="coverletter">
-          <ClList />
+          <ClList cleTitle={getTitleFromCle()} />
           <ClInput
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
