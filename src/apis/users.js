@@ -5,10 +5,10 @@ import config from "../configs";
  * @param {String} email
  * @param {String} googleId
  * @param {String} accessToken
- * @returns
+ * @returns {Array} [result json, status code(200: signup, 409: signin)]
  */
 export const postUsersOauthGoogle = async (email, googleId, accessToken) => {
-  return await await fetch(`${config.URL}/api/users/oauth/google`, {
+  const res = await fetch(`${config.URL}/api/users/oauth/google`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
@@ -16,5 +16,6 @@ export const postUsersOauthGoogle = async (email, googleId, accessToken) => {
       googleId: googleId,
       accessToken: accessToken,
     }),
-  }).json();
+  });
+  return [await res.json(), res.status];
 };

@@ -1,11 +1,6 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import config from "../../configs";
-import { useHistory } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { atomSignUp, atomUserInfo } from "../../recoil/userStore";
-import { isUserValid } from "../../utils";
-import { postUsersOauthGoogle } from "../../apis/users";
 
 const googleLoginButtonStyle = {
   backgroundColor: "white",
@@ -28,30 +23,7 @@ const googleLoginSimpleStyle = {
   fontSize: "16px",
 };
 
-function GoogleLoginButton({ usage }) {
-  const history = useHistory();
-  const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
-  const [signUp, setSignUp] = useRecoilState(atomSignUp);
-
-  const onGoogleOauthSuccess = async (res) => {
-    const data = await postUsersOauthGoogle(
-      res.profileObj.email,
-      res.googleId,
-      res.accessToken
-    );
-
-    setUserInfo({
-      id: data.user_id,
-      email: data.email,
-      accessToken: res.accessToken,
-    });
-
-    if (data.isNew) {
-      setSignUp({ signUpLevel: 0 });
-      history.push("/signup");
-    } else history.push("/find");
-  };
-
+function GoogleLoginButton({ usage, onLoginSuccess, onLoginFail }) {
   return (
     <GoogleLogin
       clientId={config.oauthGoogleClientId}
@@ -70,8 +42,10 @@ function GoogleLoginButton({ usage }) {
           </button>
         )
       }
-      onSuccess={onGoogleOauthSuccess}
-      onFailure={onGoogleOauthSuccess}
+      onSuccess={(res) =>
+        onLoginSuccess(res.profileObj.email, res.googleId, res.accessToken)
+      }
+      onFailure={onLoginFail}
       cookiePolicy={"single_host_origin"}
       //isSignedIn={true}
     />
