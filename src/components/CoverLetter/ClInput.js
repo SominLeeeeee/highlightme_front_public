@@ -110,14 +110,6 @@ function ClInput(props) {
     else setAnswer(coverLetterElements.element[idx].answer);
   };
 
-  const onInputChangeProblem = (event) => {
-    setProblem(event.target.value);
-  };
-
-  const onInputChangeAnswer = (event) => {
-    setAnswer(event.target.value);
-  };
-
   const memoryTime = () => {
     var time = new Date();
     var month = time.getMonth();
@@ -231,7 +223,6 @@ function ClInput(props) {
     data.set("CLES", JSON.stringify(request.CLES));
 
     const result = await fetch(`${config.URL}/api/cls`, {
-      // const result = await fetch(`/api/cls`, {
       method: "POST",
       credentials: "include",
       body: data,

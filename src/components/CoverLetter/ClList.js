@@ -2,27 +2,9 @@ import React from "react";
 import ClElementTitle from "../molcule/ClElementTitle";
 import "./clList.scss";
 import "../../index.css";
-import { useRecoilState } from "recoil";
-import { atomCoverLetterElements } from "../../recoil/userStore";
-import produce from "immer";
 
 function ClList(props) {
   const { cleTitle, onClickPlusButton } = { ...props };
-  const [coverLetterElements, setCoverLetterElements] = useRecoilState(
-    atomCoverLetterElements
-  );
-
-  function clPlusOnClick() {
-    setCoverLetterElements((prev) =>
-      produce(prev, (draft) => {
-        draft.element.push({
-          problem: "",
-          answer: "",
-        });
-        return draft;
-      })
-    );
-  }
 
   return (
     <div className="clListWrapper ">
