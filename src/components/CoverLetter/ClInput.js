@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./clInput.scss";
-import config from "../../configs";
 import ClTip from "../molcule/ClTip";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { atomCoverLetterElements } from "../../recoil/userStore";
 import InputTitle from "../atom/InputTitle";
 import InputBox from "../atom/InputBox";
 import ErrNotice from "../atom/ErrNotice";
-import produce from "immer";
-import { useHistory } from "react-router";
 
 function ClInput(props) {
   const {
     onChangeProblem,
     onChangeAnswer,
     onClickSaveButton,
+    onClickDeleteButton,
     countErr,
     emptyErr,
     problem,
     answer,
   } = { ...props };
 
-  const [coverLetterElements, setCoverLetterElements] = useRecoilState(
-    atomCoverLetterElements
-  );
-
   const [deleteHover, setDeleteHover] = useState(false);
-
-  const [curr, setCurr] = useState(0);
   const [storeTime, setStoreTime] = useState();
-
-  const history = useHistory();
 
   const memoryTime = () => {
     var time = new Date();
@@ -45,43 +33,6 @@ function ClInput(props) {
   const onDeleteButtonMouseOver = () => {
     setDeleteHover(!deleteHover);
   };
-
-  function deleteButtonOnClick() {
-    if (coverLetterElements.element.length === 1)
-      alert("자기소개서 문항, 답변은 1개 이상이어야 합니다!");
-    else {
-      fetch(`${config.url}/api/cls`, {
-        method: "DELETE",
-        credentials: "include",
-        body: new URLSearchParams({
-          cl_element_id: coverLetterElements.selectedElement + 1,
-        }),
-      });
-
-      const temp = coverLetterElements.element.filter(
-        (e, index, array) => index != coverLetterElements.selectedElement
-      );
-
-      if (!coverLetterElements.selectedElement) {
-        setCoverLetterElements({
-          ...coverLetterElements,
-          element: temp,
-          selectedElement: 1,
-        });
-        setCoverLetterElements({
-          ...coverLetterElements,
-          element: temp,
-          selectedElement: 0,
-        });
-      } else {
-        setCoverLetterElements((prev) => ({
-          ...prev,
-          element: temp,
-          selectedElement: curr - 1,
-        }));
-      }
-    }
-  }
 
   return (
     <div className="clInputWrapper">
@@ -125,7 +76,7 @@ function ClInput(props) {
           className="clInputDeleteButton noselect"
           onMouseOver={onDeleteButtonMouseOver}
           onMouseOut={onDeleteButtonMouseOver}
-          onClick={deleteButtonOnClick}
+          onClick={onClickDeleteButton}
         >
           <img
             src={

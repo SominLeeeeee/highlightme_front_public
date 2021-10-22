@@ -51,7 +51,6 @@ function CoverletterPage() {
 
     if (result.ok) {
       result = await result.json();
-      console.log(result);
       setCle((prev) => ({ ...prev, cl_id: result.cl_id }));
       return result;
     } else return result.ok;
@@ -176,6 +175,47 @@ function CoverletterPage() {
     }
   }
 
+  function handleClickDeleteButton() {
+    if (cle.element.length === 1)
+      alert("자기소개서 문항/답변은 1개 이상이어야 합니다!");
+    else {
+      deleteCleServer(cle.selectedElement + 1);
+      deleteCleLocal(cle.selectedElement);
+    }
+  }
+
+  function deleteCleServer(index) {
+    fetch(`${config.url}/api/cls`, {
+      method: "DELETE",
+      credentials: "include",
+      body: new URLSearchParams({
+        cl_element_id: index,
+      }),
+    });
+  }
+
+  function deleteCleLocal(index) {
+    const afterDelete = cle.element.filter((e, idx, arr) => idx != index);
+
+    if (cle.selectedElement !== 0) {
+      setCle((prev) => ({
+        ...prev,
+        element: afterDelete,
+        selectedElement: index - 1,
+      }));
+    } else {
+      setCle({
+        ...cle,
+        selectedElement: 1,
+      });
+      setCle({
+        ...cle,
+        element: afterDelete,
+        selectedElement: 0,
+      });
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -190,6 +230,7 @@ function CoverletterPage() {
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
             onClickSaveButton={handleClickSaveButton}
+            onClickDeleteButton={handleClickDeleteButton}
             countErr={countErr}
             emptyErr={emptyErr}
             problem={cle.element[cle.selectedElement].problem}
