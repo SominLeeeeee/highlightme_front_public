@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./keywordGraphView.scss";
 import "./questionsList.scss";
 import colors from "../../style/colors.js";
@@ -6,36 +6,12 @@ import HighlightText from "../atom/HighlightText";
 import ItemCircle from "../atom/ItemCircle";
 import Keyword from "../atom/Keyword";
 import ShadowBoxMedium from "../atom/ShadowBoxMedium";
-import { useSelector } from "react-redux";
-import config from "../../configs";
 import { useRecoilState } from "recoil";
-import { atomKeyword, atomUserInfo } from "../../recoil/userStore";
+import { atomKeyword } from "../../recoil/userStore";
 import produce from "immer";
 
 function KeywordGraphView() {
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
-
-  useEffect(async () => {
-    let res;
-
-    try {
-      res = await fetch(`${config.url}/api/keywords`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      res = await res.json();
-
-      setKeyword((prev) =>
-        produce(prev, (draft) => {
-          draft.userKeywords = res.result;
-          return draft;
-        })
-      );
-    } catch (e) {
-      console.log("could not fetch😭");
-    }
-  }, []);
 
   function pickColor(answered) {
     if (answered === 2) return `${colors.mainyellow}`;
@@ -47,15 +23,11 @@ function KeywordGraphView() {
     setKeyword((prev) =>
       produce(prev, (draft) => {
         draft.selected = index;
-        draft.userKeywords[index].answered = 1;
-
+        if (draft.userKeywords[index].answered === 0)
+          draft.userKeywords[index].answered = 1;
         return draft;
       })
     );
-  };
-
-  const userKeywordExist = () => {
-    return keyword && keyword.userKeywords && keyword.userKeywords.length > 0;
   };
 
   return (
@@ -69,7 +41,7 @@ function KeywordGraphView() {
         </span>
 
         <ShadowBoxMedium>
-          {userKeywordExist() ? (
+          {keyword.userKeywords ? (
             <div id="keywordWrapper">
               {keyword.userKeywords.map((e, idx, arr) => (
                 <Keyword

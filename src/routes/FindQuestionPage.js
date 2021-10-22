@@ -15,16 +15,32 @@ import {
   postQuestionDislike,
 } from "../apis/questions";
 
+import { getKeywords } from "../apis/keywords";
+
 function FindQuestionPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
   const [questions, setQuestions] = useRecoilState(atomQuestion);
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
 
-  useEffect(() => {
+  useEffect(async () => {
     setMenu("질문찾기");
+
+    const keywords = await getKeywords();
+
+    if (keywords) {
+      setKeyword((prev) =>
+        produce(prev, (draft) => {
+          draft.userKeywords = keywords;
+          return draft;
+        })
+      );
+    } else {
+      console.log("couldn't get keywords 😭");
+    }
   }, []);
 
   useEffect(async () => {
+    console.log("keyword", keyword);
     const selectedKeyword = keyword.userKeywords[keyword.selected];
 
     if (selectedKeyword) {
@@ -123,7 +139,7 @@ function FindQuestionPage() {
             </p>
           </div>
           <div className="keywordQuestionWrapper">
-            <KeywordGraphView />
+            <KeywordGraphView keywords={keyword.userKeywords} />
             <QuestionList
               keyword={keyword.userKeywords[keyword.selected]}
               questions={questions}
