@@ -44,7 +44,7 @@ function CoverletterPage() {
   async function downloadCle() {
     let result;
 
-    result = await fetch(`${config.URL}/api/cls`, {
+    result = await fetch(`${config.url}/api/cls`, {
       method: "GET",
       credentials: "include",
     });
@@ -80,7 +80,7 @@ function CoverletterPage() {
     request = new URLSearchParams(request);
     request.set("CLES", JSON.stringify(CLES));
 
-    let result = await fetch(`${config.URL}/api/cls`, {
+    let result = await fetch(`${config.url}/api/cls`, {
       method: "POST",
       credentials: "include",
       body: request,

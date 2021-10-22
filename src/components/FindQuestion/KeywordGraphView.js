@@ -19,7 +19,7 @@ function KeywordGraphView() {
     let res;
 
     try {
-      res = await fetch(`${config.URL}/api/keywords`, {
+      res = await fetch(`${config.url}/api/keywords`, {
         method: "GET",
         credentials: "include",
       });

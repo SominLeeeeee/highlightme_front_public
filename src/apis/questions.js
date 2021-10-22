@@ -8,7 +8,7 @@ import config from "../configs";
 export const postQuestions = async (userKeywordId) => {
   return (
     await (
-      await fetch(`${config.URL}/api/questions`, {
+      await fetch(`${config.url}/api/questions`, {
         method: "POST",
         credentials: "include",
         body: new URLSearchParams({
@@ -25,7 +25,7 @@ export const postQuestions = async (userKeywordId) => {
  * @returns response from server
  */
 export const postQuestionLike = async (questionId) => {
-  return await fetch(`${config.URL}/api/questions/like`, {
+  return await fetch(`${config.url}/api/questions/like`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
@@ -40,7 +40,7 @@ export const postQuestionLike = async (questionId) => {
  * @returns response from server
  */
 export const postQuestionDislike = async (questionId) => {
-  return await fetch(`${config.URL}/api/questions/dislike`, {
+  return await fetch(`${config.url}/api/questions/dislike`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
@@ -61,7 +61,7 @@ export const postQuestionAnswer = async (
   userKeywordId,
   answer
 ) => {
-  return await fetch(`${config.URL}/api/questions/answer`, {
+  return await fetch(`${config.url}/api/questions/answer`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({

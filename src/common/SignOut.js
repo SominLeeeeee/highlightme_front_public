@@ -9,7 +9,7 @@ function SignOut() {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   const signOut = async () => {
-    const result = await fetch(`${config.URL}/api/users/logout`, {
+    const result = await fetch(`${config.url}/api/users/logout`, {
       method: "GET",
       credentials: "include",
     });

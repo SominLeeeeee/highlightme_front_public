@@ -50,7 +50,7 @@ function ClInput(props) {
     if (coverLetterElements.element.length === 1)
       alert("자기소개서 문항, 답변은 1개 이상이어야 합니다!");
     else {
-      fetch(`${config.URL}/api/cls`, {
+      fetch(`${config.url}/api/cls`, {
         method: "DELETE",
         credentials: "include",
         body: new URLSearchParams({
