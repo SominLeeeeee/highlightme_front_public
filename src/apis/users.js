@@ -1,0 +1,21 @@
+import config from "../configs";
+
+/**
+ * Sign up or in user
+ * @param {String} email
+ * @param {String} googleId
+ * @param {String} accessToken
+ * @returns {Array} [result json, status code(200: signup, 409: signin)]
+ */
+export const postUsersOauthGoogle = async (email, googleId, accessToken) => {
+  const res = await fetch(`${config.URL}/api/users/oauth/google`, {
+    method: "POST",
+    credentials: "include",
+    body: new URLSearchParams({
+      email: email,
+      googleId: googleId,
+      accessToken: accessToken,
+    }),
+  });
+  return [await res.json(), res.status];
+};

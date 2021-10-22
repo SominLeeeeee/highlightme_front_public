@@ -40,8 +40,8 @@ export const atomQuestion = atom({
       answer: "",
       user_question_id: "",
       user_keyword_id: "",
-      likes: 0,
-      dislikes: 0,
+      liked: false,
+      disliked: false,
     },
   ],
 });
