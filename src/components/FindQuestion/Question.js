@@ -69,6 +69,7 @@ function Question({
             onMouseOver={() => setIsThumbsDownHovered(true)}
             onMouseOut={() => setIsThumbsDownHovered(false)}
           />
+          <img id="icScrap" src="/images/ic-scrap.svg" />
         </span>
         <span id="editAnswerBox" onClick={onEditClick}>
           <img
