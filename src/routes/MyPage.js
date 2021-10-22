@@ -8,9 +8,9 @@ import { atomSignUp, atomUserInfo } from "../recoil/userStore";
 function MyPage() {
   const history = useHistory();
 
-  const onSignOutClick = () => {
+  function onSignOutClick() {
     history.push("/signout");
-  };
+  }
 
   return (
     <div>

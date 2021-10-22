@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 function NotFoundPage() {
   const history = useHistory();
 
-  const onHomeButtonClick = () => {
+  function onHomeButtonClick() {
     history.push("/");
-  };
+  }
 
   return (
     <div>

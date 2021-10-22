@@ -20,7 +20,7 @@ function LandingPage() {
    * @param {String} googleId
    * @param {String} accessToken
    */
-  const onLoginSuccess = async (email, googleId, accessToken) => {
+  async function onLoginSuccess(email, googleId, accessToken) {
     const [result, status] = await postUsersOauthGoogle(
       email,
       googleId,
@@ -41,11 +41,11 @@ function LandingPage() {
     } else {
       alert("서버 문제로 로그인에 실패했어요 🤕");
     }
-  };
+  }
 
-  const onLoginFail = () => {
+  function onLoginFail() {
     alert("Google 서버 문제로 로그인에 실패했어요 🤕");
-  };
+  }
 
   return (
     <div className="gotoSignUpWrapper">
