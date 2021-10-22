@@ -5,13 +5,13 @@ import { useHistory } from "react-router-dom";
 function SignUpComplete() {
   const history = useHistory();
 
-  const onNowClick = () => {
+  function onNowClick() {
     history.push("/coverletter");
-  };
+  }
 
-  const onLaterClick = () => {
+  function onLaterClick() {
     history.push("/");
-  };
+  }
 
   return (
     <div className="signUpCompleteWrapper">
