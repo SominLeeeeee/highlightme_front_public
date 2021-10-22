@@ -18,21 +18,10 @@ function ClInput(props) {
   } = { ...props };
 
   const [deleteHover, setDeleteHover] = useState(false);
-  const [storeTime, setStoreTime] = useState();
 
-  const memoryTime = () => {
-    var time = new Date();
-    var month = time.getMonth();
-    var date = time.getDate();
-    var hour = time.getHours();
-    var minute = time.getMinutes();
-
-    setStoreTime(`${month + 1}/${date} ${hour}:${minute}`);
-  };
-
-  const onDeleteButtonMouseOver = () => {
+  function onDeleteButtonMouseOver() {
     setDeleteHover(!deleteHover);
-  };
+  }
 
   return (
     <div className="clInputWrapper">
@@ -90,7 +79,6 @@ function ClInput(props) {
           </p>
         </div>
         <div className="clInputSaveButton">
-          <p>({storeTime}에 임시 저장됨)</p>
           <button
             onClick={onClickSaveButton}
             style={
