@@ -3,7 +3,7 @@ import config from "../configs";
 
 function Test() {
   useEffect(() => {
-    fetch(`${config.URL}/api/tests`, {
+    fetch(`${config.url}/api/tests`, {
       method: "GET",
       credentials: "include",
     });

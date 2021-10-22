@@ -8,6 +8,7 @@ export const atomCoverLetterElements = atom({
   default: {
     element: [{ problem: null, answer: null }],
     selectedElement: 0,
+    cl_id: 0,
   },
   effects_UNSTABLE: [persistAtom],
 });
