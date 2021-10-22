@@ -19,7 +19,7 @@ function KeywordGraphView() {
     else return `${colors.gray}`;
   }
 
-  const keywordOnClick = (index) => {
+  function keywordOnClick(index) {
     setKeyword((prev) =>
       produce(prev, (draft) => {
         draft.selected = index;
@@ -28,7 +28,7 @@ function KeywordGraphView() {
         return draft;
       })
     );
-  };
+  }
 
   return (
     <div className="parentForCenter">

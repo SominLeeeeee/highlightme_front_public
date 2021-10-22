@@ -40,7 +40,6 @@ function FindQuestionPage() {
   }, []);
 
   useEffect(async () => {
-    console.log("keyword", keyword);
     const selectedKeyword = keyword.userKeywords[keyword.selected];
 
     if (selectedKeyword) {
@@ -54,47 +53,47 @@ function FindQuestionPage() {
     }
   }, [keyword.selected]);
 
-  const onLikeClick = async (index) => {
+  async function onLikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
     if (questions[index].disliked) {
       onDislikeClick(index);
     }
     toggleLike(index);
     await postQuestionLike(questions[index].question_id);
-  };
+  }
 
-  const onDislikeClick = async (index) => {
+  async function onDislikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
     if (questions[index].liked) {
       onLikeClick(index);
     }
     toggleDislike(index);
     await postQuestionDislike(questions[index].question_id);
-  };
+  }
 
   /**
    * Toggle liked on certain question
    */
-  const toggleLike = (index) => {
+  function toggleLike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
         draft[index].liked = !prev[index].liked;
         return draft;
       })
     );
-  };
+  }
 
   /**
    * Toggle disliked on certain question
    */
-  const toggleDislike = (index) => {
+  function toggleDislike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
         draft[index].disliked = !prev[index].disliked;
         return draft;
       })
     );
-  };
+  }
 
   /**
    * Post answer for question and update keyword selected type
@@ -102,7 +101,7 @@ function FindQuestionPage() {
    * @param {Number} userKeywordId
    * @param {String} answer
    */
-  const onAnswerPost = (userQuestionId, userKeywordId, answer) => {
+  function onAnswerPost(userQuestionId, userKeywordId, answer) {
     postQuestionAnswer(userQuestionId, userKeywordId, answer);
     setKeyword((prev) =>
       produce(prev, (draft) => {
@@ -110,21 +109,21 @@ function FindQuestionPage() {
         return draft;
       })
     );
-  };
+  }
 
   /**
    * Update questions with new answer string
    * @param {Number} index Index of question
    * @param {String} answer Answer string user edited
    */
-  const onAnswerEdit = (index, answer) => {
+  function onAnswerEdit(index, answer) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
         draft[index].answer = answer;
         return draft;
       })
     );
-  };
+  }
 
   return (
     <div>

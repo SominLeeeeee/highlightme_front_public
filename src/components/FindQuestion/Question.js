@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Question.scss";
 import "../../index.css";
 import InputBox from "../atom/InputBox";
-// import { ReactComponent as GoodIcon } from "../../public/images/ic-mydocs-good.svg";
 
 function Question({
   question,
