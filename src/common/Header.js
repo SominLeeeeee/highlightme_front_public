@@ -27,17 +27,17 @@ function Header() {
   const [menu, setMenu] = useRecoilState(atomMenu);
   const [displayModal, setDisplayModal] = useState(false);
 
-  const onProfileClick = () => {
+  function onProfileClick() {
     setDisplayModal(!displayModal);
-  };
+  }
 
-  const onUnderConstructingMenuClick = (name) => {
+  function onUnderConstructingMenuClick(name) {
     alert(`${name}는 현재 열심히 준비중! 😃`);
-  };
+  }
 
-  const onMenuClick = (name) => {
+  function onMenuClick(name) {
     setMenu(name);
-  };
+  }
 
   return (
     <div id="headerWrapper">
@@ -66,14 +66,12 @@ function Header() {
           ))}
 
           <li>
-            {/* <Link to="/mypage"> */}
             <img
               id="myProfile"
               src="/images/ic-profile.svg"
               onClick={onProfileClick}
             />
             {displayModal ? <Modal /> : <div />}
-            {/* </Link> */}
           </li>
         </ul>
       </div>

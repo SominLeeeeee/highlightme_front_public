@@ -10,7 +10,7 @@ import { atomUserInfo } from "../recoil/userStore";
  * @param {React.Component} component
  * @returns {React.Component}
  */
-const PrivateRouter = ({ component: Component, ...rest }) => {
+function PrivateRouter({ component: Component, ...rest }) {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   return (
@@ -21,6 +21,6 @@ const PrivateRouter = ({ component: Component, ...rest }) => {
       }
     />
   );
-};
+}
 
 export default PrivateRouter;

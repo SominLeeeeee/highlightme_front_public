@@ -13,7 +13,7 @@ import { atomUserInfo } from "../recoil/userStore";
  * @param {Boolean} restricted(true: restricted route, false: public route)
  * @returns {React.Component}
  */
-const PublicRouter = ({ component: Component, restricted, ...rest }) => {
+function PublicRouter({ component: Component, restricted, ...rest }) {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
   return (
@@ -28,6 +28,6 @@ const PublicRouter = ({ component: Component, restricted, ...rest }) => {
       }
     />
   );
-};
+}
 
 export default PublicRouter;

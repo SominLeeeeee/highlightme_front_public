@@ -8,7 +8,7 @@ function SignOut() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
-  const signOut = async () => {
+  async function signOut() {
     const result = await fetch(`${config.url}/api/users/logout`, {
       method: "GET",
       credentials: "include",
@@ -26,7 +26,7 @@ function SignOut() {
     } else {
       alert("서버 문제로 로그아웃에 실패했어요 🤒");
     }
-  };
+  }
 
   useEffect(() => {
     signOut();

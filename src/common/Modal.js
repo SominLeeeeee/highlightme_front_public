@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import SignOut from "../common/SignOut";
 
-const Modal = () => {
+function Modal() {
   const history = useHistory();
   const [logout, setLogOut] = useState(false);
 
-  const cleOnClick = () => {
+  function cleOnClick() {
     history.push("/coverletter");
-  };
+  }
 
-  const logoutOnClick = () => {
+  function logoutOnClick() {
     setLogOut(!logout);
-  };
+  }
 
   return (
     <div className="modalWrapper">
@@ -26,6 +26,6 @@ const Modal = () => {
       {logout ? <SignOut /> : <></>}
     </div>
   );
-};
+}
 
 export default Modal;
