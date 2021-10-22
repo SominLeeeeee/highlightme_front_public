@@ -5,7 +5,7 @@ import config from "../configs";
  * @param {Number} userKeywordId
  * @returns questions
  */
-export const postQuestions = async (userKeywordId) => {
+export async function postQuestions(userKeywordId) {
   return (
     await (
       await fetch(`${config.url}/api/questions`, {
@@ -17,14 +17,14 @@ export const postQuestions = async (userKeywordId) => {
       })
     ).json()
   ).questions;
-};
+}
 
 /**
  * Like or Unlike a question
  * @param {Number} questionId
  * @returns response from server
  */
-export const postQuestionLike = async (questionId) => {
+export async function postQuestionLike(questionId) {
   return await fetch(`${config.url}/api/questions/like`, {
     method: "POST",
     credentials: "include",
@@ -32,14 +32,14 @@ export const postQuestionLike = async (questionId) => {
       question_id: questionId,
     }),
   });
-};
+}
 
 /**
  * Dislike or Undislike a question
  * @param {Number} questionId
  * @returns response from server
  */
-export const postQuestionDislike = async (questionId) => {
+export async function postQuestionDislike(questionId) {
   return await fetch(`${config.url}/api/questions/dislike`, {
     method: "POST",
     credentials: "include",
@@ -47,7 +47,7 @@ export const postQuestionDislike = async (questionId) => {
       question_id: questionId,
     }),
   });
-};
+}
 
 /**
  * Post user answer of question
@@ -56,11 +56,11 @@ export const postQuestionDislike = async (questionId) => {
  * @param {String} answer
  * @returns response from server
  */
-export const postQuestionAnswer = async (
+export async function postQuestionAnswer(
   userQuestionId,
   userKeywordId,
   answer
-) => {
+) {
   return await fetch(`${config.url}/api/questions/answer`, {
     method: "POST",
     credentials: "include",
@@ -70,4 +70,4 @@ export const postQuestionAnswer = async (
       answer: answer,
     }),
   });
-};
+}

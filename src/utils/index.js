@@ -3,7 +3,7 @@
  * @param {UserInfo} userInfo
  * @returns {Boolean} isUserValid
  */
-export const isUserValid = (userInfo) => {
+export function isUserValid(userInfo) {
   return (
     userInfo &&
     userInfo.id &&
@@ -12,4 +12,4 @@ export const isUserValid = (userInfo) => {
     userInfo.email.length > 0 &&
     userInfo.accessToken.length > 0
   );
-};
+}
