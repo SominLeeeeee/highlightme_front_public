@@ -12,6 +12,7 @@ function Question({
 }) {
   const [isThumbsUpHovered, setIsThumbsUpHovered] = useState(false);
   const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
+  const [isScrapHovered, setIsScrapHovered] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
 
   function onEditClick() {
@@ -26,6 +27,48 @@ function Question({
       );
     }
   }
+
+  const icGoodActive = (
+    <span className="iconSpan">
+      <img id="icGood" src={"/images/ic-mydocs-good-clicked.svg"} />
+      <span className={"icParagraphFocused"}>좋아요</span>
+    </span>
+  );
+
+  const icGood = (
+    <span className="iconSpan">
+      <img id="icGood" src={"/images/ic-mydocs-good.svg"} />
+      <span className={"icParagraph"}>좋아요</span>
+    </span>
+  );
+
+  const icBadActive = (
+    <span className="iconSpan">
+      <img id="icBad" src={"/images/ic-mydocs-bad-clicked.svg"} />
+      <span className={"icParagraphFocused"}>싫어요</span>
+    </span>
+  );
+
+  const icBad = (
+    <span className="iconSpan">
+      <img id="icBad" src={"/images/ic-mydocs-bad.svg"} />
+      <span className={"icParagraph"}>싫어요</span>
+    </span>
+  );
+
+  const icScrapActive = (
+    <span className="iconSpan">
+      <img id="icScrap" src={"/images/ic-mydocs-scrap-clicked.svg"} />
+      <span className={"icParagraphFocused"}>모아두기</span>
+    </span>
+  );
+
+  const icScrap = (
+    <span className="iconSpan">
+      <img id="icScrap" src={"/images/ic-mydocs-scrap.svg"} />
+      <span className={"icParagraph"}>모아두기</span>
+    </span>
+  );
 
   return (
     <div>
@@ -42,34 +85,38 @@ function Question({
 
       <div id="underQuestion">
         <span className="evaluateQuestionBox noselect">
-          이 질문이 마음에 드셨나요?
-          <img
-            id="icGood"
-            src={
-              question.liked
-                ? "/images/ic-mydocs-good-clicked.svg"
-                : isThumbsUpHovered
-                ? "/images/ic-mydocs-good-clicked.svg"
-                : "/images/ic-mydocs-good.svg"
-            }
+          <span
             onClick={onLikeClick}
             onMouseOver={() => setIsThumbsUpHovered(true)}
             onMouseOut={() => setIsThumbsUpHovered(false)}
-          />
-          <img
-            id="icBad"
-            src={
-              question.disliked
-                ? "/images/ic-mydocs-bad-clicked.svg"
-                : isThumbsDownHovered
-                ? "/images/ic-mydocs-bad-clicked.svg"
-                : "/images/ic-mydocs-bad.svg"
-            }
+          >
+            {question.liked
+              ? icGoodActive
+              : isThumbsUpHovered
+              ? icGoodActive
+              : icGood}
+          </span>
+          <span
             onClick={onDislikeClick}
             onMouseOver={() => setIsThumbsDownHovered(true)}
             onMouseOut={() => setIsThumbsDownHovered(false)}
-          />
-          <img id="icScrap" src="/images/ic-scrap.svg" />
+          >
+            {question.disliked
+              ? icBadActive
+              : isThumbsDownHovered
+              ? icBadActive
+              : icBad}
+          </span>
+          <span
+            onMouseOver={() => setIsScrapHovered(true)}
+            onMouseOut={() => setIsScrapHovered(false)}
+          >
+            {question.scraped
+              ? icScrapActive
+              : isScrapHovered
+              ? icScrapActive
+              : icScrap}
+          </span>
         </span>
         <span id="editAnswerBox" onClick={onEditClick}>
           <img

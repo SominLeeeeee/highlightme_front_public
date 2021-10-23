@@ -3,7 +3,7 @@
   display: block;
   text-align: left;
   color: black;
-  margin: 1.4rem 0 2.1rem 0;
+  margin: 1.4rem 0 2.5rem 0;
   font-family: "AppleSDGothicNeo-Medium";
 }
 
@@ -19,25 +19,36 @@
     border-radius: 2.5rem;
     background-color: #ffffff;
     padding: 0 2.2rem 0 0.5rem;
-    color: #818181;
+    color: #a0a0a0;
     font-size: 1.8rem;
     display: flex;
     width: fit-content;
 
-    #icGood,
-    #icBad {
-      display: inline-block;
-      width: 1.9rem;
-      height: 1.8rem;
-      margin-left: 1.24rem;
-    }
+    .iconSpan {
+      display: flex;
 
-    #icScrap {
-      display: inline-block;
-      width: 2.1rem;
-      height: 2.1rem;
-      margin-left: 1.24rem;
-      margin-top: -0.1rem;
+      #icGood,
+      #icBad {
+        display: inline-block;
+        width: 1.9rem;
+        height: 1.8rem;
+      }
+
+      #icScrap {
+        display: inline-block;
+        width: 2.1rem;
+        height: 2.1rem;
+        margin-top: -0.1rem;
+      }
+
+      .icParagraph {
+        margin: -0.2rem 2rem 0 1rem;
+      }
+
+      .icParagraphFocused {
+        margin: -0.2rem 2rem 0 1rem;
+        color: #ffbb00;
+      }
     }
   }
 

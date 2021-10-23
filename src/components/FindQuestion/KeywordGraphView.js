@@ -41,7 +41,7 @@ function KeywordGraphView() {
         </span>
 
         <ShadowBoxMedium>
-          {keyword.userKeywords ? (
+          {keyword.userKeywords.length !== 0 ? (
             <div id="keywordWrapper">
               {keyword.userKeywords.map((e, idx, arr) => (
                 <Keyword
