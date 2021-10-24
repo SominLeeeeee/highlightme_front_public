@@ -1,9 +1,15 @@
+.question {
+  width: calc(100%);
+  margin-top: 1.4rem;
+}
+
 #questionText {
   font-size: 2.4rem;
   display: block;
   text-align: left;
   color: black;
-  margin: 1.4rem 0 2.5rem 0;
+  margin: 0;
+  margin-bottom: 2.5rem;
   font-family: "AppleSDGothicNeo-Medium";
 }
 
@@ -63,5 +69,16 @@
       font-size: 1.8rem;
       color: #898989;
     }
+  }
+}
+
+#tailQuestion {
+  display: flex;
+  width: auto;
+  align-items: flex-start;
+
+  #tailIcon {
+    margin-top: 1.5rem;
+    margin-right: 1rem;
   }
 }
