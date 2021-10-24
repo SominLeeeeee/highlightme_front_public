@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { atomCoverLetterElements, atomMenu } from "../recoil/userStore";
 import config from "../configs";
 import produce from "immer";
+import { getCoverletters } from "../apis/coverletters";
 
 function CoverletterPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
@@ -22,7 +23,7 @@ function CoverletterPage() {
   useEffect(async () => {
     setMenu("자기소개서");
 
-    const response = await downloadCle();
+    const response = await getCoverletters();
 
     if (response) {
       let fromServerCle = [];
@@ -35,26 +36,12 @@ function CoverletterPage() {
 
       setCle((prev) => ({
         ...prev,
+        cl_id: response.cl_id,
         element: fromServerCle,
         selectedElement: 0,
       }));
     }
   }, []);
-
-  async function downloadCle() {
-    let result;
-
-    result = await fetch(`${config.url}/api/cls`, {
-      method: "GET",
-      credentials: "include",
-    });
-
-    if (result.ok) {
-      result = await result.json();
-      setCle((prev) => ({ ...prev, cl_id: result.cl_id }));
-      return result;
-    } else return result.ok;
-  }
 
   async function uploadCle() {
     let CLES = [];
