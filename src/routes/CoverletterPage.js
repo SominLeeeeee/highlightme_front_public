@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import { atomCoverLetterElements, atomMenu } from "../recoil/userStore";
 import config from "../configs";
 import produce from "immer";
-import { getCoverletters } from "../apis/coverletters";
+import { getCoverletters, postCoverletters } from "../apis/coverletters";
 
 function CoverletterPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
@@ -42,38 +42,6 @@ function CoverletterPage() {
       }));
     }
   }, []);
-
-  async function uploadCle() {
-    let CLES = [];
-    cle.element.map((e, idx, arr) => {
-      CLES.push({
-        cl_element_id: idx + 1,
-        problem: e.problem,
-        answer: e.answer,
-        _public: 1,
-      });
-    });
-
-    let request = {
-      CLES: [],
-      cl_id: cle.cl_id,
-      title: `자기소개서 ${cle.cl_id}번`,
-      company: "카뱅",
-      tags: ["카카오", "뱅크"],
-      comments: "잘부탁드려용",
-    };
-
-    request = new URLSearchParams(request);
-    request.set("CLES", JSON.stringify(CLES));
-
-    let result = await fetch(`${config.url}/api/cls`, {
-      method: "POST",
-      credentials: "include",
-      body: request,
-    });
-
-    if (!result.ok) console.log("failed to upload coverletter 😭");
-  }
 
   /**
    * 문항을 작성할 때
@@ -143,7 +111,8 @@ function CoverletterPage() {
       setCle((prev) => ({ ...prev, selectedElement: abnormal.index }));
       setError(abnormal.err);
     } else {
-      uploadCle();
+      const result = postCoverletters(cle);
+      if (!result) console.log("fail to upload coverletter");
     }
   }
 
