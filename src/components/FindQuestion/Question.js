@@ -14,18 +14,23 @@ function Question({
   const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
   const [isScrapHovered, setIsScrapHovered] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
+  const [tailQuestion, setTailQuestion] = useState(false);
 
-  function onEditClick() {
+  async function onEditClick() {
     /* 수정완료 버튼을 눌렀다면 서버에 전송 및 키워드 색상 변경 */
     setIsEditClicked(!isEditClicked);
+    let tailResult;
 
     if (isEditClicked) {
-      onAnswerPost(
+      tailResult = onAnswerPost(
         question.user_question_id,
         question.user_keyword_id,
         question.answer
       );
     }
+
+    setTailQuestion(await tailResult);
+    console.log(await tailResult);
   }
 
   const icGoodActive = (
@@ -71,7 +76,7 @@ function Question({
   );
 
   return (
-    <div>
+    <div className="question">
       <p id="questionText">Q. {question.content}</p>
       <InputBox
         placeholder="답변을 입력해주세요."
@@ -135,6 +140,21 @@ function Question({
           </p>
         </span>
       </div>
+
+      {tailQuestion ? (
+        <div id="tailQuestion">
+          <img id="tailIcon" src="/images/ic-mydocs-tailquestion.svg" />
+          <Question
+            question={tailQuestion}
+            onLikeClick={() => onLikeClick}
+            onDislikeClick={() => onDislikeClick}
+            onAnswerEdit={(answer) => onAnswerEdit}
+            onAnswerPost={onAnswerPost}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
