@@ -5,6 +5,7 @@ import InputBox from "../atom/InputBox";
 import LikeButton from "../atom/LikeButton";
 import DislikeButton from "../atom/DislikeButton";
 import ScrapButton from "../atom/ScrapButton";
+import EditButton from "../atom/EditButton";
 
 function Question({
   question,
@@ -89,22 +90,10 @@ function Question({
             }
           />
         </span>
-        <span id="editAnswerBox" onClick={onEditClick}>
-          <img
-            id="icEdit"
-            src={
-              isEditClicked
-                ? "/images/ic-mydocs-g-write-clicked.svg"
-                : "/images/ic-mydocs-g-write.svg"
-            }
-          />
-          <p
-            className="noselect"
-            style={isEditClicked ? { color: "#fe894b" } : {}}
-          >
-            {isEditClicked ? "수정완료" : "수정"}
-          </p>
-        </span>
+        <EditButton
+          onClick={onEditClick}
+          status={isEditClicked ? "active" : "default"}
+        />
       </div>
 
       {tailQuestion ? (

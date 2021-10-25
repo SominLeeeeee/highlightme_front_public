@@ -4,7 +4,9 @@
   display: flex;
 
   span {
-    margin: -0.2rem 2rem 0 1rem;
+    margin: 0rem 2rem 0 0.5rem;
+    color: #a0a0a0;
+    font-size: 1.8rem;
   }
 
   .focusedText {
@@ -13,7 +15,8 @@
 }
 
 .icGood,
-.icBad {
+.icBad,
+.icEdit {
   display: inline-block;
   width: 1.9rem;
   height: 1.8rem;
