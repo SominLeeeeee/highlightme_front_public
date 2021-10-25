@@ -13,38 +13,6 @@
   font-family: "AppleSDGothicNeo-Medium";
 }
 
-#underQuestion {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
-  font-family: "AppleSDGothicNeo-Regular";
-
-  .evaluateQuestionBox {
-    border-radius: 2.5rem;
-    background-color: #ffffff;
-    padding: 0 2.2rem 0 0.5rem;
-    color: #a0a0a0;
-    font-size: 1.8rem;
-    display: flex;
-    width: fit-content;
-  }
-
-  #editAnswerBox {
-    #icEdit {
-      width: 1.44rem;
-      height: 1.44rem;
-      margin-right: 0.8rem;
-    }
-    p {
-      display: inline;
-      font-size: 1.8rem;
-      color: #898989;
-    }
-  }
-}
-
 #tailQuestion {
   display: flex;
   width: auto;

@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import "./Question.scss";
 import "../../index.css";
 import InputBox from "../atom/InputBox";
-import LikeButton from "../atom/LikeButton";
-import DislikeButton from "../atom/DislikeButton";
-import ScrapButton from "../atom/ScrapButton";
-import EditButton from "../atom/EditButton";
+import RespondFindQuestion from "./RespondFindQuestion";
 
 function Question({
   question,
@@ -15,15 +12,12 @@ function Question({
   onAnswerEdit,
   onScrapClick,
 }) {
-  const [isThumbsUpHovered, setIsThumbsUpHovered] = useState(false);
-  const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
-  const [isScrapHovered, setIsScrapHovered] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
   const [tailQuestion, setTailQuestion] = useState(false);
+  const [isEditClicked, setIsEditClicked] = useState(false);
 
-  async function onEditClick() {
+  async function onEditClick(paramEditClicked) {
     /* 수정완료 버튼을 눌렀다면 서버에 전송, 키워드 색상 변경, 꼬리질문 설정 */
-    setIsEditClicked(!isEditClicked);
+    setIsEditClicked(paramEditClicked);
 
     let tailResult;
     if (isEditClicked) {
@@ -50,50 +44,13 @@ function Question({
         disabled={!isEditClicked}
       />
 
-      <div id="underQuestion">
-        <span className="evaluateQuestionBox noselect">
-          <LikeButton
-            onClick={onLikeClick}
-            onMouseOver={() => setIsThumbsUpHovered(true)}
-            onMouseOut={() => setIsThumbsUpHovered(false)}
-            status={
-              question.liked
-                ? "active"
-                : isThumbsUpHovered
-                ? "active"
-                : "default"
-            }
-          />
-          <DislikeButton
-            onClick={onDislikeClick}
-            onMouseOver={() => setIsThumbsDownHovered(true)}
-            onMouseOut={() => setIsThumbsDownHovered(false)}
-            status={
-              question.disliked
-                ? "active"
-                : isThumbsDownHovered
-                ? "active"
-                : "default"
-            }
-          />
-          <ScrapButton
-            onClick={onScrapClick}
-            onMouseOver={() => setIsScrapHovered(true)}
-            onMouseOut={() => setIsScrapHovered(false)}
-            status={
-              question.scraped
-                ? "active"
-                : isScrapHovered
-                ? "active"
-                : "default"
-            }
-          />
-        </span>
-        <EditButton
-          onClick={onEditClick}
-          status={isEditClicked ? "active" : "default"}
-        />
-      </div>
+      <RespondFindQuestion
+        question={question}
+        onLikeClick={onLikeClick}
+        onDislikeClick={onDislikeClick}
+        onScrapClick={onScrapClick}
+        onEditClick={onEditClick}
+      />
 
       {tailQuestion ? (
         <div id="tailQuestion">
@@ -104,6 +61,13 @@ function Question({
             onDislikeClick={() => onDislikeClick}
             onAnswerEdit={(answer) => onAnswerEdit}
             onAnswerPost={onAnswerPost}
+          />
+          <RespondFindQuestion
+            question={tailQuestion}
+            onLikeClick={onLikeClick}
+            onDislikeClick={onDislikeClick}
+            onScrapClick={onScrapClick}
+            onEditClick={onEditClick}
           />
         </div>
       ) : (
