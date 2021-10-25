@@ -22,10 +22,10 @@ function Question({
   const [tailQuestion, setTailQuestion] = useState(false);
 
   async function onEditClick() {
-    /* 수정완료 버튼을 눌렀다면 서버에 전송 및 키워드 색상 변경 */
+    /* 수정완료 버튼을 눌렀다면 서버에 전송, 키워드 색상 변경, 꼬리질문 설정 */
     setIsEditClicked(!isEditClicked);
-    let tailResult;
 
+    let tailResult;
     if (isEditClicked) {
       tailResult = onAnswerPost(
         question.user_question_id,
@@ -35,7 +35,6 @@ function Question({
     }
 
     setTailQuestion(await tailResult);
-    console.log(await tailResult);
   }
 
   return (

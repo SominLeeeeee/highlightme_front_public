@@ -100,6 +100,7 @@ function FindQuestionPage() {
    * @param {Number} userQuestionId
    * @param {Number} userKeywordId
    * @param {String} answer
+   * @return tail question
    */
   async function onAnswerPost(userQuestionId, userKeywordId, answer) {
     let result = await postQuestionAnswer(
@@ -118,17 +119,6 @@ function FindQuestionPage() {
     );
 
     if (result.isAnswerSuccess) {
-      result = {
-        ...result,
-        tailQuestion: {
-          question_id: 883,
-          content: "꼬리꼬리 크롬 탭은 프로세스인가요 스레드인가요?",
-          liked: 0,
-          disliked: 0,
-          answer: "",
-        },
-      };
-
       return result.tailQuestion;
     } else return false;
   }
