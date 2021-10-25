@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Question.scss";
 import "../../index.css";
 import InputBox from "../atom/InputBox";
+import LikeButton from "../atom/LikeButton";
+import DislikeButton from "../atom/DislikeButton";
+import ScrapButton from "../atom/ScrapButton";
 
 function Question({
   question,
@@ -9,6 +12,7 @@ function Question({
   onDislikeClick,
   onAnswerPost,
   onAnswerEdit,
+  onScrapClick,
 }) {
   const [isThumbsUpHovered, setIsThumbsUpHovered] = useState(false);
   const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
@@ -33,48 +37,6 @@ function Question({
     console.log(await tailResult);
   }
 
-  const icGoodActive = (
-    <span className="iconSpan">
-      <img id="icGood" src={"/images/ic-mydocs-good-clicked.svg"} />
-      <span className={"icParagraphFocused"}>좋아요</span>
-    </span>
-  );
-
-  const icGood = (
-    <span className="iconSpan">
-      <img id="icGood" src={"/images/ic-mydocs-good.svg"} />
-      <span className={"icParagraph"}>좋아요</span>
-    </span>
-  );
-
-  const icBadActive = (
-    <span className="iconSpan">
-      <img id="icBad" src={"/images/ic-mydocs-bad-clicked.svg"} />
-      <span className={"icParagraphFocused"}>싫어요</span>
-    </span>
-  );
-
-  const icBad = (
-    <span className="iconSpan">
-      <img id="icBad" src={"/images/ic-mydocs-bad.svg"} />
-      <span className={"icParagraph"}>싫어요</span>
-    </span>
-  );
-
-  const icScrapActive = (
-    <span className="iconSpan">
-      <img id="icScrap" src={"/images/ic-mydocs-scrap-clicked.svg"} />
-      <span className={"icParagraphFocused"}>모아두기</span>
-    </span>
-  );
-
-  const icScrap = (
-    <span className="iconSpan">
-      <img id="icScrap" src={"/images/ic-mydocs-scrap.svg"} />
-      <span className={"icParagraph"}>모아두기</span>
-    </span>
-  );
-
   return (
     <div className="question">
       <p id="questionText">Q. {question.content}</p>
@@ -90,38 +52,42 @@ function Question({
 
       <div id="underQuestion">
         <span className="evaluateQuestionBox noselect">
-          <span
+          <LikeButton
             onClick={onLikeClick}
             onMouseOver={() => setIsThumbsUpHovered(true)}
             onMouseOut={() => setIsThumbsUpHovered(false)}
-          >
-            {question.liked
-              ? icGoodActive
-              : isThumbsUpHovered
-              ? icGoodActive
-              : icGood}
-          </span>
-          <span
+            status={
+              question.liked
+                ? "active"
+                : isThumbsUpHovered
+                ? "active"
+                : "default"
+            }
+          />
+          <DislikeButton
             onClick={onDislikeClick}
             onMouseOver={() => setIsThumbsDownHovered(true)}
             onMouseOut={() => setIsThumbsDownHovered(false)}
-          >
-            {question.disliked
-              ? icBadActive
-              : isThumbsDownHovered
-              ? icBadActive
-              : icBad}
-          </span>
-          <span
+            status={
+              question.disliked
+                ? "active"
+                : isThumbsDownHovered
+                ? "active"
+                : "default"
+            }
+          />
+          <ScrapButton
+            onClick={onScrapClick}
             onMouseOver={() => setIsScrapHovered(true)}
             onMouseOut={() => setIsScrapHovered(false)}
-          >
-            {question.scraped
-              ? icScrapActive
-              : isScrapHovered
-              ? icScrapActive
-              : icScrap}
-          </span>
+            status={
+              question.scraped
+                ? "active"
+                : isScrapHovered
+                ? "active"
+                : "default"
+            }
+          />
         </span>
         <span id="editAnswerBox" onClick={onEditClick}>
           <img
