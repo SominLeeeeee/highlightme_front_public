@@ -4,6 +4,9 @@ import App from "./App";
 import { RecoilRoot } from "recoil";
 import Footer from "./common/Footer";
 import "./index.css";
+import { enableMapSet } from "immer";
+
+enableMapSet();
 
 ReactDOM.render(
   <RecoilRoot>

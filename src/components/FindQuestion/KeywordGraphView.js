@@ -10,7 +10,8 @@ import { useRecoilState } from "recoil";
 import { atomKeyword } from "../../recoil/userStore";
 import produce from "immer";
 
-function KeywordGraphView() {
+function KeywordGraphView(props) {
+  const { onKeywordClick } = { ...props };
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
 
   function pickColor(answered) {
@@ -47,7 +48,7 @@ function KeywordGraphView() {
                 <Keyword
                   text={e.keyword}
                   color={pickColor(e.answered)}
-                  onClick={() => keywordOnClick(idx)}
+                  onClick={() => onKeywordClick(idx)}
                 />
               ))}
             </div>

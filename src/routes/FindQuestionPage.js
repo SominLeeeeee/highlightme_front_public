@@ -43,32 +43,51 @@ function FindQuestionPage() {
     const selectedKeyword = keyword.userKeywords[keyword.selected];
 
     if (selectedKeyword) {
-      let questions = await postQuestions(selectedKeyword.user_keyword_id);
-      setQuestions(
-        questions.map((e) => ({
-          ...e,
-          user_keyword_id: selectedKeyword.user_keyword_id,
-        }))
+      let postQuestionsResult = await postQuestions(
+        selectedKeyword.user_keyword_id
       );
+
+      let questionArr = new Map();
+
+      postQuestionsResult.map((e) => {
+        questionArr.set(e.question_id, {
+          ...e,
+          editing: false,
+          keyword_id: selectedKeyword.user_keyword_id,
+        });
+      });
+
+      setQuestions(questionArr);
     }
   }, [keyword.selected]);
 
+  function onKeywordClick(index) {
+    setKeyword((prev) =>
+      produce(prev, (draft) => {
+        draft.selected = index;
+        if (draft.userKeywords[index].answered === 0)
+          draft.userKeywords[index].answered = 1;
+        return draft;
+      })
+    );
+  }
+
   async function onLikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
-    if (questions[index].disliked) {
+    if (questions.get(index).disliked) {
       onDislikeClick(index);
     }
     toggleLike(index);
-    await postQuestionLike(questions[index].question_id);
+    await postQuestionLike(index);
   }
 
   async function onDislikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
-    if (questions[index].liked) {
+    if (questions.get(index).liked) {
       onLikeClick(index);
     }
     toggleDislike(index);
-    await postQuestionDislike(questions[index].question_id);
+    await postQuestionDislike(index);
   }
 
   /**
@@ -77,7 +96,7 @@ function FindQuestionPage() {
   function toggleLike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
-        draft[index].liked = !prev[index].liked;
+        draft.get(index).liked = !prev.get(index).liked;
         return draft;
       })
     );
@@ -89,7 +108,7 @@ function FindQuestionPage() {
   function toggleDislike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
-        draft[index].disliked = !prev[index].disliked;
+        draft.get(index).disliked = !prev.get(index).disliked;
         return draft;
       })
     );
@@ -131,7 +150,7 @@ function FindQuestionPage() {
   function onAnswerEdit(index, answer) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
-        draft[index].answer = answer;
+        draft.get(index).answer = answer;
         return draft;
       })
     );
@@ -150,7 +169,10 @@ function FindQuestionPage() {
             </p>
           </div>
           <div className="keywordQuestionWrapper">
-            <KeywordGraphView keywords={keyword.userKeywords} />
+            <KeywordGraphView
+              keywords={keyword.userKeywords}
+              onKeywordClick={onKeywordClick}
+            />
             <QuestionList
               keyword={keyword.userKeywords[keyword.selected]}
               questions={questions}

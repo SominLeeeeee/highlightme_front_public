@@ -46,8 +46,8 @@ function Question({
 
       <RespondFindQuestion
         question={question}
-        onLikeClick={onLikeClick}
-        onDislikeClick={onDislikeClick}
+        onLikeClick={() => onLikeClick(question.question_id)}
+        onDislikeClick={() => onDislikeClick(question.question_id)}
         onScrapClick={onScrapClick}
         onEditClick={onEditClick}
       />

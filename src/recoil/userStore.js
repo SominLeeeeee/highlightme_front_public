@@ -33,17 +33,7 @@ export const atomKeyword = atom({
 
 export const atomQuestion = atom({
   key: "atomQuestion",
-  default: [
-    {
-      question_id: "",
-      content: "",
-      answer: "",
-      user_question_id: "",
-      user_keyword_id: "",
-      liked: false,
-      disliked: false,
-    },
-  ],
+  default: new Map(),
 });
 
 export const atomSignUp = atom({
