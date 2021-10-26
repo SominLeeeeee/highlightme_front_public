@@ -1,11 +1,12 @@
 import "../../style/iconTextButton.scss";
+import "../../index.css";
 
 function EditButton(props) {
   const { onClick, status } = { ...props };
 
   return (
     <span
-      className="iconTextButton"
+      className="iconTextButton noselect"
       onClick={onClick}
       style={{ marginRight: "-2rem" }}
     >
