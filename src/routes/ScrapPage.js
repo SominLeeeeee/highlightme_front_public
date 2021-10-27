@@ -128,18 +128,44 @@ function ScrapPage() {
     );
   }
 
+  function handleAddInterviewClick(id) {
+    setTemp((prev) =>
+      produce(prev, (draft) => {
+        draft.get(id).actions.interviewListed =
+          !prev.get(id).actions.interviewListed;
+        return draft;
+      })
+    );
+  }
+
+  function handleDeleteInterview(id) {
+    console.log("before", temp);
+    setTemp((prev) => {
+      produce(prev, (draft) => {
+        draft.get(id).actions.interviewListed = false;
+        return draft;
+      });
+    });
+    console.log("after", temp);
+  }
+
   function interviewQuestions() {
     let result = [];
 
-    temp.forEach((question) => {
-      if (question.actions.interviewListed) {
-        result.push({ id: question.id, content: question.content });
-      }
-    });
+    if (temp) {
+      temp.forEach((question) => {
+        if (question.actions.interviewListed) {
+          result.push({ id: question.id, content: question.content });
+        }
+      });
+    }
 
-    console.log("interview", result);
     return result;
   }
+
+  useEffect(() => {
+    console.log("asdfasdf", temp);
+  }, [temp]);
 
   return (
     <>
@@ -158,8 +184,12 @@ function ScrapPage() {
               onChangeAnswer={handleChangeAnswer}
               onEditClick={handleEditClick}
               onScrapClick={handleScrapClick}
+              onAddInterviewClick={handleAddInterviewClick}
             />
-            <InterviewSetting interviewQuestions={interviewQuestions()} />
+            <InterviewSetting
+              interviewQuestions={interviewQuestions()}
+              onDeleteInterview={handleAddInterviewClick}
+            />
           </div>
         </div>
       </div>

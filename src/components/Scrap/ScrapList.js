@@ -6,7 +6,13 @@ import ScrapAction from "./ScrapAction";
 import "./scrapList.scss";
 
 function ScrapList(props) {
-  const { scrapQuestions, onChangeAnswer, onEditClick, onScrapClick } = {
+  const {
+    scrapQuestions,
+    onChangeAnswer,
+    onEditClick,
+    onScrapClick,
+    onAddInterviewClick,
+  } = {
     ...props,
   };
 
@@ -28,6 +34,7 @@ function ScrapList(props) {
             actions={question.actions}
             onEditClick={() => onEditClick(question.id)}
             onScrapClick={() => onScrapClick(question.id)}
+            onAddInterviewClick={() => onAddInterviewClick(question.id)}
           />
         </>
       );

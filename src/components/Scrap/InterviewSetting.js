@@ -3,13 +3,17 @@ import ShadowBoxMedium from "../atom/ShadowBoxMedium";
 import "./interviewSetting.scss";
 
 function InterviewSetting(props) {
-  const { interviewQuestions } = { ...props };
+  const { interviewQuestions, onDeleteInterview } = { ...props };
 
+  // console.log("sss", interviewQuestions);
   function interviewListJSX() {
     return interviewQuestions.map((question) => (
       <div className="interviewContent">
         <p>{question.content}</p>
-        <img src="/images/ic-sign-delete-gray.svg"></img>
+        <img
+          src="/images/ic-sign-delete-gray.svg"
+          onClick={() => onDeleteInterview(question.id)}
+        />
       </div>
     ));
   }
