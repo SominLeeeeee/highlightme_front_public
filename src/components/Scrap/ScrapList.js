@@ -2,9 +2,12 @@ import produce from "immer";
 import EditButton from "../atom/EditButton";
 import HighlightText from "../atom/HighlightText";
 import QuestionContent from "../FindQuestion/QuestionContent";
+import ScrapAction from "./ScrapAction";
 
 function ScrapList(props) {
-  const { scrapQuestions, onChangeAnswer, onEditClick } = { ...props };
+  const { scrapQuestions, onChangeAnswer, onEditClick, onScrapClick } = {
+    ...props,
+  };
 
   function makeScrapListJSX() {
     let scrapListJSX = [];
@@ -16,9 +19,14 @@ function ScrapList(props) {
             question={question}
             onChangeAnswer={onChangeAnswer}
           />
-          <EditButton
+          {/* <EditButton
             onClick={() => onEditClick(question.id)}
             status={question.actions.editing ? "active" : "default"}
+          /> */}
+          <ScrapAction
+            actions={question.actions}
+            onEditClick={() => onEditClick(question.id)}
+            onScrapClick={() => onScrapClick(question.id)}
           />
         </>
       );

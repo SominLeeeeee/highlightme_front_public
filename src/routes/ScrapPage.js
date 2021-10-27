@@ -17,7 +17,7 @@ function ScrapPage() {
       actions: {
         liked: false,
         disliked: false,
-        scrapped: false,
+        scrapped: true,
         interviewListed: false,
         editing: false,
       },
@@ -31,7 +31,7 @@ function ScrapPage() {
       actions: {
         liked: false,
         disliked: false,
-        scrapped: false,
+        scrapped: true,
         interviewListed: false,
         editing: false,
       },
@@ -57,6 +57,24 @@ function ScrapPage() {
     );
   }
 
+  function handleScrapClick(id) {
+    // setTemp((prev) =>
+    //   produce(prev, (draft) => {
+    //     draft.get(id).actions.scrapped = !prev.get(id).actions.scrapped;
+    //     return draft;
+    //   })
+    // );
+
+    // 눌려있는 스크랩 버튼을 눌렀다 -> 스크랩 하지 않겠다는 뜻
+    // 따라서 스크랩 버튼을 누르면 스크랩질문 목록에서 지움
+    setTemp((prev) =>
+      produce(prev, (draft) => {
+        draft.delete(id);
+        return draft;
+      })
+    );
+  }
+
   return (
     <>
       <Header />
@@ -73,6 +91,7 @@ function ScrapPage() {
               scrapQuestions={temp}
               onChangeAnswer={handleChangeAnswer}
               onEditClick={handleEditClick}
+              onScrapClick={handleScrapClick}
             />
           </div>
         </div>
