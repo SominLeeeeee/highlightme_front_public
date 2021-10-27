@@ -3,22 +3,16 @@ import LikeButton from "../atom/LikeButton";
 import DislikeButton from "../atom/DislikeButton";
 import ScrapButton from "../atom/ScrapButton";
 import EditButton from "../atom/EditButton";
-import "./respondFindQuestion.scss";
+import "./questionAction.scss";
 
-function RespondFindQuestion(props) {
-  const { question, onLikeClick, onDislikeClick, onScrapClick, onEditClick } = {
+function QuestionAction(props) {
+  const { actions, onLikeClick, onDislikeClick, onScrapClick, onEditClick } = {
     ...props,
   };
 
   const [isThumbsUpHovered, setIsThumbsUpHovered] = useState(false);
   const [isThumbsDownHovered, setIsThumbsDownHovered] = useState(false);
   const [isScrapHovered, setIsScrapHovered] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
-
-  function handleEditClick() {
-    onEditClick(!isEditClicked);
-    setIsEditClicked(!isEditClicked);
-  }
 
   return (
     <div className="respondFindQuestion">
@@ -28,7 +22,7 @@ function RespondFindQuestion(props) {
           onMouseOver={() => setIsThumbsUpHovered(true)}
           onMouseOut={() => setIsThumbsUpHovered(false)}
           status={
-            question.liked ? "active" : isThumbsUpHovered ? "active" : "default"
+            actions.liked ? "active" : isThumbsUpHovered ? "active" : "default"
           }
         />
         <DislikeButton
@@ -36,7 +30,7 @@ function RespondFindQuestion(props) {
           onMouseOver={() => setIsThumbsDownHovered(true)}
           onMouseOut={() => setIsThumbsDownHovered(false)}
           status={
-            question.disliked
+            actions.disliked
               ? "active"
               : isThumbsDownHovered
               ? "active"
@@ -48,17 +42,17 @@ function RespondFindQuestion(props) {
           onMouseOver={() => setIsScrapHovered(true)}
           onMouseOut={() => setIsScrapHovered(false)}
           status={
-            question.scraped ? "active" : isScrapHovered ? "active" : "default"
+            actions.scrapped ? "active" : isScrapHovered ? "active" : "default"
           }
         />
       </span>
 
       <EditButton
-        onClick={handleEditClick}
-        status={isEditClicked ? "active" : "default"}
+        onClick={onEditClick}
+        status={actions.editing ? "active" : "default"}
       />
     </div>
   );
 }
 
-export default RespondFindQuestion;
+export default QuestionAction;

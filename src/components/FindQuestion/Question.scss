@@ -1,25 +1,12 @@
-.question {
-  width: calc(100%);
-  margin-top: 1.4rem;
-}
-
-#questionText {
-  font-size: 2.4rem;
-  display: block;
-  text-align: left;
-  color: black;
-  margin: 0;
-  margin-bottom: 2.5rem;
-  font-family: "AppleSDGothicNeo-Medium";
-}
-
-#tailQuestion {
+.tailQuestion {
   display: flex;
-  width: auto;
   align-items: flex-start;
 
-  #tailIcon {
-    margin-top: 1.5rem;
+  img {
     margin-right: 1rem;
   }
+}
+
+.question {
+  width: calc(100%);
 }

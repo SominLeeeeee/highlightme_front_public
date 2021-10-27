@@ -13,9 +13,11 @@ import {
   postQuestionAnswer,
   postQuestionLike,
   postQuestionDislike,
+  postQuestionScrap,
 } from "../apis/questions";
 
 import { getKeywords } from "../apis/keywords";
+import Question from "../components/FindQuestion/QuestionContent";
 
 function FindQuestionPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
@@ -43,18 +45,13 @@ function FindQuestionPage() {
     const selectedKeyword = keyword.userKeywords[keyword.selected];
 
     if (selectedKeyword) {
-      let postQuestionsResult = await postQuestions(
-        selectedKeyword.user_keyword_id
-      );
-
+      let postQuestionsResult = await postQuestions(selectedKeyword.keyword_id);
       let questionArr = new Map();
 
       postQuestionsResult.map((e) => {
-        questionArr.set(e.question_id, {
-          ...e,
-          editing: false,
-          keyword_id: selectedKeyword.user_keyword_id,
-        });
+        questionArr.set(e.id, e);
+        questionArr.get(e.id).actions.editing = false;
+        questionArr.get(e.id).keyword_id = selectedKeyword.keyword_id;
       });
 
       setQuestions(questionArr);
@@ -74,7 +71,7 @@ function FindQuestionPage() {
 
   async function onLikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
-    if (questions.get(index).disliked) {
+    if (questions.get(index).actions.disliked) {
       onDislikeClick(index);
     }
     toggleLike(index);
@@ -83,11 +80,37 @@ function FindQuestionPage() {
 
   async function onDislikeClick(index) {
     //두가지가 동시에 눌리지 않도록 처리
-    if (questions.get(index).liked) {
+    if (questions.get(index).actions.liked) {
       onLikeClick(index);
     }
     toggleDislike(index);
     await postQuestionDislike(index);
+  }
+
+  async function handleScrapClick(index) {
+    setQuestions((prev) =>
+      produce(prev, (draft) => {
+        draft.get(index).actions.scrapped = !prev.get(index).actions.scrapped;
+        return draft;
+      })
+    );
+
+    await postQuestionScrap(index);
+  }
+
+  async function handleEditClick(index) {
+    const nowEditing = questions.get(index).actions.editing;
+
+    setQuestions((prev) =>
+      produce(prev, (draft) => {
+        draft.get(index).actions.editing = !nowEditing;
+        return draft;
+      })
+    );
+
+    if (nowEditing) {
+      return onAnswerPost(index);
+    } else return false;
   }
 
   /**
@@ -96,7 +119,7 @@ function FindQuestionPage() {
   function toggleLike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
-        draft.get(index).liked = !prev.get(index).liked;
+        draft.get(index).actions.liked = !prev.get(index).actions.liked;
         return draft;
       })
     );
@@ -108,7 +131,7 @@ function FindQuestionPage() {
   function toggleDislike(index) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
-        draft.get(index).disliked = !prev.get(index).disliked;
+        draft.get(index).actions.disliked = !prev.get(index).actions.disliked;
         return draft;
       })
     );
@@ -116,19 +139,15 @@ function FindQuestionPage() {
 
   /**
    * Post answer for question and update keyword selected type
-   * @param {Number} userQuestionId
-   * @param {Number} userKeywordId
-   * @param {String} answer
+   * @param {Number} index
    * @return tail question
    */
-  async function onAnswerPost(userQuestionId, userKeywordId, answer) {
+  async function onAnswerPost(index) {
     let result = await postQuestionAnswer(
-      userQuestionId,
-      userKeywordId,
-      answer
+      index,
+      questions.get(index).keyword_id,
+      questions.get(index).answer
     );
-
-    result = await result.json();
 
     setKeyword((prev) =>
       produce(prev, (draft) => {
@@ -137,9 +156,18 @@ function FindQuestionPage() {
       })
     );
 
-    if (result.isAnswerSuccess) {
-      return result.tailQuestion;
-    } else return false;
+    if (result) {
+      result = { ...result, type: "tail", from: index };
+      setQuestions((prev) =>
+        produce(prev, (draft) => {
+          draft.set(result.id, result);
+          draft.get(result.id).actions.editing = false;
+          return draft;
+        })
+      );
+    }
+
+    return result;
   }
 
   /**
@@ -147,7 +175,7 @@ function FindQuestionPage() {
    * @param {Number} index Index of question
    * @param {String} answer Answer string user edited
    */
-  function onAnswerEdit(index, answer) {
+  function handleChangeAnswer(index, answer) {
     setQuestions((prev) =>
       produce(prev, (draft) => {
         draft.get(index).answer = answer;
@@ -178,8 +206,9 @@ function FindQuestionPage() {
               questions={questions}
               onLikeClick={onLikeClick}
               onDislikeClick={onDislikeClick}
-              onAnswerEdit={onAnswerEdit}
-              onAnswerPost={onAnswerPost}
+              onEditClick={handleEditClick}
+              onScrapClick={handleScrapClick}
+              onChangeAnswer={handleChangeAnswer}
             />
           </div>
         </div>

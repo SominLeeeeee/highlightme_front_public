@@ -1,73 +1,48 @@
-import React, { useState } from "react";
-import "./Question.scss";
-import "../../index.css";
-import InputBox from "../atom/InputBox";
-import RespondFindQuestion from "./RespondFindQuestion";
+import { useState } from "react";
+import QuestionAction from "./QuestionAction";
+import QuestionContent from "./QuestionContent";
+import "./question.scss";
 
-function Question({
-  question,
-  onLikeClick,
-  onDislikeClick,
-  onAnswerPost,
-  onAnswerEdit,
-  onScrapClick,
-}) {
+function Question(props) {
+  const {
+    question,
+    onLikeClick,
+    onDislikeClick,
+    onEditClick,
+    onChangeAnswer,
+    onScrapClick,
+  } = {
+    ...props,
+  };
+
   const [tailQuestion, setTailQuestion] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
 
-  async function onEditClick(paramEditClicked) {
-    /* 수정완료 버튼을 눌렀다면 서버에 전송, 키워드 색상 변경, 꼬리질문 설정 */
-    setIsEditClicked(paramEditClicked);
-
-    let tailResult;
-    if (isEditClicked) {
-      tailResult = onAnswerPost(
-        question.user_question_id,
-        question.user_keyword_id,
-        question.answer
-      );
-    }
-
-    setTailQuestion(await tailResult);
+  async function handleEditClick() {
+    let result = await onEditClick(question.id);
+    setTailQuestion(result);
   }
 
   return (
     <div className="question">
-      <p id="questionText">Q. {question.content}</p>
-      <InputBox
-        placeholder="답변을 입력해주세요."
-        radius="1.6rem"
-        maxRows="4"
-        minRows="2"
-        onChange={(event) => onAnswerEdit(event.target.value)}
-        value={question.answer}
-        disabled={!isEditClicked}
+      <QuestionContent question={question} onChangeAnswer={onChangeAnswer} />
+      <QuestionAction
+        actions={question.actions}
+        onLikeClick={() => onLikeClick(question.id)}
+        onDislikeClick={() => onDislikeClick(question.id)}
+        onEditClick={() => handleEditClick()}
+        onScrapClick={() => onScrapClick(question.id)}
       />
 
-      <RespondFindQuestion
-        question={question}
-        onLikeClick={() => onLikeClick(question.question_id)}
-        onDislikeClick={() => onDislikeClick(question.question_id)}
-        onScrapClick={onScrapClick}
-        onEditClick={onEditClick}
-      />
-
-      {tailQuestion ? (
-        <div id="tailQuestion">
-          <img id="tailIcon" src="/images/ic-mydocs-tailquestion.svg" />
+      {tailQuestion && tailQuestion.from === question.id ? (
+        <div className="tailQuestion">
+          <img src="/images/ic-mydocs-tailquestion.svg" />
           <Question
             question={tailQuestion}
-            onLikeClick={() => onLikeClick}
-            onDislikeClick={() => onDislikeClick}
-            onAnswerEdit={(answer) => onAnswerEdit}
-            onAnswerPost={onAnswerPost}
-          />
-          <RespondFindQuestion
-            question={tailQuestion}
+            onChangeAnswer={onChangeAnswer}
+            onEditClick={onEditClick}
             onLikeClick={onLikeClick}
             onDislikeClick={onDislikeClick}
             onScrapClick={onScrapClick}
-            onEditClick={onEditClick}
           />
         </div>
       ) : (

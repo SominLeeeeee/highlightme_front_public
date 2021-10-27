@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import config from "../../configs";
 import "./questionsList.scss";
 import Question from "./Question.js";
 import HighlightText from "../atom/HighlightText";
@@ -11,22 +10,34 @@ function QuestionsList({
   questions,
   onLikeClick,
   onDislikeClick,
-  onAnswerEdit,
-  onAnswerPost,
+  onChangeAnswer,
+  onEditClick,
+  onScrapClick,
 }) {
-  let questionJSX = [];
-  questions.forEach((question, index) => {
-    questionJSX.push(
-      <Question
-        key={question.question_id}
-        question={question}
-        onLikeClick={onLikeClick}
-        onDislikeClick={onDislikeClick}
-        onAnswerEdit={(answer) => onAnswerEdit(index, answer)}
-        onAnswerPost={onAnswerPost}
-      />
+  function makeQuestionListJSX() {
+    let questionListJSX = [];
+    questions.forEach((question) => {
+      if (!question.type) questionListJSX.push(makeQuestionJSX(question));
+    });
+
+    return questionListJSX;
+  }
+
+  function makeQuestionJSX(paramQuestion) {
+    return (
+      <div>
+        <Question
+          key={paramQuestion.question_id}
+          question={paramQuestion}
+          onChangeAnswer={onChangeAnswer}
+          onEditClick={onEditClick}
+          onLikeClick={onLikeClick}
+          onDislikeClick={onDislikeClick}
+          onScrapClick={onScrapClick}
+        />
+      </div>
     );
-  });
+  }
 
   return (
     <div className="questionsListParent">
@@ -39,7 +50,7 @@ function QuestionsList({
             <p className="keywordClick"> 키워드를 클릭해보세요! 🙂</p>
           </div>
         )}
-        {keyword && questions ? questionJSX : <div />}
+        {keyword && questions ? makeQuestionListJSX() : <div />}
       </ShadowBoxMedium>
     </div>
   );
