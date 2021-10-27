@@ -1,6 +1,7 @@
 import produce from "immer";
 import { useEffect, useState } from "react";
 import Header from "../common/Header";
+import InterviewSetting from "../components/Scrap/InterviewSetting";
 import ScrapList from "../components/Scrap/ScrapList";
 import "./scrapPage.scss";
 
@@ -18,7 +19,7 @@ function ScrapPage() {
         liked: false,
         disliked: false,
         scrapped: true,
-        interviewListed: false,
+        interviewListed: true,
         editing: false,
       },
     });
@@ -33,6 +34,58 @@ function ScrapPage() {
         disliked: false,
         scrapped: true,
         interviewListed: false,
+        editing: false,
+      },
+    });
+
+    tempttt.set(590, {
+      id: 590,
+      content: "useState는 동기인가요, 비동기인가요? 그 이유는 무엇인가요?",
+      answer: "aaa",
+      actions: {
+        liked: false,
+        disliked: false,
+        scrapped: true,
+        interviewListed: true,
+        editing: false,
+      },
+    });
+
+    tempttt.set(591, {
+      id: 591,
+      content: "591번 질문입니다",
+      answer: "이름의 차이입니다 ㅋㅋ",
+      actions: {
+        liked: false,
+        disliked: false,
+        scrapped: true,
+        interviewListed: true,
+        editing: false,
+      },
+    });
+
+    tempttt.set(592, {
+      id: 592,
+      content: "592번 질문입니다",
+      answer: "ㅁㅁㄴㄴ",
+      actions: {
+        liked: false,
+        disliked: false,
+        scrapped: true,
+        interviewListed: false,
+        editing: false,
+      },
+    });
+
+    tempttt.set(593, {
+      id: 593,
+      content: "593번 질문입니다",
+      answer: "aaa",
+      actions: {
+        liked: false,
+        disliked: false,
+        scrapped: true,
+        interviewListed: true,
         editing: false,
       },
     });
@@ -75,6 +128,19 @@ function ScrapPage() {
     );
   }
 
+  function interviewQuestions() {
+    let result = [];
+
+    temp.forEach((question) => {
+      if (question.actions.interviewListed) {
+        result.push({ id: question.id, content: question.content });
+      }
+    });
+
+    console.log("interview", result);
+    return result;
+  }
+
   return (
     <>
       <Header />
@@ -93,6 +159,7 @@ function ScrapPage() {
               onEditClick={handleEditClick}
               onScrapClick={handleScrapClick}
             />
+            <InterviewSetting interviewQuestions={interviewQuestions()} />
           </div>
         </div>
       </div>

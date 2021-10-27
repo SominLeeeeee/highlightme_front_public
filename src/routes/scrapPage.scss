@@ -27,7 +27,8 @@
 
 .scrapInterviewWrapper {
   display: grid;
-  width: 900px;
-  column-gap: 4rem;
+  width: 1200px;
+  grid-template-columns: 2fr 1fr;
+  // column-gap: 4rem;
   align-items: start;
 }

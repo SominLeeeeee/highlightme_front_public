@@ -3,6 +3,7 @@ import EditButton from "../atom/EditButton";
 import HighlightText from "../atom/HighlightText";
 import QuestionContent from "../FindQuestion/QuestionContent";
 import ScrapAction from "./ScrapAction";
+import "./scrapList.scss";
 
 function ScrapList(props) {
   const { scrapQuestions, onChangeAnswer, onEditClick, onScrapClick } = {
@@ -36,7 +37,7 @@ function ScrapList(props) {
   }
 
   return (
-    <div>
+    <div className="scrapList">
       <HighlightText text="질문 리스트" />
       {scrapQuestions ? makeScrapListJSX() : <p>nope!</p>}
     </div>
