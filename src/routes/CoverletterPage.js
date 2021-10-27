@@ -26,20 +26,22 @@ function CoverletterPage() {
     const response = await getCoverletters();
 
     if (response) {
-      let fromServerCle = [];
-      response.cles.map((element) => {
-        fromServerCle = fromServerCle.concat({
-          problem: element.problem,
-          answer: element.answer,
+      if (response.cles.length) {
+        let fromServerCle = [];
+        response.cles.map((element) => {
+          fromServerCle = fromServerCle.concat({
+            problem: element.problem,
+            answer: element.answer,
+          });
         });
-      });
 
-      setCle((prev) => ({
-        ...prev,
-        cl_id: response.cl_id,
-        element: fromServerCle,
-        selectedElement: 0,
-      }));
+        setCle((prev) => ({
+          ...prev,
+          cl_id: response.cl_id,
+          element: fromServerCle,
+          selectedElement: 0,
+        }));
+      }
     }
   }, []);
 

@@ -10,8 +10,10 @@ export async function getCoverletters() {
     credentials: "include",
   });
 
+  const rjson = await result.json();
+
   if (result.ok) {
-    return await result.json();
+    return await rjson;
   }
   return result.ok;
 }
