@@ -13,8 +13,8 @@ const menus = [
   },
   {
     name: "모아보기",
-    route: "/gather",
-    underConstruction: true,
+    route: "/scrap",
+    underConstruction: false,
   },
   {
     name: "주고받기",
