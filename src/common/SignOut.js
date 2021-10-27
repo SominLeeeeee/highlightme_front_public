@@ -22,6 +22,8 @@ function SignOut() {
         email: undefined,
         accessToken: undefined,
       });
+
+      localStorage.clear();
       history.push("/");
     } else {
       alert("서버 문제로 로그아웃에 실패했어요 🤒");

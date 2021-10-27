@@ -13,6 +13,7 @@ function LandingPage() {
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
   const [signUp, setSignUp] = useRecoilState(atomSignUp);
 
+  localStorage.clear();
   /**
    * 우리 서버로 정보를 보내서 로그인 처리 한 뒤, 성공한 경우 값을 저장하고 페이지를 이동함
    * status가 200이 오면 신규 회원가입, 409가 오면 로그인이므로 적합한 페이지로 이동

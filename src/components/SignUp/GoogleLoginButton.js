@@ -24,7 +24,6 @@ const googleLoginSimpleStyle = {
 };
 
 function GoogleLoginButton({ usage, onLoginSuccess, onLoginFail }) {
-  console.log(process.env.REACT_APP_OAUTH_GOOGLE_CLIENT_ID);
   return (
     <GoogleLogin
       clientId={config.oauthGoogleClientId}
