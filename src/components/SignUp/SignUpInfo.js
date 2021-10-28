@@ -37,7 +37,7 @@ function SignUpInfo() {
     })
       .then((res) => res.json())
       .then((res) => {
-        fieldParsing(res.result.bigField);
+        fieldParsing(res);
       });
   }, []);
 
@@ -45,7 +45,7 @@ function SignUpInfo() {
     var tempArr = fieldList;
     bigField.map((e) => {
       tempArr = tempArr.concat([{ id: e.id, name: e.name }]);
-      jobParsing(e.id, e.smallGroup);
+      jobParsing(e.id, e.jobs);
     });
 
     setFieldList(tempArr);

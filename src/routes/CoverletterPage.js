@@ -24,23 +24,10 @@ function CoverletterPage() {
     setMenu("자기소개서");
 
     const response = await getCoverletters();
-
+    console.log(response);
     if (response) {
-      if (response.cles.length) {
-        let fromServerCle = [];
-        response.cles.map((element) => {
-          fromServerCle = fromServerCle.concat({
-            problem: element.problem,
-            answer: element.answer,
-          });
-        });
-
-        setCle((prev) => ({
-          ...prev,
-          cl_id: response.cl_id,
-          element: fromServerCle,
-          selectedElement: 0,
-        }));
+      if (response.elements.length) {
+        setCle(response);
       }
     }
   }, []);
@@ -51,7 +38,7 @@ function CoverletterPage() {
   function handleChangeProblem(event) {
     setCle((prev) =>
       produce(prev, (draft) => {
-        draft.element[draft.selectedElement].problem = event.target.value;
+        draft.elements[draft.selectedElement].problem = event.target.value;
         return draft;
       })
     );
@@ -63,7 +50,7 @@ function CoverletterPage() {
   function handleChangeAnswer(event) {
     setCle((prev) =>
       produce(prev, (draft) => {
-        draft.element[draft.selectedElement].answer = event.target.value;
+        draft.elements[draft.selectedElement].answer = event.target.value;
         return draft;
       })
     );
@@ -75,9 +62,10 @@ function CoverletterPage() {
   function handleClickPlusButton() {
     setCle((prev) =>
       produce(prev, (draft) => {
-        draft.element.push({
+        draft.elements.push({
           problem: "",
           answer: "",
+          public: 1,
         });
         return draft;
       })
@@ -87,7 +75,7 @@ function CoverletterPage() {
   function getTitleFromCle() {
     let res = [];
 
-    cle.element.map((e) => {
+    cle.elements.map((e) => {
       res = res.concat(e.problem);
     });
 
@@ -97,7 +85,7 @@ function CoverletterPage() {
   function checkAbnormal() {
     let result = false;
 
-    cle.element.map((e, idx, arr) => {
+    cle.elements.map((e, idx, arr) => {
       if (e.problem === "") result = { res: true, index: idx, err: "empty" };
       else if (e.answer.length < 200)
         result = { res: true, index: idx, err: "count" };
@@ -134,7 +122,7 @@ function CoverletterPage() {
   }
 
   function handleClickDeleteButton() {
-    if (cle.element.length === 1)
+    if (cle.elements.length === 1)
       alert("자기소개서 문항/답변은 1개 이상이어야 합니다!");
     else {
       deleteCleServer(cle.selectedElement + 1);
@@ -153,12 +141,12 @@ function CoverletterPage() {
   }
 
   function deleteCleLocal(index) {
-    const afterDelete = cle.element.filter((e, idx, arr) => idx != index);
+    const afterDelete = cle.elements.filter((e, idx, arr) => idx != index);
 
     if (cle.selectedElement !== 0) {
       setCle((prev) => ({
         ...prev,
-        element: afterDelete,
+        elements: afterDelete,
         selectedElement: index - 1,
       }));
     } else {
@@ -168,7 +156,7 @@ function CoverletterPage() {
       });
       setCle({
         ...cle,
-        element: afterDelete,
+        elements: afterDelete,
         selectedElement: 0,
       });
     }
@@ -191,8 +179,8 @@ function CoverletterPage() {
             onClickDeleteButton={handleClickDeleteButton}
             countErr={countErr}
             emptyErr={emptyErr}
-            problem={cle.element[cle.selectedElement].problem}
-            answer={cle.element[cle.selectedElement].answer}
+            problem={cle.elements[cle.selectedElement].problem}
+            answer={cle.elements[cle.selectedElement].answer}
           />
         </div>
       </div>

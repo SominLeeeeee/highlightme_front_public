@@ -10,10 +10,8 @@ export async function getCoverletters() {
     credentials: "include",
   });
 
-  const rjson = await result.json();
-
   if (result.ok) {
-    return await rjson;
+    return await result.json();
   }
   return result.ok;
 }
@@ -24,17 +22,9 @@ export async function getCoverletters() {
  * @returns post result
  */
 export async function postCoverletters(cle) {
-  const CLES = cle.element.map((e, idx, arr) => ({
-    cl_element_id: idx + 1,
-    problem: e.problem,
-    answer: e.answer,
-    _public: 1,
-  }));
-
   const request = {
-    CLES: JSON.stringify(CLES),
-    cl_id: cle.cl_id,
-    title: `자기소개서 ${cle.cl_id}번`,
+    elements: JSON.stringify(cle.elements),
+    title: "자기소개서제목",
     company: "카뱅",
     tags: ["카카오", "뱅크"],
     comments: "잘부탁드림다",
