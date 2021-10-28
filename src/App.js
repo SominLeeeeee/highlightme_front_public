@@ -11,6 +11,7 @@ const MyPage = lazy(() => import("./routes/MyPage"));
 const CoverLetterPage = lazy(() => import("./routes/CoverletterPage"));
 const NotFoundPage = lazy(() => import("./routes/NotFoundPage"));
 const TestPage = lazy(() => import("./routes/TestPage"));
+const ScrapPage = lazy(() => import("./routes/ScrapPage"));
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             exact
             component={CoverLetterPage}
           />
+          <PrivateRouter path="/scrap" exact component={ScrapPage} />
 
           {/* ETC Routers */}
           <Route component={NotFoundPage} />

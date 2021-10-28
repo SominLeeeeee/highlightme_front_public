@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13.122" height="13.121" viewBox="0 0 13.122 13.121">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#c1c1c1;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px}
+        </style>
+    </defs>
+    <g id="ic_sign_delete" transform="translate(-569.772 -2205.003)">
+        <g id="그룹_20" transform="translate(570.833 2206.221)">
+            <path id="선_20" d="M0 0L11 11" class="cls-1" transform="translate(0.001 -0.158)"/>
+        </g>
+        <g id="그룹_21" transform="translate(570.833 2206.221)">
+            <path id="선_21" d="M0 0L11 11" class="cls-1" transform="translate(0.001 -0.158)"/>
+        </g>
+        <g id="그룹_22" transform="translate(570.832 2206.221)">
+            <path id="선_22" d="M0 11L11 0" class="cls-1" transform="translate(0 -0.158)"/>
+        </g>
+        <g id="그룹_23" transform="translate(570.832 2206.221)">
+            <path id="선_23" d="M0 11L11 0" class="cls-1" transform="translate(0 -0.158)"/>
+        </g>
+    </g>
+</svg>

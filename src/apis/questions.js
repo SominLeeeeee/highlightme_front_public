@@ -54,13 +54,12 @@ export async function postQuestionDislike(questionId) {
  * @param {String} answer
  * @returns response from server
  */
-export async function postQuestionAnswer(questionId, keywordId, answer) {
+export async function postQuestionAnswer(questionId, answer) {
   const tailQuestion = await fetch(`${config.url}/api/questions/answer`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
       questionId: questionId,
-      keywordId: keywordId,
       answer: answer,
     }),
   });
@@ -71,6 +70,26 @@ export async function postQuestionAnswer(questionId, keywordId, answer) {
 
 export async function postQuestionScrap(questionId) {
   return await fetch(`${config.url}/api/questions/scrap`, {
+    method: "POST",
+    credentials: "include",
+    body: new URLSearchParams({
+      questionId: questionId,
+    }),
+  });
+}
+
+export async function getScrappedQuestion() {
+  const scrapped = await fetch(`${config.url}/api/questions/scrapped`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (scrapped.status) return await scrapped.json();
+  else return scrapped.status;
+}
+
+export async function postInterviewListed(questionId) {
+  return await fetch(`${config.url}/api/questions/interviewListed`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
