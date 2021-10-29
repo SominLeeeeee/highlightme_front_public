@@ -6,14 +6,13 @@ const { persistAtom } = recoilPersist();
 export const atomCoverLetterElements = atom({
   key: "atomCoverLetterElements",
   default: {
-    elements: [{ problem: null, answer: null, public: 1 }],
+    elements: [{ problem: "", answer: "", public: 1 }],
     company: "",
     title: "",
     tags: "",
     comments: "",
     selectedElement: 0,
   },
-  effects_UNSTABLE: [persistAtom],
 });
 
 export const atomUserInfo = atom({

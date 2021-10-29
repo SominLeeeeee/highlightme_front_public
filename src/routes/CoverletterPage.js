@@ -24,10 +24,9 @@ function CoverletterPage() {
     setMenu("자기소개서");
 
     const response = await getCoverletters();
-    console.log(response);
     if (response) {
       if (response.elements.length) {
-        setCle(response);
+        setCle((prev) => ({ ...prev, ...response }));
       }
     }
   }, []);
@@ -172,6 +171,7 @@ function CoverletterPage() {
             selectedIndex={cle.selectedElement}
             onClickPlusButton={handleClickPlusButton}
           />
+
           <ClInput
             onChangeProblem={handleChangeProblem}
             onChangeAnswer={handleChangeAnswer}
