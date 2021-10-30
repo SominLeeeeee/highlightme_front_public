@@ -143,11 +143,7 @@ function FindQuestionPage() {
    * @return tail question
    */
   async function onAnswerPost(index) {
-    let result = await postQuestionAnswer(
-      index,
-      questions.get(index).keyword_id,
-      questions.get(index).answer
-    );
+    let result = await postQuestionAnswer(index, questions.get(index).answer);
 
     setKeyword((prev) =>
       produce(prev, (draft) => {
