@@ -8,6 +8,7 @@ import { atomCoverLetterElements, atomMenu } from "../recoil/userStore";
 import config from "../configs";
 import produce from "immer";
 import { getCoverletters, postCoverletters } from "../apis/coverletters";
+import { useHistory } from "react-router";
 
 function CoverletterPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
@@ -15,6 +16,8 @@ function CoverletterPage() {
 
   const [emptyErr, setEmptyErr] = useState(false);
   const [countErr, setCountErr] = useState(false);
+
+  const history = useHistory();
 
   /**
    * 자소서 등록 페이지 처음 접속 시
@@ -102,6 +105,7 @@ function CoverletterPage() {
     } else {
       const result = postCoverletters(cle);
       if (!result) console.log("fail to upload coverletter");
+      else history.push("/find");
     }
   }
 
