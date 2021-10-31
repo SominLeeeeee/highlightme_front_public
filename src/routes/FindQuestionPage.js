@@ -51,13 +51,13 @@ function FindQuestionPage() {
     const selectedKeyword = keyword.userKeywords[keyword.selected];
 
     if (selectedKeyword) {
-      let postQuestionsResult = await postQuestions(selectedKeyword.keyword_id);
+      let postQuestionsResult = await postQuestions(selectedKeyword.keywordId);
       let questionArr = new Map();
 
       postQuestionsResult.map((e) => {
         questionArr.set(e.id, e);
         questionArr.get(e.id).actions.editing = false;
-        questionArr.get(e.id).keyword_id = selectedKeyword.keyword_id;
+        questionArr.get(e.id).keywordId = selectedKeyword.keywordId;
       });
 
       setQuestions(questionArr);

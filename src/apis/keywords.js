@@ -8,7 +8,7 @@ export async function getKeywords() {
 
   if (result.ok) {
     result = await result.json();
-    return result.keywords;
+    return result;
   }
   return result.ok;
 }
