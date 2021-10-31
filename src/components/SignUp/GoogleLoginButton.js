@@ -42,9 +42,7 @@ function GoogleLoginButton({ usage, onLoginSuccess, onLoginFail }) {
           </button>
         )
       }
-      onSuccess={(res) =>
-        onLoginSuccess(res.profileObj.email, res.googleId, res.accessToken)
-      }
+      onSuccess={(res) => onLoginSuccess(res.profileObj.email, res.googleId)}
       onFailure={onLoginFail}
       cookiePolicy={"single_host_origin"}
       //isSignedIn={true}

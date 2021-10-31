@@ -20,7 +20,6 @@ export const atomUserInfo = atom({
   default: {
     id: undefined,
     email: undefined,
-    accessToken: undefined,
   },
   effects_UNSTABLE: [persistAtom],
 });

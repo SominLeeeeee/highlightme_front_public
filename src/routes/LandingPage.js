@@ -21,18 +21,13 @@ function LandingPage() {
    * @param {String} googleId
    * @param {String} accessToken
    */
-  async function onLoginSuccess(email, googleId, accessToken) {
-    const [result, status] = await postUsersOauthGoogle(
-      email,
-      googleId,
-      accessToken
-    );
+  async function onLoginSuccess(email, googleId) {
+    const [result, status] = await postUsersOauthGoogle(email, googleId);
 
     if (status === 200 || status === 409) {
       setUserInfo({
-        id: result.user_id,
+        id: result.userId,
         email: result.email,
-        accessToken: accessToken,
       });
 
       if (status === 200) {

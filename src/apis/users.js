@@ -7,15 +7,15 @@ import config from "../configs";
  * @param {String} accessToken
  * @returns {Array} [result json, status code(200: signup, 409: signin)]
  */
-export async function postUsersOauthGoogle(email, googleId, accessToken) {
+export async function postUsersOauthGoogle(email, googleId) {
   const res = await fetch(`${config.url}/api/users/oauth/google`, {
     method: "POST",
     credentials: "include",
     body: new URLSearchParams({
       email: email,
       googleId: googleId,
-      accessToken: accessToken,
     }),
   });
+
   return [await res.json(), res.status];
 }
