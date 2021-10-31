@@ -4,7 +4,7 @@ import "./findQuestionPage.scss";
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
 import QuestionList from "../components/FindQuestion/QuestionsList";
 import Header from "../common/Header";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { atomMenu, atomKeyword, atomQuestion } from "../recoil/userStore";
 import produce from "immer";
 
@@ -159,17 +159,21 @@ function FindQuestionPage() {
     );
 
     if (result) {
-      result = { ...result, type: "tail", from: index };
       setQuestions((prev) =>
         produce(prev, (draft) => {
           draft.set(result.id, result);
           draft.get(result.id).actions.editing = false;
+          draft.get(result.id).answer = "";
           return draft;
         })
       );
-    }
 
-    return result;
+      setQuestions((prev) =>
+        produce(prev, (draft) => {
+          draft.get(index).tail = result.id;
+        })
+      );
+    }
   }
 
   /**
