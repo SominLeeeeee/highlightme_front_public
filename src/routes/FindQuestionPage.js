@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./findQuestionPage.scss";
 
 import KeywordGraphView from "../components/FindQuestion/KeywordGraphView";
@@ -17,12 +17,12 @@ import {
 } from "../apis/questions";
 
 import { getKeywords } from "../apis/keywords";
-import Question from "../components/FindQuestion/QuestionContent";
 
 function FindQuestionPage() {
   const [menu, setMenu] = useRecoilState(atomMenu);
   const [questions, setQuestions] = useRecoilState(atomQuestion);
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
+  const [modified, setModified] = useState(Date.now());
 
   useEffect(async () => {
     setMenu("질문찾기");
@@ -33,6 +33,7 @@ function FindQuestionPage() {
       setKeyword((prev) =>
         produce(prev, (draft) => {
           draft.userKeywords = keywords;
+          draft.modified = Date.now();
           return draft;
         })
       );
@@ -40,6 +41,11 @@ function FindQuestionPage() {
       console.log("couldn't get keywords 😭");
     }
   }, []);
+
+  // keyword가 변경되면 새로 렌더링하기 위함
+  useEffect(() => {
+    setModified(keyword.modified);
+  }, [keyword.modified]);
 
   useEffect(async () => {
     const selectedKeyword = keyword.userKeywords[keyword.selected];

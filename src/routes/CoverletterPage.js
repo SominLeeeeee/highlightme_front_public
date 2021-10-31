@@ -96,14 +96,14 @@ function CoverletterPage() {
     return result;
   }
 
-  function handleClickSaveButton() {
+  async function handleClickSaveButton() {
     const abnormal = checkAbnormal();
 
     if (abnormal.res) {
       setCle((prev) => ({ ...prev, selectedElement: abnormal.index }));
       setError(abnormal.err);
     } else {
-      const result = postCoverletters(cle);
+      const result = await postCoverletters(cle);
       if (!result) console.log("fail to upload coverletter");
       else history.push("/find");
     }

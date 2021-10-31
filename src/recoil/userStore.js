@@ -30,6 +30,7 @@ export const atomKeyword = atom({
   default: {
     userKeywords: [],
     selected: "",
+    modified: 0,
   },
 });
 
