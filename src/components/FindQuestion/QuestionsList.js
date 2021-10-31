@@ -4,6 +4,7 @@ import "./questionsList.scss";
 import Question from "./Question.js";
 import HighlightText from "../atom/HighlightText";
 import ShadowBoxMedium from "../atom/ShadowBoxMedium";
+import TailQuestion from "./TailQuestion";
 
 function QuestionsList({
   keyword,
@@ -27,7 +28,7 @@ function QuestionsList({
     return (
       <div>
         <Question
-          key={paramQuestion.question_id}
+          key={paramQuestion.id}
           question={paramQuestion}
           onChangeAnswer={onChangeAnswer}
           onEditClick={onEditClick}
@@ -35,6 +36,19 @@ function QuestionsList({
           onDislikeClick={onDislikeClick}
           onScrapClick={onScrapClick}
         />
+        {paramQuestion.tail ? (
+          <TailQuestion
+            key={paramQuestion.tail}
+            question={questions.get(paramQuestion.tail)}
+            onChangeAnswer={onChangeAnswer}
+            onEditClick={onEditClick}
+            onLikeClick={onLikeClick}
+            onDislikeClick={onDislikeClick}
+            onScrapClick={onScrapClick}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

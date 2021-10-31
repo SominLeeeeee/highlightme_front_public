@@ -15,13 +15,6 @@ function Question(props) {
     ...props,
   };
 
-  const [tailQuestion, setTailQuestion] = useState(false);
-
-  async function handleEditClick() {
-    let result = await onEditClick(question.id);
-    setTailQuestion(result);
-  }
-
   return (
     <div className="question">
       <QuestionContent question={question} onChangeAnswer={onChangeAnswer} />
@@ -29,25 +22,9 @@ function Question(props) {
         actions={question.actions}
         onLikeClick={() => onLikeClick(question.id)}
         onDislikeClick={() => onDislikeClick(question.id)}
-        onEditClick={() => handleEditClick()}
+        onEditClick={() => onEditClick(question.id)}
         onScrapClick={() => onScrapClick(question.id)}
       />
-
-      {tailQuestion && tailQuestion.from === question.id ? (
-        <div className="tailQuestion">
-          <img src="/images/ic-mydocs-tailquestion.svg" />
-          <Question
-            question={tailQuestion}
-            onChangeAnswer={onChangeAnswer}
-            onEditClick={onEditClick}
-            onLikeClick={onLikeClick}
-            onDislikeClick={onDislikeClick}
-            onScrapClick={onScrapClick}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }
