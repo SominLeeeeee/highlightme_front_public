@@ -101,16 +101,12 @@ function SignUpInfo() {
     });
 
     const postFieldJobResult = fetch(`${config.url}/api/fields`, {
-      // const postFieldJobResult = fetch(`/api/fields`, {
       method: "POST",
       credentials: "include",
       body: new URLSearchParams({
-        user_id: userInfo.id,
-        field_ids: JSON.stringify(userJob),
+        fieldIds: JSON.stringify(userJob),
       }),
     });
-
-    console.log("postFieldJobResult", postFieldJobResult);
   }
 
   return (

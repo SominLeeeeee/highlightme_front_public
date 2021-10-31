@@ -4,12 +4,5 @@
  * @returns {Boolean} isUserValid
  */
 export function isUserValid(userInfo) {
-  return (
-    userInfo &&
-    userInfo.id &&
-    userInfo.email &&
-    userInfo.accessToken &&
-    userInfo.email.length > 0 &&
-    userInfo.accessToken.length > 0
-  );
+  return userInfo && userInfo.id && userInfo.email && userInfo.email.length > 0;
 }
