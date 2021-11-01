@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "../../style/font.scss";
 
 .keyword {
   display: inline;
@@ -6,6 +7,7 @@
   outline: none;
   color: #3e3e3e;
   font-size: 2rem;
+  font-family: "AppleSDGothicNeo-Regular";
   background-color: $gray;
   border-radius: 0.6rem;
   padding: 0.6rem 1.2rem;
