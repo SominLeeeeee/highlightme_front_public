@@ -164,6 +164,7 @@ function FindQuestionPage() {
           draft.set(result.id, result);
           draft.get(result.id).actions.editing = false;
           draft.get(result.id).answer = "";
+          draft.get(result.id).type = "tail";
           return draft;
         })
       );
@@ -171,6 +172,12 @@ function FindQuestionPage() {
       setQuestions((prev) =>
         produce(prev, (draft) => {
           draft.get(index).tail = result.id;
+        })
+      );
+    } else {
+      setQuestions((prev) =>
+        produce(prev, (draft) => {
+          draft.get(index).tail = result;
         })
       );
     }

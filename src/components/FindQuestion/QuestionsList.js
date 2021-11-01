@@ -18,7 +18,8 @@ function QuestionsList({
   function makeQuestionListJSX() {
     let questionListJSX = [];
     questions.forEach((question) => {
-      if (!question.type) questionListJSX.push(makeQuestionJSX(question));
+      if (question.type !== "tail")
+        questionListJSX.push(makeQuestionJSX(question));
     });
 
     return questionListJSX;
