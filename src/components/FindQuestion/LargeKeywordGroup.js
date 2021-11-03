@@ -6,13 +6,16 @@ function LargeKeywordGroup(props) {
   return (
     <div>
       <h1>{largeGroupName}</h1>
-      {middleGroups &&
+      {middleGroups && Array.isArray(middleGroups) ? (
+        <MiddleKeywordGroup middleGroupName="" keywords={middleGroups} />
+      ) : (
         Object.keys(middleGroups).map((groupName) => (
           <MiddleKeywordGroup
             middleGroupName={groupName}
             keywords={Object.values(middleGroups[groupName])}
           />
-        ))}
+        ))
+      )}
     </div>
   );
 }

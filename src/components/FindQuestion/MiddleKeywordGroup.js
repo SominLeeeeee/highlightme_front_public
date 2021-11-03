@@ -14,7 +14,11 @@ function MiddleKeywordGroup(props) {
 
   return (
     <ShadowBoxMedium>
-      <HighlightText color="#ffbb00" text={middleGroupName} />
+      {middleGroupName ? (
+        <HighlightText color="#ffbb00" text={middleGroupName} />
+      ) : (
+        <></>
+      )}
       {keywords ? (
         keywords.map((e) => (
           <Keyword color={pickColor(e.answered)} text={e.keyword} />
