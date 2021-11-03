@@ -2,6 +2,7 @@ import HighlightText from "../atom/HighlightText";
 import ShadowBoxMedium from "../atom/ShadowBoxMedium";
 import Keyword from "../atom/Keyword";
 import colors from "../../style/colors";
+import "./middleKeywordGroup.scss";
 
 function MiddleKeywordGroup(props) {
   const { middleGroupName, keywords } = { ...props };
@@ -13,16 +14,25 @@ function MiddleKeywordGroup(props) {
   }
 
   return (
-    <ShadowBoxMedium>
+    <ShadowBoxMedium padding="3.2rem" marginBottom="2rem">
       {middleGroupName ? (
-        <HighlightText color="#ffbb00" text={middleGroupName} />
+        <HighlightText
+          color="#ffbb00"
+          text={middleGroupName}
+          marginBottom="1.5rem"
+          fontSize="2.4rem"
+          marginBottom="0rem"
+          marginTop="-1rem"
+        />
       ) : (
         <></>
       )}
       {keywords ? (
-        keywords.map((e) => (
-          <Keyword color={pickColor(e.answered)} text={e.keyword} />
-        ))
+        <div className="keywordWrapper">
+          {keywords.map((e) => (
+            <Keyword color={pickColor(e.answered)} text={e.keyword} />
+          ))}
+        </div>
       ) : (
         <></>
       )}

@@ -1,11 +1,12 @@
 import MiddleKeywordGroup from "./MiddleKeywordGroup";
+import "./largeKeywordGroup.scss";
 
 function LargeKeywordGroup(props) {
   const { largeGroupName, middleGroups, onKeywordClick } = { ...props };
 
   return (
-    <div>
-      <h1>{largeGroupName}</h1>
+    <div className="largeGroupWrapper">
+      <p className="largeGroupTitle">{largeGroupName}</p>
       {middleGroups && Array.isArray(middleGroups) ? (
         <MiddleKeywordGroup middleGroupName="" keywords={middleGroups} />
       ) : (

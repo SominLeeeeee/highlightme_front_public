@@ -2,7 +2,9 @@ import React from "react";
 import "./ShadowBoxMedium.scss";
 
 function ShadowBoxMedium(props) {
-  const { paddingTop, children, paddingBottom, padding } = { ...props };
+  const { paddingTop, children, paddingBottom, padding, marginBottom } = {
+    ...props,
+  };
 
   return (
     <div
@@ -11,6 +13,7 @@ function ShadowBoxMedium(props) {
         paddingTop: paddingTop,
         paddingBottom: paddingBottom,
         padding: padding,
+        marginBottom: marginBottom,
       }}
     >
       {children}
