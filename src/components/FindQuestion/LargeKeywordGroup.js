@@ -8,12 +8,17 @@ function LargeKeywordGroup(props) {
     <div className="largeGroupWrapper">
       <p className="largeGroupTitle">{largeGroupName}</p>
       {middleGroups && Array.isArray(middleGroups) ? (
-        <MiddleKeywordGroup middleGroupName="" keywords={middleGroups} />
+        <MiddleKeywordGroup
+          middleGroupName=""
+          keywords={middleGroups}
+          onKeywordClick={onKeywordClick}
+        />
       ) : (
         Object.keys(middleGroups).map((groupName) => (
           <MiddleKeywordGroup
             middleGroupName={groupName}
             keywords={Object.values(middleGroups[groupName])}
+            onKeywordClick={onKeywordClick}
           />
         ))
       )}

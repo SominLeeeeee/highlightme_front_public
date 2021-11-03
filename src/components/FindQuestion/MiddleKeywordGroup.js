@@ -3,9 +3,10 @@ import ShadowBoxMedium from "../atom/ShadowBoxMedium";
 import Keyword from "../atom/Keyword";
 import colors from "../../style/colors";
 import "./middleKeywordGroup.scss";
+import { useEffect } from "react";
 
 function MiddleKeywordGroup(props) {
-  const { middleGroupName, keywords } = { ...props };
+  const { middleGroupName, keywords, onKeywordClick } = { ...props };
 
   function pickColor(answered) {
     if (answered === 2) return `${colors.mainyellow}`;
@@ -30,7 +31,11 @@ function MiddleKeywordGroup(props) {
       {keywords ? (
         <div className="keywordWrapper">
           {keywords.map((e) => (
-            <Keyword color={pickColor(e.answered)} text={e.keyword} />
+            <Keyword
+              color={pickColor(e.answered)}
+              text={e.keyword}
+              onClick={() => onKeywordClick(e.id)}
+            />
           ))}
         </div>
       ) : (

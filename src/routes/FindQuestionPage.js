@@ -78,16 +78,16 @@ function FindQuestionPage() {
   }, [keyword.modified]);
 
   useEffect(async () => {
-    const selectedKeyword = keyword.userKeywords[keyword.selected];
+    const selectedKeyword = keyword.userKeywords.get(keyword.selected);
 
     if (selectedKeyword) {
-      let postQuestionsResult = await postQuestions(selectedKeyword.keywordId);
+      let postQuestionsResult = await postQuestions(selectedKeyword.id);
       let questionArr = new Map();
 
       postQuestionsResult.map((e) => {
         questionArr.set(e.id, e);
         questionArr.get(e.id).actions.editing = false;
-        questionArr.get(e.id).keywordId = selectedKeyword.keywordId;
+        questionArr.get(e.id).keywordId = selectedKeyword.id;
       });
 
       setQuestions(questionArr);
@@ -98,8 +98,8 @@ function FindQuestionPage() {
     setKeyword((prev) =>
       produce(prev, (draft) => {
         draft.selected = index;
-        if (draft.userKeywords[index].answered === 0)
-          draft.userKeywords[index].answered = 1;
+        if (draft.userKeywords.get(index).answered === 0)
+          draft.userKeywords.get(index).answered = 1;
         return draft;
       })
     );
@@ -183,7 +183,7 @@ function FindQuestionPage() {
 
     setKeyword((prev) =>
       produce(prev, (draft) => {
-        draft.userKeywords[draft.selected].answered = 2;
+        draft.userKeywords.get(draft.selected).answered = 2;
         return draft;
       })
     );
@@ -245,7 +245,7 @@ function FindQuestionPage() {
               onKeywordClick={onKeywordClick}
             />
             <QuestionList
-              keyword={keyword.userKeywords[keyword.selected]}
+              keyword={keyword.userKeywords.get(keyword.selected)}
               questions={questions}
               onLikeClick={onLikeClick}
               onDislikeClick={onDislikeClick}

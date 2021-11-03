@@ -28,6 +28,7 @@ function KeywordGraphView(props) {
         {largeGroup &&
           Object.keys(largeGroup).map((e) => (
             <LargeKeywordGroup
+              onKeywordClick={onKeywordClick}
               largeGroupName={e}
               middleGroups={largeGroup[e]}
             />
