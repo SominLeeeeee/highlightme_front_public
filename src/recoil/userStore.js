@@ -27,7 +27,7 @@ export const atomUserInfo = atom({
 export const atomKeyword = atom({
   key: "atomKeyword",
   default: {
-    userKeywords: [],
+    userKeywords: new Map(),
     selected: "",
     modified: 0,
   },

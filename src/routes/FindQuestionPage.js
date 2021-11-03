@@ -24,15 +24,31 @@ function FindQuestionPage() {
   const [keyword, setKeyword] = useRecoilState(atomKeyword);
   const [modified, setModified] = useState(Date.now());
 
+  const [largeGroup, setLargeGroup] = useState();
+
   useEffect(async () => {
     setMenu("질문찾기");
 
     const keywords = await getKeywords();
 
     if (keywords) {
+      setLargeGroup(keywords);
+      let keys = Object.keys(keywords);
+
+      // 인성, 자기소개서, 개발자 공통, AI 일단 제외
+      keys.splice(keys.indexOf("개발자 공통"), 1);
+      keys.splice(keys.indexOf("인성"), 1);
+      keys.splice(keys.indexOf("자기소개서"), 1);
+      keys.splice(keys.indexOf("AI"), 1);
+
+      for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+
+        setKeywordByKeywords(Object.values(keywords[key]));
+      }
+
       setKeyword((prev) =>
         produce(prev, (draft) => {
-          draft.userKeywords = keywords;
           draft.modified = Date.now();
           return draft;
         })
@@ -41,6 +57,19 @@ function FindQuestionPage() {
       console.log("couldn't get keywords 😭");
     }
   }, []);
+
+  function setKeywordByKeywords(keywords) {
+    keywords.map((e) => {
+      e.map((keywordElement) => {
+        setKeyword((prev) =>
+          produce(prev, (draft) => {
+            draft.userKeywords.set(keywordElement.id, keywordElement);
+            return draft;
+          })
+        );
+      });
+    });
+  }
 
   // keyword가 변경되면 새로 렌더링하기 위함
   useEffect(() => {
@@ -211,7 +240,7 @@ function FindQuestionPage() {
           </div>
           <div className="keywordQuestionWrapper">
             <KeywordGraphView
-              keywords={keyword.userKeywords}
+              largeGroup={largeGroup}
               onKeywordClick={onKeywordClick}
             />
             <QuestionList
