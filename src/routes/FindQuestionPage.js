@@ -33,6 +33,7 @@ function FindQuestionPage() {
 
     if (keywords) {
       setLargeGroup(keywords);
+      console.log(keywords);
       let keys = Object.keys(keywords);
 
       for (let i = 0; i < keys.length; i++) {
@@ -68,10 +69,6 @@ function FindQuestionPage() {
     });
   }
 
-  // useEffect(() => {
-  //   console.log(keyword);
-  // }, [keyword]);
-
   // keyword가 변경되면 새로 렌더링하기 위함
   useEffect(() => {
     setModified(keyword.modified);
@@ -79,7 +76,6 @@ function FindQuestionPage() {
 
   useEffect(async () => {
     const selectedKeyword = keyword.userKeywords.get(keyword.selected);
-
     if (selectedKeyword) {
       let postQuestionsResult = await postQuestions(selectedKeyword.id);
       let questionArr = new Map();
@@ -94,15 +90,58 @@ function FindQuestionPage() {
     }
   }, [keyword.selected]);
 
-  function onKeywordClick(index) {
+  function onKeywordClick(keywordId, largeGroupName, middleGroupName) {
+    let temp = keyword.userKeywords.get(keywordId);
+    temp = {
+      ...temp,
+      answered: 1,
+    };
+
     setKeyword((prev) =>
       produce(prev, (draft) => {
-        draft.selected = index;
-        if (draft.userKeywords.get(index).answered === 0)
-          draft.userKeywords.get(index).answered = 1;
+        draft.selected = keywordId;
+        draft.userKeywords.set(keywordId, temp);
         return draft;
       })
     );
+
+    if (middleGroupName) {
+      setLargeGroup((prev) =>
+        produce(prev, (draft) => {
+          for (var index in draft[largeGroupName][middleGroupName]) {
+            if (
+              keywordId === draft[largeGroupName][middleGroupName][index].id &&
+              draft[largeGroupName][middleGroupName][index].answered === 0
+            ) {
+              draft[largeGroupName][middleGroupName][index] = {
+                ...draft[largeGroupName][middleGroupName][index],
+                answered: 1,
+              };
+            }
+          }
+
+          return draft;
+        })
+      );
+    } else {
+      setLargeGroup((prev) =>
+        produce(prev, (draft) => {
+          for (var index in draft[largeGroupName]) {
+            if (
+              keywordId === draft[largeGroupName][index].id &&
+              draft[largeGroupName][index].answered === 0
+            ) {
+              draft[largeGroupName][index] = {
+                ...draft[largeGroupName][index],
+                answered: 1,
+              };
+            }
+          }
+
+          return draft;
+        })
+      );
+    }
   }
 
   async function onLikeClick(index) {

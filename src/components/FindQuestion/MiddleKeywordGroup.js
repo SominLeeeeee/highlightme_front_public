@@ -6,9 +6,16 @@ import "./middleKeywordGroup.scss";
 import { useEffect } from "react";
 
 function MiddleKeywordGroup(props) {
-  const { middleGroupName, keywords, onKeywordClick } = { ...props };
+  const { largeGroupName, middleGroupName, keywords, onKeywordClick } = {
+    ...props,
+  };
+
+  function handleKeywordClick(idx) {
+    onKeywordClick(idx, largeGroupName, middleGroupName);
+  }
 
   function pickColor(answered) {
+    // console.log(answered);
     if (answered === 2) return `${colors.mainyellow}`;
     else if (answered === 1) return `${colors.subyellow}`;
     else return `${colors.gray}`;
@@ -31,11 +38,14 @@ function MiddleKeywordGroup(props) {
       {keywords ? (
         <div className="keywordWrapper">
           {keywords.map((e) => (
-            <Keyword
-              color={pickColor(e.answered)}
-              text={e.keyword}
-              onClick={() => onKeywordClick(e.id)}
-            />
+            <div>
+              <Keyword
+                color={pickColor(e.answered)}
+                text={e.keyword}
+                onClick={() => handleKeywordClick(e.id)}
+              />
+              {/* <p>{console.log(e)}</p> */}
+            </div>
           ))}
         </div>
       ) : (
