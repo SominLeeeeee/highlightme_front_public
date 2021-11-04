@@ -212,6 +212,39 @@ function FindQuestionPage() {
     );
   }
 
+  function findCategory(index) {
+    const largeGroupNames = Object.keys(largeGroup);
+
+    for (let i = 0; i < largeGroupNames.length; i++) {
+      let largeCategory = largeGroupNames[i];
+      let keywords;
+
+      if (Array.isArray(largeGroup[largeCategory])) {
+        keywords = largeGroup[largeCategory];
+
+        for (let j = 0; j < keywords.length; j++) {
+          if (keywords[j].id === index)
+            return { largeCategory: largeCategory, middleCategory: undefined };
+        }
+      } else {
+        let middleGroupNames = Object.keys(largeGroup[largeCategory]);
+
+        for (let j = 0; j < middleGroupNames.length; j++) {
+          let middleCategory = middleGroupNames[j];
+          keywords = largeGroup[largeCategory][middleCategory];
+
+          for (let k = 0; k < keywords.length; k++) {
+            if (keywords[k].id === index)
+              return {
+                largeCategory: largeCategory,
+                middleCategory: middleCategory,
+              };
+          }
+        }
+      }
+    }
+  }
+
   /**
    * Post answer for question and update keyword selected type
    * @param {Number} index
@@ -226,6 +259,43 @@ function FindQuestionPage() {
         return draft;
       })
     );
+
+    const category = findCategory(keyword.selected);
+
+    const largeCategory = category.largeCategory;
+    const middleCategory = category.middleCategory;
+
+    if (middleCategory) {
+      setLargeGroup((prev) =>
+        produce(prev, (draft) => {
+          for (var index in draft[largeCategory][middleCategory]) {
+            if (keyword.selected === draft[largeCategory][index].id) {
+              draft[largeCategory][middleCategory][index] = {
+                ...draft[largeCategory][middleCategory][index],
+                answered: 2,
+              };
+            }
+          }
+
+          return draft;
+        })
+      );
+    } else {
+      setLargeGroup((prev) =>
+        produce(prev, (draft) => {
+          for (var index in draft[largeCategory]) {
+            if (keyword.selected === draft[largeCategory][index].id) {
+              draft[largeCategory][index] = {
+                ...draft[largeCategory][index],
+                answered: 2,
+              };
+            }
+          }
+
+          return draft;
+        })
+      );
+    }
 
     if (result) {
       setQuestions((prev) =>
