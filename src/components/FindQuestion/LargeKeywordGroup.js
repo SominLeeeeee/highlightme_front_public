@@ -9,13 +9,14 @@ function LargeKeywordGroup(props) {
       <p className="largeGroupTitle">{largeGroupName}</p>
       {middleGroups && Array.isArray(middleGroups) ? (
         <MiddleKeywordGroup
-          middleGroupName=""
+          largeGroupName={largeGroupName}
           keywords={middleGroups}
           onKeywordClick={onKeywordClick}
         />
       ) : (
         Object.keys(middleGroups).map((groupName) => (
           <MiddleKeywordGroup
+            largeGroupName={largeGroupName}
             middleGroupName={groupName}
             keywords={Object.values(middleGroups[groupName])}
             onKeywordClick={onKeywordClick}
