@@ -1,53 +1,50 @@
-@font-face {
-  font-family: "GmarketSansBold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "GmarketSansLight";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+// @font-face {
+//   font-family: "GmarketSansBold";
+//   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+//     format("woff");
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
 @font-face {
   font-family: "AppleSDGothicNeo-Bold";
   src: url("../font/AppleSDGothicNeo-Bold.ttf");
+  font-display: fallback;
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "AppleSDGothicNeo-ExtraBold";
   src: url("../font/AppleSDGothicNeo-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "AppleSDGothicNeo-Light";
   src: url("../font/AppleSDGothicNeo-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "AppleSDGothicNeo-Medium";
   src: url("../font/AppleSDGothicNeo-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "AppleSDGothicNeo-Regular";
   src: url("../font/AppleSDGothicNeo-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "AppleSDGothicNeo-SemiBold";
   src: url("../font/AppleSDGothicNeo-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
 }
