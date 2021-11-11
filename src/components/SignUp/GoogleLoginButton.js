@@ -43,9 +43,9 @@ function GoogleLoginButton({ usage, onLoginSuccess, onLoginFail }) {
         )
       }
       onSuccess={(res) => onLoginSuccess(res.profileObj.email, res.googleId)}
-      onFailure={onLoginFail}
+      onFailure={(error) => console.log(error)}
       cookiePolicy={"single_host_origin"}
-      //isSignedIn={true}
+      // isSignedIn={true}
     />
   );
 }

@@ -39,8 +39,13 @@ function LandingPage() {
     }
   }
 
-  function onLoginFail() {
-    alert("Google 서버 문제로 로그인에 실패했어요 🤕");
+  function onLoginFail(error, detail) {
+    if (error) {
+      // alert("Google 서버 문제로 로그인에 실패했어요 🤕");
+      console.log("Google 서버 문제로 로그인에 실패했어요 🤕");
+      console.log(error, detail);
+    }
+    // "Not a valid origin for the client: https://localhost:3000 has not been registered for client ID 568158562597-qu7pvd53laqmvfsas5bihd5k1lk53c3s.apps.googleusercontent.com. Please go to https://console.developers.google.com/ and register this origin for your project's client ID.";
   }
 
   return (
