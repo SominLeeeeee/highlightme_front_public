@@ -1,4 +1,5 @@
 import HighlightText from "../atom/HighlightText";
+import HighlightButton from "../atom/HighlightButton";
 import ShadowBoxMedium from "../atom/ShadowBoxMedium";
 import "./interviewSetting.scss";
 
@@ -18,6 +19,10 @@ function InterviewSetting(props) {
     ));
   }
 
+  function onStartClick() {
+    alert("모의면접 서비스는 아직 준비중입니다!");
+  }
+
   return (
     <div className="interviewSetting">
       <HighlightText text="모의면접 설정" />
@@ -29,6 +34,7 @@ function InterviewSetting(props) {
         <p id="interviewListTitle">질문 목록</p>
         {interviewQuestions ? interviewListJSX() : <></>}
       </ShadowBoxMedium>
+      <HighlightButton text="모의 면접 시작하기" onClick={onStartClick} />
     </div>
   );
 }
