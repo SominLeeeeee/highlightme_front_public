@@ -24,3 +24,7 @@ yarn-error.log*
 
 # Add config files for gitlab ci
 /src/configs/
+
+# private
+.env*
+/cert
