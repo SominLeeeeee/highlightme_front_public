@@ -23,10 +23,12 @@ function CoverletterPage() {
    * 자소서 등록 페이지 처음 접속 시
    * 서버에서 자기소개서 받아오기
    */
-  useEffect(async () => {
+  // useEffect(async () => {
+  useEffect(() => {
     setMenu("자기소개서");
 
-    const response = await getCoverletters();
+    //const response = await getCoverletters();
+    const response = getCoverletters();
     if (response) {
       if (response.elements.length) {
         setCle((prev) => ({ ...prev, ...response }));
@@ -96,6 +98,7 @@ function CoverletterPage() {
     return result;
   }
 
+  
   async function handleClickSaveButton() {
     const abnormal = checkAbnormal();
 

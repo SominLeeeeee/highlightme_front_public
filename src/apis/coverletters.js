@@ -3,7 +3,7 @@ import config from "../configs";
 /**
  * get coverletters
  * @returns success -> result, fail -> false
- */
+
 export async function getCoverletters() {
   const result = await fetch(`${config.url}/api/cls`, {
     method: "GET",
@@ -15,12 +15,34 @@ export async function getCoverletters() {
   }
   return result.ok;
 }
+ */
+
+export function getCoverletters() {
+  return {
+    "elements": [
+        {
+            "problem": "1번문항",
+            "answer": "소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth 소셜로그인 OAuth oauth ",
+            "_public": true
+        },
+        {
+            "problem": "adsf",
+            "answer": "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf",
+            "_public": true
+        }
+    ],
+    "company": "init",
+    "title": "init",
+    "tags": "init",
+    "comment": "init"
+}
+}
 
 /**
  * post coverletters
  * @param {Object} cle
  * @returns post result
- */
+
 export async function postCoverletters(cle) {
   const request = {
     elements: JSON.stringify(cle.elements),
@@ -37,4 +59,9 @@ export async function postCoverletters(cle) {
   });
 
   return result;
+}
+ */
+
+export function postCoverletters(cle) {
+  return true;
 }

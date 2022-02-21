@@ -6,7 +6,7 @@ import config from "../configs";
  * @param {String} googleId
  * @param {String} accessToken
  * @returns {Array} [result json, status code(200: signup, 409: signin)]
- */
+
 export async function postUsersOauthGoogle(email, googleId) {
   const res = await fetch(`${config.url}/api/users/oauth/google`, {
     method: "POST",
@@ -18,4 +18,17 @@ export async function postUsersOauthGoogle(email, googleId) {
   });
 
   return [await res.json(), res.status];
+}
+ */
+
+export function postUsersOauthGoogle(email, googleId) {
+  return [
+    {
+      userId: 7,
+      googleId: "994558138543",
+      email: "tr.highlightme@gmail.com",
+      isNew: false,
+    },
+    200,
+  ];
 }
