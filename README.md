@@ -10,14 +10,9 @@
 
 ## 실행 및 빌드 방법
 ```
-$ yarn start
+$ npm install
+$ npm start
 ```
-```
-$ yarn build
-```
-yarn: v1.22.10
-
-node: v14.17.3
 
 ## 브라우저
 Chrome: 95.0.4638.69
