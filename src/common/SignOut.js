@@ -8,6 +8,7 @@ function SignOut() {
   const history = useHistory();
   const [userInfo, setUserInfo] = useRecoilState(atomUserInfo);
 
+  /*
   async function signOut() {
     const result = await fetch(`${config.url}/api/users/logout`, {
       method: "GET",
@@ -28,6 +29,18 @@ function SignOut() {
     } else {
       alert("서버 문제로 로그아웃에 실패했어요 🤒");
     }
+  }
+  */
+
+  function signOut() {
+    setUserInfo({
+      id: undefined,
+      email: undefined,
+      accessToken: undefined,
+    });
+
+    localStorage.clear();
+    history.push("/");
   }
 
   useEffect(() => {

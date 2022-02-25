@@ -50,11 +50,14 @@ function Header() {
           {menus.map((e) => (
             <li>
               {e.underConstruction ? (
-                <Link onClick={() => onUnderConstructingMenuClick(e.name)}>
+                <div
+                  className="menu"
+                  onClick={() => onUnderConstructingMenuClick(e.name)}>
                   {e.name}
-                </Link>
+                </div>
               ) : (
                 <Link
+                  className="menu"
                   to={e.route}
                   onClick={() => onMenuClick(e.name)}
                   style={menu == e.name ? { color: "#ffbb00" } : { color: "" }}
